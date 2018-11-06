@@ -1,0 +1,28 @@
+footer {
+    position:fixed;
+    bottom:0;
+    width:100%;
+}
+
+body{
+    font-family: 'Mali', cursive;
+}
+
+.bg-main{
+    background-color: #00BCD4; 
+}
+
+.logo{
+    width: 100px;
+}
+
+.title{
+    color: white;
+    width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .title{
+        width:50%
+    }
+}
