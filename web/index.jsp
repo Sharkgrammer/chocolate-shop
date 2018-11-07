@@ -17,12 +17,17 @@
 
   </head>
 
-  <body>
+  <body style="background-image: url('images/pattern.png');">
    <%@include file="header.jsp" %> 
+   <div style="padding-bottom: 100px"></br></div>
        
-   <%@include file="carousel.jsp" %>    
+   <%@include file="carousel.jsp" %>
+   <div style="padding-bottom: 20px"></br></div>
+   
+   <%@include file="shop.jsp" %>    
    
    <%@include file="footer.jsp" %>
+   
     <!-- Bootstrap core JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
