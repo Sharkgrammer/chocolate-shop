@@ -16,6 +16,10 @@ footer {
     background-color: white; 
 }
 
+.caraspace{
+    padding: 5px
+}
+
 body{
     font-family: 'Mali', cursive;
     background-color: #e9ebee;
@@ -27,19 +31,50 @@ body{
 
 .logo{
     width: 100px;
+   
+
 }
 
 .title{
     color: white;
     width: 100%;
+   
 }
 
 @media screen and (max-width: 1000px) {
     .title{
         width:50%
     }
+    
+    .logo{
+        width: 60px;
+    }
+    
+    .search-container {
+        float: none;
+    }
+
 }
 
 .carousel {
     overflow:hidden
+}
+
+.search-container {
+  float: right;
+  margin:auto;
+  max-width:500px;
+  padding: 6px;
+}
+
+.search-container button {
+  background: #cccccc;
+}
+
+.search-container button:hover {
+  background: #cccccc;
+}
+
+.navsize{
+    font-size: 110%;
 }

@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-10">
+      <div class="col-sm-2"> <div class="caraspace"> <!-- Future ad space --> </div> </div>
+      <div class="col-sm-8">
         <div class="caramain rounded">
           <div id="carousel" class="carousel slide center" data-ride="carousel">
 
@@ -56,7 +56,7 @@
         </div>
 
       </div>
-      <div class="col-sm-1"></div>
+      <div class="col-sm-2"> <div class="caraspace"> <!-- Future ad space --> </div> </div>
       
   </div>
 </div>

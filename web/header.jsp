@@ -7,7 +7,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div class="collapse navbar-collapse navsize" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
 
             <li class="nav-item active">
@@ -31,8 +31,12 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Contact</a>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="#"><h5><b>Log&nbsp;In/Sign&nbsp;Up</b></h5></a>
+            </li>
 
-          </ul>
+          </ul> 
         </div>
 
     </div>

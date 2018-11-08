@@ -6,7 +6,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Chocolate Shop</title>
+    <title>Sharkolate</title>
+    <link rel="shortcut icon" href="images/logo.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -25,7 +26,10 @@
    <%@include file="carousel.jsp" %>
    <div style="padding-bottom: 20px"></br></div>
    
-   <%@include file="shop.jsp" %> 
+   <%@include file="shopArrivals.jsp" %> 
+   <div style="padding-bottom: 20px"></br></div>
+   
+   <%@include file="reviews.jsp" %> 
    <div style="padding-bottom: 20px"></br></div>
    
    <%@include file="footer.jsp" %>
