@@ -17,14 +17,16 @@
 
   </head>
 
-  <body style="background-image: url('images/pattern.png');">
+  <body>
+      
    <%@include file="header.jsp" %> 
    <div style="padding-bottom: 100px"></br></div>
        
    <%@include file="carousel.jsp" %>
    <div style="padding-bottom: 20px"></br></div>
    
-   <%@include file="shop.jsp" %>    
+   <%@include file="shop.jsp" %> 
+   <div style="padding-bottom: 20px"></br></div>
    
    <%@include file="footer.jsp" %>
    

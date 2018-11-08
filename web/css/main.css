@@ -1,15 +1,28 @@
 footer {
-    position:fixed;
-    bottom:0;
+    height:10%;
     width:100%;
+}
+
+.cara{
+   height: 500px;
+}
+
+.caramain{
+   padding:2px;
+   background-color: #000000; 
+}
+
+.content{
+    background-color: white; 
 }
 
 body{
     font-family: 'Mali', cursive;
+    background-color: #e9ebee;
 }
 
 .bg-main{
-    background-color: #00BCD4; 
+   background-color: #873B00; 
 }
 
 .logo{
@@ -25,4 +38,8 @@ body{
     .title{
         width:50%
     }
+}
+
+.carousel {
+    overflow:hidden
 }

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-main fixed-top">
     <div class="container">
         <a href="#"><img src="images/logo.png" class="logo"/></a>
-        <h2 class="text-center title">Shark Chocolate</h2>
+        <h2 class="text-center title">Sharkolate</h2>
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Shop</a>
+              <a class="nav-link" href="#shop">Shop</a>
             </li>
 
              <li class="nav-item">
