@@ -78,3 +78,61 @@ body{
 .navsize{
     font-size: 110%;
 }
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.5);
+    
+}
+
+.modal-gdpr {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fefefe;
+    
+    -webkit-animation-name: slideUp;
+    -webkit-animation-duration: 0.5s;
+    animation-name: slideUp;
+    animation-duration: 0.5s
+}
+
+.modal-news{
+    background-color: #fefefe;
+    color:black;
+    padding: 10px 20px 10px 20px;
+}
+
+.modal-news-padding{
+    background-color:#873B00;
+    padding:5px 20px 15px 20px;
+    color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    width: 70%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-news-btn{
+    width:200px;
+    padding: 5px;
+}
+.modal-edge {
+    padding: 2px 16px;
+    background-color: #873B00;
+    color: white;
+}
+
+@-webkit-keyframes slideUp {
+    from {bottom: -300px; opacity: 0} 
+    to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideUp {
+    from {bottom: -300px; opacity: 0}
+    to {bottom: 0; opacity: 1}
+}
