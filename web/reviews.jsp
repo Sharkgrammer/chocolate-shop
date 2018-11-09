@@ -1,4 +1,4 @@
-<div class="container-fluid" id='shop'>
+<div class="container-fluid" id='reviews'>
     <div class="row">
       <div class="col-sm-1" ></div>
       

@@ -30,12 +30,10 @@
         <h3>The newest tasty goods hot off the shelf?</h3>
         <h3>The greatest deals on the best chocolate on the Internet?</h3>
         <h3>Sign up to our newsletter!</h3>
-        <form action="email.jsp">
-          <input type="text" name="email" placeholder="Email.."  size="35" class="border border-dark rounded" class="bar">
-          </br></br>
-          <button type="submit" value="Submit" class="btn btn-success modal-news-btn">Sure! I love deals!</button>
-          <button type="button" class="btn btn-danger modal-news-btn" id="closenews">No i hate saving money</button>
-        </form>
+        <input type="text" placeholder="Email.." id="newsemail" size="35" class="border border-dark rounded">
+        </br></br>
+        <button type="button" class="btn btn-success modal-news-btn" id="newsaccept">Sure! I love deals!</button>
+        <button type="button" class="btn btn-danger modal-news-btn" id="newsreject">No i hate saving money</button>
     </div>
   </div>
 
@@ -44,20 +42,41 @@
 <script>
     var modal = document.getElementById('gdprmodal');
     var span = document.getElementById("close");
+    modal.style.display = "none";
+    //Check cookies here for GDPR compliance before showing it
+    if (!checkCookie("gdpr", "yes")){
+        modal.style.display = "block";
+    }
     
-    //Check cookies here for GDPR compliance pls before showing it
-    modal.style.display = "block";
-    span.onclick = function() { modal.style.display = "none"; };
+    span.onclick = function() { 
+        modal.style.display = "none"; 
+        setCookie("gdpr", "yes", 10);
+    };
     
     //Check cookies here if email has been given to us, if not do other things.
-    var modalnews = document.getElementById('newsmodal');
-    var spannews = document.getElementById("closenews");
-    var titlenews = document.getElementById("newstitle");
-    modalnews.style.display = "none";
-    spannews.onclick = function() { modalnews.style.display = "none"; };
+    var newsletter;
+    if (!checkCookie("email", "yes")){
+        newsletter = setInterval(newsletterCheck, 1000);
+    }
     
-    var newsletter = setInterval(newsletterCheck, 1000);
+    var modalnews = document.getElementById('newsmodal');
+    var newsemail = document.getElementById('newsemail');
+    var spannewsno = document.getElementById("newsreject");
+    var spannewsyes = document.getElementById("newsaccept");
+    var titlenews = document.getElementById("newstitle");
     var newsCounter = 0;
+    modalnews.style.display = "none";
+    
+    spannewsno.onclick = function() { modalnews.style.display = "none"; };
+    spannewsyes.onclick = function() { 
+        modalnews.style.display = "none"; 
+        //do something with the email here?
+        //Such as uploading + checks and whatnot
+        newsCounter = 5;
+        alert("Thank you for your email " + email.innerHTML);
+        setCookie("email", "yes", 10);
+    };
+    
 
     function newsletterCheck() {
         //Dont show newsletter request if the gdpr notice is up
@@ -77,6 +96,7 @@
                     break;
                 case 5:
                     clearInterval(newsletter);
+                    setCookie("email", "yes", 10);
                     return;
             }
             newsCounter++;
@@ -84,4 +104,31 @@
         }
     }
     
+    function setCookie(name, value, days) {
+        var d = new Date();
+        d.setTime(d.getTime() + (days*24*60*60*1000));
+        document.cookie = name + "=" + value + ";" + ("expires=" + d.toUTCString());
+    }
+    
+    function getCookie(name) {
+        var cookieName = name + "=";
+        var cookie = document.cookie.split(';');
+        for(var i = 0; i < cookie.length; i++) {
+            var cookieTemp = cookie[i];
+            while (cookieTemp.charAt(0) === ' ') {
+                cookieTemp = cookieTemp.substring(1);
+            }
+            if (cookieTemp.indexOf(name) === 0) {
+                return cookieTemp.substring(cookieName.length, cookieTemp.length);
+            }
+        }
+        return false;
+    }
+    
+    function checkCookie(name, value){
+        if (getCookie(name) == value){
+            return true;
+        }
+        return false;
+    }
 </script>
