@@ -1,6 +1,36 @@
+/* Main CSS + header/footers*/
+
 footer {
     height:10%;
     width:100%;
+}
+
+body{
+    font-family: 'Mali', cursive;
+    background-color: #e9ebee;
+}
+
+.bg-main{
+   background-color: #873B00; 
+}
+
+.logo{
+    width: 100px;
+}
+
+.title{
+    color: white;
+    width: 100%;   
+}
+
+.navsize{
+    font-size: 110%;
+}
+
+/* Carousel CSS */
+
+.carousel {
+    overflow:hidden
 }
 
 .cara{
@@ -20,45 +50,7 @@ footer {
     padding: 5px
 }
 
-body{
-    font-family: 'Mali', cursive;
-    background-color: #e9ebee;
-}
-
-.bg-main{
-   background-color: #873B00; 
-}
-
-.logo{
-    width: 100px;
-   
-
-}
-
-.title{
-    color: white;
-    width: 100%;
-   
-}
-
-@media screen and (max-width: 1000px) {
-    .title{
-        width:50%
-    }
-    
-    .logo{
-        width: 60px;
-    }
-    
-    .search-container {
-        float: none;
-    }
-
-}
-
-.carousel {
-    overflow:hidden
-}
+/* shopArrivals CSS */
 
 .search-container {
   float: right;
@@ -75,16 +67,13 @@ body{
   background: #cccccc;
 }
 
-.navsize{
-    font-size: 110%;
-}
+/* Modal CSS CSS */
 
 .modal {
     display: none;
     position: fixed;
     z-index: 1;
     background-color: rgba(0,0,0,0.5);
-    
 }
 
 .modal-gdpr {
@@ -92,7 +81,6 @@ body{
     bottom: 0;
     width: 100%;
     background-color: #fefefe;
-    
     -webkit-animation-name: slideUp;
     -webkit-animation-duration: 0.5s;
     animation-name: slideUp;
@@ -121,11 +109,65 @@ body{
     width:200px;
     padding: 5px;
 }
+
+.modal-news-box{
+    width:300px;
+}
+
 .modal-edge {
     padding: 2px 16px;
     background-color: #873B00;
     color: white;
 }
+
+
+/* Media querys here. Its set to 992 as this is where bootstrap switches to mobile mode with the navbar */
+
+@media screen and (max-width: 992px) {
+    .title{
+        width:50%
+    }
+    
+    .logo{
+        width: 60px;
+    }
+    
+    .search-container {
+        float: none;
+    }
+    
+    .modal-news h3{
+        font-size:15px;
+    }
+    
+    .modal-news{
+        padding: 5px 10px 5px 10px;
+        line-height: 20%;
+    }
+    
+    .modal-news-padding h2{
+        font-size:15px;
+    }
+    
+    .modal-news-padding{
+        width: 60%;
+        font-size:15px;
+        padding:5px 10px 10px 10px;
+    }
+    
+    .modal-news-btn{
+        width:120px;
+        font-size:12px;
+    }
+    
+     .modal-news-box{
+        width:120px;
+        font-size:12px;
+    }
+
+}
+
+/* Animation code here */
 
 @-webkit-keyframes slideUp {
     from {bottom: -300px; opacity: 0} 

@@ -30,10 +30,10 @@
         <h3>The newest tasty goods hot off the shelf?</h3>
         <h3>The greatest deals on the best chocolate on the Internet?</h3>
         <h3>Sign up to our newsletter!</h3>
-        <input type="text" placeholder="Email.." id="newsemail" size="35" class="border border-dark rounded">
+        <input type="text" placeholder="Email.." id="newsemail" class="border border-dark rounded modal-news-box">
         </br></br>
-        <button type="button" class="btn btn-success modal-news-btn" id="newsaccept">Sure! I love deals!</button>
-        <button type="button" class="btn btn-danger modal-news-btn" id="newsreject">No i hate saving money</button>
+        <button type="button" class="btn btn-success modal-news-btn" id="newsaccept">I love deals!</button>
+        <button type="button" class="btn btn-danger modal-news-btn" id="newsreject">I hate savings</button>
     </div>
   </div>
 
