@@ -1,0 +1,496 @@
+package db;
+
+import java.sql.*;
+import data.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class databaseConnections {
+    
+   //database details
+   static final String DRIVER = "org.apache.derby.jdbc.ClientDriver";  
+   static final String DB_URL = "jdbc:derby://localhost:1527/chocolateshop";
+   static final String USER = "chocolate";
+   static final String PASS = "chocolate";
+   private Connection conn;
+   private String errorMessage;
+   private String resultMessage;
+   private String sql;
+   private boolean sqlSuccess;
+   private updateMaps mapControl = new updateMaps();
+   private List<String> updateControl;
+   
+   //Make the database connetion here
+   public databaseConnections() {
+       //set vars here, in case
+        conn = null;
+        errorMessage = "";
+        resultMessage = "";
+        sql = "";
+        sqlSuccess = false;
+        updateControl = new ArrayList<>();
+        try{
+           Class.forName(DRIVER);
+           conn = DriverManager.getConnection(DB_URL,USER,PASS);
+        }catch(ClassNotFoundException | SQLException e){
+          errorMessage = e.toString();
+          System.out.println(e.toString());
+        }    
+   }
+   
+   //Misc operations related to the databse go here
+   public String returnErrorMessage(){
+       return errorMessage;
+   }
+   
+   public String returnLastResult(){
+       return sql + " | " + resultMessage + " | " + sqlSuccess;
+   }
+   
+   private void sqlSuccessHandler(String fuctName){
+       if (sqlSuccess){
+           resultMessage = fuctName + ":Complete";
+       }else{
+           resultMessage = fuctName + ":Failed";
+           errorMessage = resultMessage;
+       }
+   }
+   
+   private void sqlSuccessHandler(String fuctName, SQLException ex){
+       resultMessage = fuctName + ":Failed";
+       sqlSuccess = false;
+       errorMessage = ex.toString();
+       System.out.println(errorMessage);
+   }
+   
+   //Create operations
+   public boolean createUser(String Name, String Email, String Password, String Type, String Address){
+       String funtName = "Create User";
+       sql = "insert into users(user_name,user_email,user_password,user_type,user_address) values (" +
+               Name + "," + Email + "," + Password + "," + Type + "," + Address + ");";
+       try {
+           Statement query = conn.createStatement();
+           sqlSuccess = query.execute(sql);
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+      
+       return sqlSuccess;
+   }
+   
+   public boolean createChocolate(String Name, String Desc, String Type, String Flavour, String Weight, String Producer, String Image_Loc){
+       String funtName = "Create Chocolate";
+       sql = "insert into chocolate(CHOCO_NAME,CHOCO_DESC,CHOCO_TYPE,CGOCO_FLAVOUR,CHOCO_WEIGHT,CHOCO_PRODUCER,CHOHO_IMAGE_FOLDER,CHOCO_DATE_ENTERED) values (" +
+               Name + "," + Desc + "," + Type + "," + Flavour + "," + Weight + "," + Producer + "," + Image_Loc + ",NOW());";
+       try {
+           Statement query = conn.createStatement();
+           sqlSuccess = query.execute(sql);
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+      
+       return sqlSuccess;
+   }
+   
+   public boolean createPurchase(String ChocoID, String UserID, int Amt){
+       String funtName = "Create Purchase";
+       sql = "insert into purchase(CHOCO_ID,USER_ID,PURCHASE_AMOUNT,PURCHASE_DATE) values (" +
+               ChocoID + "," + UserID + "," + Amt + ",NOW());";
+       try {
+           Statement query = conn.createStatement();
+           sqlSuccess = query.execute(sql);
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+      
+       return sqlSuccess;
+   }
+   
+   public boolean createActivity(String UserID, String Type, String Details){
+       String funtName = "Create Activity";
+       sql = "insert into activity(USER_ID,ACTIVITY_TYPE,ACTIVITY_DETAILS) values (" +
+               UserID + "," + Type + "," + Details + ");";
+       try {
+           Statement query = conn.createStatement();
+           sqlSuccess = query.execute(sql);
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+      
+       return sqlSuccess;
+   }
+   
+   public boolean createStock(String ChocoID, int Amt, String BestBefore){
+       String funtName = "Create Stock";
+       sql = "insert into stocks(CHOCO_ID,STOCK_AMOUNT,STOCK_BESTBEFORE,STOCK_DATE_ENTERED) values (" +
+               ChocoID + "," + Amt + "," + BestBefore + ",NOW());";
+       try {
+           Statement query = conn.createStatement();
+           sqlSuccess = query.execute(sql);
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+      
+       return sqlSuccess;
+   }
+   
+   //Retrieve operations
+   public List<user> retrieveAllUsers(){
+       return retrieveUsersInternal(0);
+   }
+   
+   
+   public List<user> retrieveSingleUser(int id){
+       return retrieveUsersInternal(id);
+   }
+   
+   private List<user> retrieveUsersInternal(int id){
+       String funtName = "Retrieve All Users";
+       List <user> List = new ArrayList<>();
+       
+       if (id == 0){
+           sql = "select * from users";
+       }else{
+           sql = "select * from users where user_id = " + id;
+       }
+      
+       try {
+           Statement query = conn.createStatement();
+           ResultSet rs = query.executeQuery(sql);
+           
+           user user;
+           while(rs.next()){
+               user = new user();
+               user.setId(rs.getInt("USER_ID"));
+               user.setName(rs.getString("USER_NAME"));
+               user.setEmail(rs.getString("USER_EMAIL"));
+               user.setPassword(rs.getString("USER_PASSWORD"));
+               user.setType(rs.getString("USER_TYPE"));
+               user.setAddress(rs.getString("USER_ADDRESS"));
+               List.add(user);
+             }
+           
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       sqlSuccess = !List.isEmpty();
+       sqlSuccessHandler(funtName);
+       
+       return List;
+   }
+   
+   public List<chocolate> retrieveAllChocolates(){
+       return retrieveChocolateInternal(0);
+   }
+   
+   public List<chocolate> retrieveSingleChocolate(int id){
+       return retrieveChocolateInternal(id);
+   }
+   
+   private List<chocolate> retrieveChocolateInternal(int id){
+       String funtName = "Retrieve Chocolate";
+       List <chocolate> List = new ArrayList<>();
+       
+       if (id == 0){
+           sql = "select * from chocolate";
+       }else{
+           sql = "select * from chocolate where choco_id = " + id;
+       }
+      
+       try {
+           Statement query = conn.createStatement();
+           ResultSet rs = query.executeQuery(sql);
+           
+           chocolate choco;
+           while(rs.next()){
+               choco = new chocolate();
+               choco.setId(rs.getInt("CHOCO_ID"));
+               choco.setName(rs.getString("CHOCO_NAME"));
+               choco.setDescription(rs.getString("CHOCO_DESC"));
+               choco.setType(rs.getString("CHOCO_TYPE"));
+               choco.setFlavour(rs.getString("CHOCO_FLAVOUR"));
+               choco.setWeight(rs.getString("CHOCO_WEIGHT"));
+               choco.setProducer(rs.getString("CHOCO_PRODUCER"));
+               choco.setImage_folder(rs.getString("CHOHO_IMAGE_FOLDER"));
+               choco.setDate(rs.getString("CHOCO_DATE_ENTERED"));
+               List.add(choco);
+           }
+           
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       sqlSuccess = !List.isEmpty();
+       sqlSuccessHandler(funtName);
+       
+       return List;
+   }
+   
+   public List<purchase> retrieveAllPurchases(){
+       return retrievePurchaseInternal(0);
+   }
+   
+   public List<purchase> retrieveSinglePurchase(int id){
+       return retrievePurchaseInternal(id);
+   }
+   
+   private List<purchase> retrievePurchaseInternal(int id){
+       String funtName = "Retrieve Purchase";
+       List <purchase> List = new ArrayList<>();
+       
+       if (id == 0){
+           sql = "select * from purchase";
+       }else{
+           sql = "select * from purchase where purchase_id = " + id;
+       }
+      
+       try {
+           Statement query = conn.createStatement();
+           ResultSet rs = query.executeQuery(sql);
+           
+           purchase purch;
+           while(rs.next()){
+               purch = new purchase();
+               purch.setId(rs.getInt("PURCHASE_ID"));
+               purch.setChoco_id(rs.getInt("CHOCO_ID"));
+               purch.setUser_id(rs.getInt("USER_ID"));
+               purch.setAmount(rs.getInt("PURCHASE_AMOUNT"));
+               purch.setDate(rs.getString("PURCHASE_DATE"));
+               List.add(purch);
+           }
+           
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       sqlSuccess = !List.isEmpty();
+       sqlSuccessHandler(funtName);
+       
+       return List;
+   }
+   
+   public List<activity> retrieveAllActivitys(){
+       return retrieveActivityInternal(0);
+   }
+   
+   public List<activity> retrieveSingleActivity(int id){
+       return retrieveActivityInternal(id);
+   }
+   
+   private List<activity> retrieveActivityInternal(int id){
+       String funtName = "Retrieve Activity";
+       List <activity> List = new ArrayList<>();
+       
+       if (id == 0){
+           sql = "select * from activity";
+       }else{
+           sql = "select * from activity where activity_id = " + id;
+       }
+      
+       try {
+           Statement query = conn.createStatement();
+           ResultSet rs = query.executeQuery(sql);
+           
+           activity act;
+           while(rs.next()){
+               act = new activity();
+               act.setId(rs.getInt("ACTIVITY_ID"));
+               act.setUser_id(rs.getInt("USER_ID"));
+               act.setType(rs.getString("ACTIVITY_TYPE"));
+               act.setDetails(rs.getString("ACTIVITY_DETAILS"));
+               List.add(act);
+           }
+           
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       sqlSuccess = !List.isEmpty();
+       sqlSuccessHandler(funtName);
+       
+       return List;
+   }
+   
+   public List<stock> retrieveAllStocks(){
+       return retrieveStockInternal(0);
+   }
+   
+   public List<stock> retrieveSingleStock(int id){
+       return retrieveStockInternal(id);
+   }
+   
+   private List<stock> retrieveStockInternal(int id){
+       String funtName = "Retrieve Stock";
+       List <stock> List = new ArrayList<>();
+       
+       if (id == 0){
+           sql = "select * from stocks";
+       }else{
+           sql = "select * from stocks where stock_id = " + id;
+       }
+      
+       try {
+           Statement query = conn.createStatement();
+           ResultSet rs = query.executeQuery(sql);
+           
+           stock stock;
+           while(rs.next()){
+               stock = new stock();
+               stock.setId(rs.getInt("STOCK_ID"));
+               stock.setChoco_id(rs.getInt("CHOCO_ID"));
+               stock.setAmount(rs.getInt("STOCK_AMOUNT"));
+               stock.setBestBefore(rs.getString("STOCK_BESTBEFORE"));
+               stock.setDate(rs.getString("STOCK_DATE_ENTERED"));
+               List.add(stock);
+           }
+           
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       sqlSuccess = !List.isEmpty();
+       sqlSuccessHandler(funtName);
+       
+       return List;
+   }
+   
+   //Update operations
+   public boolean updateUser(Map mapUser, int id){
+       String funtName = "Update Users";
+       updateControl.clear();
+       
+       if (mapUser.isEmpty()){
+           sqlSuccess = false;
+           return sqlSuccess;
+       }
+       
+       mapUser.forEach((k,v) -> updateControl.add(k.toString() + ":::" + v.toString()));
+       //Using updateControl, the update is created here
+       
+       sql = "update users set ";
+       for (int x = 0; x < updateControl.size(); x++){
+           sql += updateControl.get(x).split(":::")[0] + " = ?";
+           if (x != updateControl.size() - 1){
+               sql += ",";
+           }
+       }
+       sql += "where user_id = ?";
+       
+       try {
+           PreparedStatement stmnt = conn.prepareStatement(sql);
+           
+           for (int x = 0; x < updateControl.size(); x++){
+               if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")){
+                   stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+               }else{
+                   stmnt.setString(x, updateControl.get(x).split(":::")[1]);
+               }
+           }
+           stmnt.setInt(updateControl.size(), id);
+           
+           sqlSuccess = stmnt.executeUpdate() != 0;
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       return sqlSuccess;
+   }
+   
+   public String updateChocolate(){
+       return resultMessage;
+   }
+   
+   public String updatePurchase(){
+       return resultMessage;
+   }
+   
+   public String updateActivity(){
+       return resultMessage;
+   }
+   
+   public String updateStock(){
+       return resultMessage;
+   }
+   
+   //Delete operations
+   public boolean deleteUser(int id){
+       String funtName = "Delete User";
+       sql = "delete * from users where user_id = id";
+       try {
+           Statement query = conn.createStatement();
+           sqlSuccess = query.execute(sql);
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+      
+       return sqlSuccess;
+   }
+   
+   public boolean deleteChocolate(int id){
+      String funtName = "Delete Chocolate";
+      sql = "delete * from chocolates where chocolate_id = id";
+      try {
+          Statement query = conn.createStatement();
+          sqlSuccess = query.execute(sql);
+          sqlSuccessHandler(funtName);
+      } catch (SQLException ex) {
+          sqlSuccessHandler(funtName, ex);
+      }
+      
+       return sqlSuccess;
+   }
+   
+   public boolean deletePurchase(int id){
+      String funtName = "Delete Purchase";
+      sql = "delete * from purchases where purchase_id = id";
+      try {
+          Statement query = conn.createStatement();
+          sqlSuccess = query.execute(sql);
+          sqlSuccessHandler(funtName);
+      } catch (SQLException ex) {
+          sqlSuccessHandler(funtName, ex);
+      }
+      
+       return sqlSuccess;
+   }
+   
+   public boolean deleteActivity(int id){
+      String funtName = "Delete Activity";
+      sql = "delete * from activity where activity_id = id";
+      try {
+          Statement query = conn.createStatement();
+          sqlSuccess = query.execute(sql);
+          sqlSuccessHandler(funtName);
+      } catch (SQLException ex) {
+          sqlSuccessHandler(funtName, ex);
+      }
+      
+       return sqlSuccess;
+   }
+   
+   public boolean deleteStock(int id){
+      String funtName = "Delete Stock";
+      sql = "delete * from stock where stock_id = id";
+      try {
+          Statement query = conn.createStatement();
+          sqlSuccess = query.execute(sql);
+          sqlSuccessHandler(funtName);
+      } catch (SQLException ex) {
+          sqlSuccessHandler(funtName, ex);
+      }
+      
+       return sqlSuccess;
+   }
+}

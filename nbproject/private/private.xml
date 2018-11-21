@@ -6,9 +6,18 @@
             <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/index.jsp</file>
             <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/shopArrivals.jsp</file>
             <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/css/main.css</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Purchases.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Activity.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/drop%20all.sql</file>
             <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/header.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/db/databaseConnections.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Stock.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Users.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/css/main.css</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/chocolateServlet.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Chocolate.sql</file>
             <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/modal.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/data/chocolate.java</file>
         </group>
     </open-files>
 </project-private>

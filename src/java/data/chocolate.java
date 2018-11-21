@@ -4,21 +4,35 @@ import java.io.Serializable;
 
 public class chocolate implements Serializable{
     
+    private int id;
     private String name;
     private String desc;
-    private String type; //Dark, Light, Milk, Mint, Orange
-    private String bestBefore;
+    private String type; //Dark, Light, Milk
+    private String flavour; //Mint, Orange, Bland
     private String weight;
     private String producer;
+    private String image_folder;
+    private String date;
     
     public chocolate(){
         //Initialise variables here
+        id = 0;
         name = "";
         desc = "";
         type = "";
-        bestBefore = "";
+        flavour = "";
         weight = "";
         producer = "";
+        image_folder = "";
+        date = "";
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -45,12 +59,12 @@ public class chocolate implements Serializable{
         this.type = type;
     }
 
-    public String getBestBefore() {
-        return bestBefore;
+    public String getFlavour() {
+        return flavour;
     }
 
-    public void setBestBefore(String bestBefore) {
-        this.bestBefore = bestBefore;
+    public void setFlavour(String flavour) {
+        this.flavour = flavour;
     }
 
     public String getWeight() {
@@ -67,5 +81,21 @@ public class chocolate implements Serializable{
 
     public void setProducer(String producer) {
         this.producer = producer;
+    }
+
+    public String getImage_folder() {
+        return image_folder;
+    }
+    
+    public void setImage_folder(String image_folder) {
+        this.image_folder = image_folder;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
