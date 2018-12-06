@@ -1,0 +1,2 @@
+insert into chocolate(CHOCO_NAME, CHOCO_DESC, CHOCO_TYPE, CHOCO_WEIGHT, CHOCO_PRODUCER, CHOHO_IMAGE_FOLDER, CHOCO_DATE_ENTERED, CHOCO_FLAVOUR) 
+values ('Boop Choco', 'Desc here pls', 'Mint', 'Yo mama', 'Producer', 'imgfolderhere', '2016-06-03 00:00:00.000', 'red');

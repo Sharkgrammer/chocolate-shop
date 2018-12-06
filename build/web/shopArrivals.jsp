@@ -1,4 +1,11 @@
+<%@page import="java.util.List"%>
+<%@page import="data.chocolate"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@include file="css.jsp" %>
 <div class="container-fluid" id='shop'>
+    
+    <jsp:include page="/chocolateServlet?mode=1" />
+    
     <div class="row">
       <div class="col-sm-1" ></div>
       
@@ -20,40 +27,21 @@
           </br>
           
           <div class="row text-center" style="overflow: hidden">
-              
-              <div class="col-sm-3">
+              <c:forEach items="${list}" var="choco">
                   
-                  <img src="images/search.png" style='height: 50%; width: 50%; object-fit: contain'/>
+                <div class="col-sm-3">
+
+                    <h3> ${choco.getName()} </h3> 
+
+                    <img src="${choco.getImage_folder()}" style='height: 50%; width: 50%; object-fit: contain'/>
+
+                    <p class="text-left">${choco.getDescription()}</p>
+
+                </div>
+          
+              </c:forEach>
                   
-                  <p class="text-left">Lorem ipsum dolor amet ugh stumptown knausgaard edison bulb banjo retro mixtape VHS. Deserunt paleo intelligentsia la croix cold-pressed shabby chic pitchfork authentic. Venmo in bitters</p>
-                  
-              </div>
-              
-              <div class="col-sm-3">
-                  
-                  <img src="images/search.png" style='height: 50%; width: 50%; object-fit: contain'/>
-                  
-                   <p class="text-left">Lorem ipsum dolor amet ugh stumptown knausgaard edison bulb banjo retro mixtape VHS. Deserunt paleo intelligentsia la croix cold-pressed shabby chic pitchfork authentic. Venmo in bitters</p>
-                  
-              </div>
-              
-              <div class="col-sm-3">
-                  
-                  <img src="images/search.png" style='height: 50%; width: 50%; object-fit: contain'/>
-                  
-                   <p class="text-left">Lorem ipsum dolor amet ugh stumptown knausgaard edison bulb banjo retro mixtape VHS. Deserunt paleo intelligentsia la croix cold-pressed shabby chic pitchfork authentic. Venmo in bitters</p>
-                  
-              </div>
-              
-              <div class="col-sm-3">
-                  
-                  <img src="images/search.png" style='height: 50%; width: 50%; object-fit: contain'/>
-                 
-                 <p class="text-left">Lorem ipsum dolor amet ugh stumptown knausgaard edison bulb banjo retro mixtape VHS. Deserunt paleo intelligentsia la croix cold-pressed shabby chic pitchfork authentic. Venmo in bitters</p>
-                  
-              </div>
-              
-          </div>
+          </div
           
           </br>
           

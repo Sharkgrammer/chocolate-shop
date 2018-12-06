@@ -5,9 +5,6 @@ import data.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class databaseConnections {
     
@@ -21,7 +18,6 @@ public class databaseConnections {
    private String resultMessage;
    private String sql;
    private boolean sqlSuccess;
-   private updateMaps mapControl = new updateMaps();
    private List<String> updateControl;
    
    //Make the database connetion here
@@ -189,15 +185,31 @@ public class databaseConnections {
        return List;
    }
    
-   public List<chocolate> retrieveAllChocolates(){
-       return retrieveChocolateInternal(0);
+   public List<chocolate> retrieveAllChocolate(){
+       return retrieveChocolateInternal(0,0, "", 0);
    }
    
    public List<chocolate> retrieveSingleChocolate(int id){
-       return retrieveChocolateInternal(id);
+       return retrieveChocolateInternal(id, 0, "", 0);
    }
    
-   private List<chocolate> retrieveChocolateInternal(int id){
+   public List<chocolate> retrieveMultiChocolate(int amt, int mode){
+       return retrieveChocolateInternal(0, amt, "", mode);
+   }
+   
+   public List<chocolate> retrieveSearchChocolate(String name){
+       return retrieveChocolateInternal(0, 0, name, 0);
+   }
+   
+   public List<chocolate> retrieveSearchChocolate(String name, int amt){
+       return retrieveChocolateInternal(0, amt, name, 0);
+   }
+   
+   public List<chocolate> retrieveSearchChocolate(String name, int amt, int mode){
+       return retrieveChocolateInternal(0, amt, name, mode);
+   }
+   
+   private List<chocolate> retrieveChocolateInternal(int id, int amt, String name, int mode){
        String funtName = "Retrieve Chocolate";
        List <chocolate> List = new ArrayList<>();
        
@@ -206,7 +218,38 @@ public class databaseConnections {
        }else{
            sql = "select * from chocolate where choco_id = " + id;
        }
-      
+       
+       if (!name.equals("")){
+           sql += " where CHOCO_NAME like %" + name + "%";
+       }
+       
+       if (mode != 0){
+           switch(mode){
+               case 1:
+                   sql += " order by CHOCO_DATE_ENTERED asc";
+                   break;
+               case 2:
+                   sql += " order by CHOCO_DATE_ENTERED desc";
+                   break;
+               case 3:
+                   sql += " order by CHOCO_TYPE";
+                   break;
+               case 4:
+                   sql += " order by CHOCO_WEIGHT";
+                   break;
+               case 5:
+                   sql += " order by CHOCO_PRODUCER";
+                   break;
+               case 6:
+                   sql += " order by CHOCO_FLAVOURT";
+                   break;
+           }
+       }
+       
+       if (amt != 0){
+           sql += " fetch first " + amt + " rows only";
+       }
+       
        try {
            Statement query = conn.createStatement();
            ResultSet rs = query.executeQuery(sql);
@@ -407,20 +450,172 @@ public class databaseConnections {
        return sqlSuccess;
    }
    
-   public String updateChocolate(){
-       return resultMessage;
+   public boolean updateChocolate(Map mapChoco, int id){
+       String funtName = "Update Chocolate";
+       updateControl.clear();
+       
+       if (mapChoco.isEmpty()){
+           sqlSuccess = false;
+           return sqlSuccess;
+       }
+       
+       mapChoco.forEach((k,v) -> updateControl.add(k.toString() + ":::" + v.toString()));
+       //Using updateControl, the update is created here
+       
+       sql = "update chocolate set ";
+       for (int x = 0; x < updateControl.size(); x++){
+           sql += updateControl.get(x).split(":::")[0] + " = ?";
+           if (x != updateControl.size() - 1){
+               sql += ",";
+           }
+       }
+       sql += "where chocolate_id = ?";
+       
+       try {
+           PreparedStatement stmnt = conn.prepareStatement(sql);
+           
+           for (int x = 0; x < updateControl.size(); x++){
+               if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")){
+                   stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+               }else{
+                   stmnt.setString(x, updateControl.get(x).split(":::")[1]);
+               }
+           }
+           stmnt.setInt(updateControl.size(), id);
+           
+           sqlSuccess = stmnt.executeUpdate() != 0;
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       return sqlSuccess;
    }
    
-   public String updatePurchase(){
-       return resultMessage;
+   public boolean updatePurchase(Map mapPurch, int id){
+       String funtName = "Update Purchases";
+       updateControl.clear();
+       
+       if (mapPurch.isEmpty()){
+           sqlSuccess = false;
+           return sqlSuccess;
+       }
+       
+       mapPurch.forEach((k,v) -> updateControl.add(k.toString() + ":::" + v.toString()));
+       //Using updateControl, the update is created here
+       
+       sql = "update purchase set ";
+       for (int x = 0; x < updateControl.size(); x++){
+           sql += updateControl.get(x).split(":::")[0] + " = ?";
+           if (x != updateControl.size() - 1){
+               sql += ",";
+           }
+       }
+       sql += "where purchase_id = ?";
+       
+       try {
+           PreparedStatement stmnt = conn.prepareStatement(sql);
+           
+           for (int x = 0; x < updateControl.size(); x++){
+               if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")){
+                   stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+               }else{
+                   stmnt.setString(x, updateControl.get(x).split(":::")[1]);
+               }
+           }
+           stmnt.setInt(updateControl.size(), id);
+           
+           sqlSuccess = stmnt.executeUpdate() != 0;
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       return sqlSuccess;
    }
    
-   public String updateActivity(){
-       return resultMessage;
+public boolean updateactivity(Map mapAct, int id){
+       String funtName = "Update Activitys";
+       updateControl.clear();
+       
+       if (mapAct.isEmpty()){
+           sqlSuccess = false;
+           return sqlSuccess;
+       }
+       
+       mapAct.forEach((k,v) -> updateControl.add(k.toString() + ":::" + v.toString()));
+       //Using updateControl, the update is created here
+       
+       sql = "update activity set ";
+       for (int x = 0; x < updateControl.size(); x++){
+           sql += updateControl.get(x).split(":::")[0] + " = ?";
+           if (x != updateControl.size() - 1){
+               sql += ",";
+           }
+       }
+       sql += "where activity_id = ?";
+       
+       try {
+           PreparedStatement stmnt = conn.prepareStatement(sql);
+           
+           for (int x = 0; x < updateControl.size(); x++){
+               if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")){
+                   stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+               }else{
+                   stmnt.setString(x, updateControl.get(x).split(":::")[1]);
+               }
+           }
+           stmnt.setInt(updateControl.size(), id);
+           
+           sqlSuccess = stmnt.executeUpdate() != 0;
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       return sqlSuccess;
    }
    
-   public String updateStock(){
-       return resultMessage;
+  public boolean updatestocks(Map mapStock, int id){
+       String funtName = "Update Stocks";
+       updateControl.clear();
+       
+       if (mapStock.isEmpty()){
+           sqlSuccess = false;
+           return sqlSuccess;
+       }
+       
+       mapStock.forEach((k,v) -> updateControl.add(k.toString() + ":::" + v.toString()));
+       //Using updateControl, the update is created here
+       
+       sql = "update stocks set ";
+       for (int x = 0; x < updateControl.size(); x++){
+           sql += updateControl.get(x).split(":::")[0] + " = ?";
+           if (x != updateControl.size() - 1){
+               sql += ",";
+           }
+       }
+       sql += "where stock_id = ?";
+       
+       try {
+           PreparedStatement stmnt = conn.prepareStatement(sql);
+           
+           for (int x = 0; x < updateControl.size(); x++){
+               if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")){
+                   stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+               }else{
+                   stmnt.setString(x, updateControl.get(x).split(":::")[1]);
+               }
+           }
+           stmnt.setInt(updateControl.size(), id);
+           
+           sqlSuccess = stmnt.executeUpdate() != 0;
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
+       return sqlSuccess;
    }
    
    //Delete operations
