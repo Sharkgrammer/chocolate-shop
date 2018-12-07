@@ -3,6 +3,8 @@ package servlets;
 import data.chocolate;
 import db.databaseConnections;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,24 +20,33 @@ public class chocolateServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        int mode = Integer.valueOf(request.getParameter("mode"));
-        choco = database.retrieveMultiChocolate(4, mode);
-        
-        request.setAttribute("list", choco);
-        
-        
-        /*String attName = "name", attDesc = "desc", attImg = "img", counter = "";
-        
-        for (int x = 0; x < 4; x++){
-            counter = String.valueOf(x);
-            request.setAttribute(attName + x, x);
-            //request.setAttribute(attDesc + x, choco.get(x).getDescription());
-            //request.setAttribute(attImg + x, choco.get(x).getImage_folder());
-        }//*/
+        chocolateDo(request,response);
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-       
-    }		
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        chocolateDo(request,response);
+    }	
+    
+    void chocolateDo(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        
+        int mode = Integer.valueOf(request.getParameter("mode"));
+        switch(mode){
+            case 1:
+                choco = database.retrieveMultiChocolate(4, mode);
+                request.setAttribute("list", choco);
+                break;
+            case 2:
+                Enumeration<String> headers = request.getParameterNames();
+                try (PrintWriter out = response.getWriter()) {
+                    while (headers.hasMoreElements()){
+                        String headerStr = headers.nextElement();
+                        out.println(headerStr + "  " + request.getParameter(headerStr));
+                    }
+                }
+        
+        }
+        
+    }
+    
+    
 }
