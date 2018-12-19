@@ -5,6 +5,6 @@ create table chocolate(
     choco_type varchar(30) not null,
     choco_weight varchar(20) not null,
     choco_producer varchar(30) not null,
-    choho_image_folder varchar(255) not null,
+    choco_flavour varchar(30) not null,
     choco_date_entered date
 );

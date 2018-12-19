@@ -4,7 +4,7 @@
 <%@include file="css.jsp" %>
 <div class="container-fluid" id='shop'>
     
-    <jsp:include page="/chocolateServlet?mode=1" />
+    <jsp:include page="/chocolateServlet?mode=1&filt=8" />
     
     <div class="row">
       <div class="col-sm-1" ></div>
@@ -25,15 +25,14 @@
           </header>
           
           </br>
-          
+           
           <div class="row text-center" style="overflow: hidden">
               <c:forEach items="${list}" var="choco">
-                  
                 <div class="col-sm-3">
-
+                    
                     <h3> ${choco.getName()} </h3> 
 
-                    <img src="${choco.getImage_folder()}" style='height: 50%; width: 50%; object-fit: contain'/>
+                    <img src="${choco.getFirstImage()}" style='height: 50%; width: 50%; object-fit: contain'/>
 
                     <p class="text-left">${choco.getDescription()}</p>
 
@@ -41,7 +40,7 @@
           
               </c:forEach>
                   
-          </div
+          </div>
           
           </br>
           

@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/index.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/shopArrivals.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/data/updateMaps.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/db/databaseConnections.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/chocolateServlet.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/carousel.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/modal.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Images.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Purchases.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Activity.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/drop%20all.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Chocolate.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Stock.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Users.sql</file>
         </group>
     </open-files>
 </project-private>

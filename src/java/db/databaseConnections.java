@@ -38,6 +38,10 @@ public class databaseConnections {
         }    
    }
    
+   public void setAutoCommit() throws SQLException{
+       conn.setAutoCommit(false);
+   }
+   
    //Misc operations related to the databse go here
    public String returnErrorMessage(){
        return errorMessage;
@@ -79,10 +83,55 @@ public class databaseConnections {
        return sqlSuccess;
    }
    
-   public boolean createChocolate(String Name, String Desc, String Type, String Flavour, String Weight, String Producer, String Image_Loc){
+   public boolean createChocolate(String Name, String Desc, String Type, String Flavour, String Weight, String Producer, String Date, List<Blob> imageList){
        String funtName = "Create Chocolate";
-       sql = "insert into chocolate(CHOCO_NAME,CHOCO_DESC,CHOCO_TYPE,CGOCO_FLAVOUR,CHOCO_WEIGHT,CHOCO_PRODUCER,CHOHO_IMAGE_FOLDER,CHOCO_DATE_ENTERED) values (" +
-               Name + "," + Desc + "," + Type + "," + Flavour + "," + Weight + "," + Producer + "," + Image_Loc + ",NOW());";
+       
+       sql = "insert into chocolate(CHOCO_NAME,CHOCO_DESC,CHOCO_TYPE,CHOCO_FLAVOUR,CHOCO_WEIGHT,CHOCO_PRODUCER,CHOCO_DATE_ENTERED) values (?,?,?,?,?,?,?)";
+       try {
+           PreparedStatement query = conn.prepareStatement(sql, new String[] { "CHOCO_ID"} );
+           
+           query.setString(1, Name);
+           query.setString(2, Desc);
+           query.setString(3, Type);
+           query.setString(4, Flavour);
+           query.setString(5, Weight);
+           query.setString(6, Producer);
+           query.setString(7, Date);
+           
+           sqlSuccess = query.executeUpdate() == 1;
+           
+           ResultSet key = query.getGeneratedKeys();
+           
+           int keyInt = 0, x = 1;
+           
+           while (key.next()){
+               keyInt += key.getInt(x);
+           }
+           
+           for (Blob image : imageList){
+               try{
+                    sql = "insert into image(choco_id, img_img) values (?,?)";
+                    query = conn.prepareStatement(sql);
+                    query.setInt(1, keyInt);
+                    query.setBlob(2, image);
+                    sqlSuccess = !query.execute();
+                    
+               } catch (SQLException ex) {
+                   sqlSuccessHandler("Add Image", ex);
+               }
+           }
+           
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+      
+       return sqlSuccess;
+   }
+   
+   public boolean createImage(int chocoID, String image){
+       String funtName = "Create Image";
+       sql = "insert into image(choco_id, img_img) values (" + chocoID + "," + image +")";
        try {
            Statement query = conn.createStatement();
            sqlSuccess = query.execute(sql);
@@ -243,6 +292,12 @@ public class databaseConnections {
                case 6:
                    sql += " order by CHOCO_FLAVOURT";
                    break;
+               case 7:
+                   sql += " order by CHOCO_ID asc";
+                   break;
+               case 8:
+                   sql += " order by CHOCO_ID desc";
+                   break;
            }
        }
        
@@ -251,10 +306,11 @@ public class databaseConnections {
        }
        
        try {
-           Statement query = conn.createStatement();
-           ResultSet rs = query.executeQuery(sql);
-           
+           Statement query = conn.createStatement(); 
+           ResultSet rs = query.executeQuery(sql), rsImg;
            chocolate choco;
+           List<Integer> imageList;
+           
            while(rs.next()){
                choco = new chocolate();
                choco.setId(rs.getInt("CHOCO_ID"));
@@ -264,7 +320,17 @@ public class databaseConnections {
                choco.setFlavour(rs.getString("CHOCO_FLAVOUR"));
                choco.setWeight(rs.getString("CHOCO_WEIGHT"));
                choco.setProducer(rs.getString("CHOCO_PRODUCER"));
-               choco.setImage_folder(rs.getString("CHOHO_IMAGE_FOLDER"));
+               
+               
+               imageList = new ArrayList<>();
+               query = conn.createStatement(); 
+               rsImg = query.executeQuery("select * from image where choco_id = " + choco.getId());
+               while(rsImg.next()){
+                   imageList.add(rsImg.getInt("IMG_ID"));
+               }
+               
+               choco.setImages(imageList); //*/
+               
                choco.setDate(rs.getString("CHOCO_DATE_ENTERED"));
                List.add(choco);
            }
@@ -277,6 +343,27 @@ public class databaseConnections {
        sqlSuccessHandler(funtName);
        
        return List;
+   }
+   
+   public Blob retrieveImage(int id){
+       String funtName = "Retrieve Image";
+       sql = "select * from image where img_id = " + id;
+       Blob blob = null;
+       try {
+           Statement query = conn.createStatement();
+           ResultSet rsImg = query.executeQuery(sql);
+           
+           while(rsImg.next()){
+               blob = rsImg.getBlob("IMG_IMG");
+           }
+           sqlSuccess = blob != null;
+           
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+          sqlSuccessHandler(funtName, ex);
+       }
+       
+       return blob;
    }
    
    public List<purchase> retrieveAllPurchases(){
@@ -635,21 +722,37 @@ public boolean updateactivity(Map mapAct, int id){
    
    public boolean deleteChocolate(int id){
       String funtName = "Delete Chocolate";
-      sql = "delete * from chocolates where chocolate_id = id";
+      sql = "delete * from chocolates where choco_id = id";
       try {
           Statement query = conn.createStatement();
-          sqlSuccess = query.execute(sql);
+          sqlSuccess = query.execute(sql, Statement.RETURN_GENERATED_KEYS);
+          ResultSet key = query.getGeneratedKeys();
+          query.execute("delete * from image where choco_id = " + key.first());
           sqlSuccessHandler(funtName);
       } catch (SQLException ex) {
           sqlSuccessHandler(funtName, ex);
       }
       
+      return sqlSuccess;
+   }
+   
+   public boolean deleteImage(int id){
+       String funtName = "Delete Image";
+       sql = "delete * from image where image_id = " + id;
+       try {
+           Statement query = conn.createStatement();
+           sqlSuccess = query.execute(sql);
+           sqlSuccessHandler(funtName);
+       } catch (SQLException ex) {
+           sqlSuccessHandler(funtName, ex);
+       }
+       
        return sqlSuccess;
    }
    
    public boolean deletePurchase(int id){
       String funtName = "Delete Purchase";
-      sql = "delete * from purchases where purchase_id = id";
+      sql = "delete * from purchases where purchase_id = " + id;
       try {
           Statement query = conn.createStatement();
           sqlSuccess = query.execute(sql);
@@ -663,7 +766,7 @@ public boolean updateactivity(Map mapAct, int id){
    
    public boolean deleteActivity(int id){
       String funtName = "Delete Activity";
-      sql = "delete * from activity where activity_id = id";
+      sql = "delete * from activity where activity_id = " + id;
       try {
           Statement query = conn.createStatement();
           sqlSuccess = query.execute(sql);
@@ -677,7 +780,7 @@ public boolean updateactivity(Map mapAct, int id){
    
    public boolean deleteStock(int id){
       String funtName = "Delete Stock";
-      sql = "delete * from stock where stock_id = id";
+      sql = "delete * from stock where stock_id = " + id;
       try {
           Statement query = conn.createStatement();
           sqlSuccess = query.execute(sql);

@@ -1,6 +1,10 @@
 package data;
 
+import db.databaseConnections;
 import java.io.Serializable;
+import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
 
 public class chocolate implements Serializable{
     
@@ -11,7 +15,7 @@ public class chocolate implements Serializable{
     private String flavour; //Mint, Orange, Bland
     private String weight;
     private String producer;
-    private String image_folder;
+    private List<Integer> images;
     private String date;
     
     public chocolate(){
@@ -23,7 +27,7 @@ public class chocolate implements Serializable{
         flavour = "";
         weight = "";
         producer = "";
-        image_folder = "";
+        images = new ArrayList<>();
         date = "";
     }
     
@@ -83,19 +87,58 @@ public class chocolate implements Serializable{
         this.producer = producer;
     }
 
-    public String getImage_folder() {
-        return image_folder;
-    }
-    
-    public void setImage_folder(String image_folder) {
-        this.image_folder = image_folder;
-    }
-
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public List<Integer> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Integer> images) {
+        this.images = images;
+    }
+    
+    public String getFirstImage() {
+        if (images.isEmpty()){
+            return null;
+        }else{
+            byte [] blobBytes;
+            String contentType = "", baseImage = ""; char c; int content = 0;
+            try {
+                databaseConnections database = new databaseConnections();
+                database.setAutoCommit();
+                Blob blob = database.retrieveImage(images.get(0));
+                
+                blobBytes = blob.getBytes(1, (int) blob.length());
+                for (byte b : blobBytes){
+                    c = (char) b;
+
+                    if (c == ';'){
+                        content = 1;
+                        continue;
+                    }else if (c == ','){
+                        content = 2;
+                        continue;
+                    }
+
+                    if (content == 0){
+                        contentType += c;
+                    }else if (content == 2){
+                        baseImage += c;
+                    }
+
+                }
+
+                baseImage = "data:" + contentType + ";base64," + baseImage;
+            } catch (Exception ex) {
+                baseImage = ex.toString();
+            }
+            return baseImage;
+        }
     }
 }
