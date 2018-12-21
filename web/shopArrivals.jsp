@@ -25,27 +25,28 @@
           </header>
           
           </br>
-           
+
           <div class="row text-center" style="overflow: hidden">
-              <c:forEach items="${list}" var="choco">
-                <div class="col-sm-3">
-                    
-                    <h3> ${choco.getName()} </h3> 
+              <c:forEach items="${listNew}" var="choco">
+                  <div class="col-sm-3">
+                      <a href="shopServlet?id=${choco.getId()}" class="shop-link">
 
-                    <img src="${choco.getFirstImage()}" style='height: 50%; width: 50%; object-fit: contain'/>
+                          <h3> ${choco.getName()} </h3> 
+                          <img src="${choco.getFirstImage()}" class="shop-arrival-img"/>
+                          <p class="text-left">${choco.getDescription()}</p>
 
-                    <p class="text-left">${choco.getDescription()}</p>
+                      </a>
 
-                </div>
-          
+                  </div>
+
               </c:forEach>
-                  
+
           </div>
           
           </br>
           
           <div class="container text-center">
-              <h3><b><a href="#">To see more of our products, please click here</a><b></h3>
+              <h3><b><a href="shop.jsp">To see more of our products, please click here</a><b></h3>
           </div>
           
       </div>

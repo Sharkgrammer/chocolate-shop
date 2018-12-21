@@ -35,6 +35,7 @@ body{
 
 .cara{
    height: 500px;
+   margin: auto;
 }
 
 .caramain{
@@ -67,7 +68,7 @@ body{
   background: #cccccc;
 }
 
-/* Modal CSS CSS */
+/* Modal CSS */
 
 .modal {
     display: none;
@@ -120,7 +121,40 @@ body{
     color: white;
 }
 
+/* Shop CSS CSS */
 
+.shop-link{
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color:black;
+}
+
+.shop-link:hover {
+  text-decoration: none;
+  color:#666666;
+}
+
+.shop-margin{
+    margin: 10px 52px 10px 52px;
+}
+
+.shop-arrival-img{
+    height: 50%; 
+    width: 50%; 
+    object-fit: contain;
+}
+
+.shop-norm-img{
+    height: 70%; 
+    width: 70%; 
+    object-fit: contain;
+}
+
+.shop-cara{
+    margin:10px;
+}
 /* Media querys here. Its set to 992 as this is where bootstrap switches to mobile mode with the navbar */
 
 @media screen and (max-width: 992px) {

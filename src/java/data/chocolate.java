@@ -98,6 +98,26 @@ public class chocolate implements Serializable{
     public List<Integer> getImages() {
         return images;
     }
+    
+    public List<String> getImageStrings(){
+        List<String> listStr = new ArrayList<>();
+        
+        for (int x : images){
+            listStr.add(blobToString(x));
+        }
+        
+        return listStr;
+    }
+    
+    public List<String> getImageStringsCara(){
+        List<String> listStr = new ArrayList<>();
+        
+        for (int x = 1; x < images.size(); x++){
+            listStr.add(blobToString(x));
+        }
+        
+        return listStr;
+    }
 
     public void setImages(List<Integer> images) {
         this.images = images;
@@ -107,13 +127,19 @@ public class chocolate implements Serializable{
         if (images.isEmpty()){
             return null;
         }else{
-            byte [] blobBytes;
+            
+            return blobToString(images.get(0));
+        }
+    }
+    
+    private String blobToString(int blobInt){
+         byte [] blobBytes;
             String contentType = "", baseImage = ""; char c; int content = 0;
             try {
                 databaseConnections database = new databaseConnections();
                 database.setAutoCommit();
-                Blob blob = database.retrieveImage(images.get(0));
                 
+                Blob blob = database.retrieveImage(blobInt);
                 blobBytes = blob.getBytes(1, (int) blob.length());
                 for (byte b : blobBytes){
                     c = (char) b;
@@ -138,7 +164,7 @@ public class chocolate implements Serializable{
             } catch (Exception ex) {
                 baseImage = ex.toString();
             }
+            
             return baseImage;
-        }
     }
 }

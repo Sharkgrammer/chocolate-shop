@@ -2,26 +2,14 @@ package servlets;
 
 import data.chocolate;
 import db.databaseConnections;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import java.net.URI;
-import java.net.URL;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,8 +40,7 @@ public class chocolateServlet extends HttpServlet {
         switch (mode) {
             case 1:
                 choco = database.retrieveMultiChocolate(4, filter);
-                request.setAttribute("count", choco.size());
-                request.setAttribute("list", choco);
+                request.setAttribute("listNew", choco);
                 break;
             case 2:
                 String paramStr;
@@ -97,6 +84,22 @@ public class chocolateServlet extends HttpServlet {
                     out.println(database.returnLastResult());
 
                 }
+                break;
+            case 3:
+                choco = database.retrieveMultiChocolate(5, filter);
+                List<chocolate> choco2 = new ArrayList<>();
+                for (int x = 1; x < choco.size();  x++){
+                    choco2.add(choco.get(x));
+                }
+                
+                request.setAttribute("firstChoco", choco.get(0));
+                request.setAttribute("listCara", choco2);
+                break;
+            case 4:
+                choco = database.retrieveAllChocolate();
+                //choco = database.retrieveMultiChocolate(5, filter);
+                request.setAttribute("llstShop", choco);
+                break;
 
         }//*/
 

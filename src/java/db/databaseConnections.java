@@ -238,8 +238,8 @@ public class databaseConnections {
        return retrieveChocolateInternal(0,0, "", 0);
    }
    
-   public List<chocolate> retrieveSingleChocolate(int id){
-       return retrieveChocolateInternal(id, 0, "", 0);
+   public chocolate retrieveSingleChocolate(int id){
+       return retrieveChocolateInternal(id, 0, "", 0).get(0);
    }
    
    public List<chocolate> retrieveMultiChocolate(int amt, int mode){

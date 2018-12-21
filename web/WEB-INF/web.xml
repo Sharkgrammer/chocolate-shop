@@ -8,6 +8,10 @@
         <servlet-name>imageServlet</servlet-name>
         <servlet-class>servlets.imageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>shopServlet</servlet-name>
+        <servlet-class>servlets.shopServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>chocolateServlet</servlet-name>
         <url-pattern>/chocolateServlet</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>imageServlet</servlet-name>
         <url-pattern>/imageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>shopServlet</servlet-name>
+        <url-pattern>/shopServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

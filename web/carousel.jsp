@@ -1,3 +1,8 @@
+<%@page import="java.util.List"%>
+<%@page import="data.chocolate"%> 
+<jsp:include page="/chocolateServlet?mode=3&filt=7" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+
 <div class="container-fluid">
     <div class="row">
       <div class="col-sm-2"> <div class="caraspace"> <!-- Future ad space --> </div> </div>
@@ -5,36 +10,31 @@
         <div class="caramain rounded">
           <div id="carousel" class="carousel slide center" data-ride="carousel">
 
-            <div class="carousel-inner">
+              <div class="carousel-inner">
 
-              <div class="carousel-item active">
-                <img class="d-block w-100 cara" src="images/1.jpg" alt="First">
-                <div class="carousel-caption d-none d-md-block">
-                 <h5>First</h5>
-                </div>
-              </div>
+                  <div class="carousel-item active">
+                      <a href="shopServlet?id=${firstChoco.getId()}" class="shop-link">
+                          <img class="d-block cara" src="${firstChoco.getFirstImage()}" alt="${firstChoco.getName()}">
+                          <div class="carousel-caption d-none d-md-block">
+                              <h5>${firstChoco.getName()}</h5>
+                          </div>
+                      </a>
+                  </div>
 
-              <div class="carousel-item">
-                <img class="d-block w-100 cara" src="images/2.jpg" alt="Second">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Second</h5>
-                </div>
-              </div>
+                  <c:forEach items="${listCara}" var="choco">
 
-              <div class="carousel-item">
-                <img class="d-block w-100 cara" src="images/3.jpg" alt="Third">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Third</h5>
-                </div>
+                      <div class="carousel-item">
+                          <a href="shopServlet?id=${choco.getId()}" class="shop-link">
+                              <img class="d-block cara" src="${choco.getFirstImage()}" alt="${choco.getName()}">
+                              <div class="carousel-caption d-none d-md-block">
+                                  <h5>${choco.getName()}</h5>
+                              </div>
+                          </a>
+                      </div>
+
+                  </c:forEach>
+
               </div>
-                
-              <div class="carousel-item">
-                <img class="d-block w-100 cara" src="images/4.jpg" alt="Fourth">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Fourth</h5>
-                </div>
-              </div>
-            </div>
 
             <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
