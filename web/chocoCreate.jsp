@@ -68,6 +68,10 @@
                     <td>Flavour</td>
                     <td><input type="text" required name="flav" placeholder="Flavour" /></td>
                 </tr>
+                 <tr>
+                    <td>Price - Enter Float Value (0.00)</td>
+                    <td><input type="text" required name="pric" placeholder="Price" /></td>
+                </tr>
             </tbody>
         </table>
         <input type="submit" value="Submit" name="submit" /> <input type="reset">

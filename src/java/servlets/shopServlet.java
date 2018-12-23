@@ -32,7 +32,7 @@ public class shopServlet extends HttpServlet {
         int id = Integer.valueOf(request.getParameter("id"));
         chocolate choco = database.retrieveSingleChocolate(id);
         
-        request.setAttribute("choco", choco);
+        request.setAttribute("chocoShop", choco);
         request.setAttribute("chocoImages", choco.getImageStringsCara());
         request.getRequestDispatcher("/shop-item.jsp").forward(request, response);
     }

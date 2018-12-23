@@ -12,6 +12,10 @@
         <servlet-name>shopServlet</servlet-name>
         <servlet-class>servlets.shopServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>errorServlet</servlet-name>
+        <servlet-class>servlets.errorServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>chocolateServlet</servlet-name>
         <url-pattern>/chocolateServlet</url-pattern>
@@ -24,12 +28,40 @@
         <servlet-name>shopServlet</servlet-name>
         <url-pattern>/shopServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>errorServlet</servlet-name>
+        <url-pattern>/errorServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-            300
+            30
         </session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    
+    <!-- Error Pages -->
+    
+    <!-- redo later pls 
+    <error-page>
+        <error-code>401</error-code>
+        <location>/errorServlet?code=401</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/errorServlet?code=403</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errorServlet?code=404</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errorServlet?code=500</location>
+    </error-page>
+    <error-page>
+        <error-code>503</error-code>
+        <location>/errorServlet?code=503</location>
+    </error-page>-->
 </web-app>

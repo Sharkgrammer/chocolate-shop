@@ -121,7 +121,7 @@ body{
     color: white;
 }
 
-/* Shop CSS CSS */
+/* Shop CSS */
 
 .shop-link{
     display: block;
@@ -153,8 +153,37 @@ body{
 }
 
 .shop-cara{
-    margin:10px;
+   height: 400px;
+   margin: auto;
 }
+
+.shop-box{
+    margin:10px 0px 10px 0px;
+    padding:5px;
+}
+
+.shop-but, .shop-but:hover, .shop-but:active {
+    background-color: #873B00;
+    font-size: 120%;
+    color: white;
+    height:100%;
+    width:100%;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    margin: auto;
+}
+
+.shop-but:hover {
+    background-color: #692E00;
+}
+
+.shop-counter{
+    margin: 20% 0px 20% 0px;
+    width: 50px;
+    height:40%;
+}
+
 /* Media querys here. Its set to 992 as this is where bootstrap switches to mobile mode with the navbar */
 
 @media screen and (max-width: 992px) {

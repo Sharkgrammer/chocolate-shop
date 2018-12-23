@@ -76,14 +76,14 @@ public class chocolateServlet extends HttpServlet {
                 boolean result = false;
 
                 result = database.createChocolate(ParamsList.get(0), ParamsList.get(1), ParamsList.get(2),
-                        ParamsList.get(5), ParamsList.get(3), ParamsList.get(4), dateSql.toString(), imageList);
+                        ParamsList.get(5), ParamsList.get(3), ParamsList.get(4), dateSql.toString(), ParamsList.get(6), imageList);
 
                 try (PrintWriter out = response.getWriter()) {
                     out.println(imageList.size());
                     out.println(database.returnErrorMessage());
                     out.println(database.returnLastResult());
-
                 }
+                
                 break;
             case 3:
                 choco = database.retrieveMultiChocolate(5, filter);

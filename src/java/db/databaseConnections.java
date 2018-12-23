@@ -83,10 +83,10 @@ public class databaseConnections {
        return sqlSuccess;
    }
    
-   public boolean createChocolate(String Name, String Desc, String Type, String Flavour, String Weight, String Producer, String Date, List<Blob> imageList){
+   public boolean createChocolate(String Name, String Desc, String Type, String Flavour, String Weight, String Producer, String Date, String Price, List<Blob> imageList){
        String funtName = "Create Chocolate";
        
-       sql = "insert into chocolate(CHOCO_NAME,CHOCO_DESC,CHOCO_TYPE,CHOCO_FLAVOUR,CHOCO_WEIGHT,CHOCO_PRODUCER,CHOCO_DATE_ENTERED) values (?,?,?,?,?,?,?)";
+       sql = "insert into chocolate(CHOCO_NAME,CHOCO_DESC,CHOCO_TYPE,CHOCO_FLAVOUR,CHOCO_WEIGHT,CHOCO_PRODUCER,CHOCO_DATE_ENTERED, CHOCO_PRICE) values (?,?,?,?,?,?,?,?)";
        try {
            PreparedStatement query = conn.prepareStatement(sql, new String[] { "CHOCO_ID"} );
            
@@ -97,6 +97,7 @@ public class databaseConnections {
            query.setString(5, Weight);
            query.setString(6, Producer);
            query.setString(7, Date);
+           query.setFloat(8, Float.parseFloat(Price));
            
            sqlSuccess = query.executeUpdate() == 1;
            
@@ -320,6 +321,7 @@ public class databaseConnections {
                choco.setFlavour(rs.getString("CHOCO_FLAVOUR"));
                choco.setWeight(rs.getString("CHOCO_WEIGHT"));
                choco.setProducer(rs.getString("CHOCO_PRODUCER"));
+               choco.setPrice(rs.getFloat("CHOCO_PRICE"));
                
                
                imageList = new ArrayList<>();

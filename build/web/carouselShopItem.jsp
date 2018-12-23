@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="data.chocolate"%> 
 
-<div class="container-fluid shop-cara">
+<div class="container-fluid" style="margin:10px">
     <div class="row">
         <div class="col-sm-2"> <div class="caraspace"> <!-- Future ad space --> </div> </div>
         <div class="col-sm-8">
@@ -12,14 +12,14 @@
                     <div class="carousel-inner">
 
                         <div class="carousel-item active">
-                            <img class="d-block cara" src="${choco.getFirstImage()}" alt="${choco.getName()}">
+                            <img class="d-block shop-cara" src="${chocoShop.getFirstImage()}" alt="${chocoShop.getName()}">
                         </div>
 
                         
                          <c:forEach items="${chocoImages}" var="image">
                              
                             <div class="carousel-item">
-                                <img class="d-block cara" src="${image}" alt="${choco.getName()}">
+                                <img class="d-block shop-cara" src="${image}" alt="${choco.getName()}">
                             </div>
                         
                          </c:forEach>

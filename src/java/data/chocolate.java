@@ -17,6 +17,7 @@ public class chocolate implements Serializable{
     private String producer;
     private List<Integer> images;
     private String date;
+    private float price;
     
     public chocolate(){
         //Initialise variables here
@@ -166,5 +167,13 @@ public class chocolate implements Serializable{
             }
             
             return baseImage;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }
