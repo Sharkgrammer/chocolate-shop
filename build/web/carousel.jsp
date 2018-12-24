@@ -1,7 +1,4 @@
-<%@page import="java.util.List"%>
-<%@page import="data.chocolate"%> 
 <jsp:include page="/chocolateServlet?mode=3&filt=7" />
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 
 <div class="container-fluid">
     <div class="row">
@@ -53,4 +50,3 @@
       
   </div>
 </div>
-    

@@ -25,7 +25,7 @@
 
                             <div class="col-sm-6" >
                                 <div class="text-center">
-                                    <h1>${chocoShop.getName()}</h1>
+                                    <h1>${chocoShop.getName()}  (${chocoShop.getId()})</h1>
                                 </div> 
 
                                 <div class="text-left">
@@ -71,11 +71,25 @@
 
                         </div>
 
+                    </div></br>
+
+
+                    <header class="text-center">
+                        <h3> Chocolate Reviews </h3>
+                    </header>
+                    <div class="row text-center" style="overflow: hidden;">
+                        <c:forEach items="${chocoShop.getReviews()}" var="review">
+                            <div class="col-sm-3 border border-dark rounded shop-margin">
+                                <h2> ${review.getTitle()} (${review.isLiked()})</h2>
+                                <h3> ${review.getUser()} </h3>
+                                <h4> ${review.getDate()} </h4> 
+                                <p class="text-left">${review.getData()}</p>
+                            </div>
+                        </c:forEach>
                     </div>
-
-                    </br></br>
+                    
                 </div>
-
+                                            
                 <div class="col-sm-1"></div>
 
             </div>

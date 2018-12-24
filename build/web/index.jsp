@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="data.chocolate"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +22,12 @@
    <div style="padding-bottom: 20px"></br></div>
    
    <%@include file="reviews.jsp" %> 
+   <div style="padding-bottom: 20px"></br></div>
+   
+   <%@include file="about.jsp" %> 
+   <div style="padding-bottom: 20px"></br></div>
+   
+   <%@include file="contact.jsp" %> 
    <div style="padding-bottom: 20px"></br></div>
    
    <%@include file="modal.jsp" %>

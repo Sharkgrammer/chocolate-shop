@@ -1,10 +1,5 @@
-<%@page import="java.util.List"%>
-<%@page import="data.chocolate"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="css.jsp" %>
+<jsp:include page="/chocolateServlet?mode=1&filt=8" />
 <div class="container-fluid" id='shop'>
-    
-    <jsp:include page="/chocolateServlet?mode=1&filt=8" />
     
     <div class="row">
       <div class="col-sm-1" ></div>
@@ -21,7 +16,7 @@
           </div>
           
           <header class="text-center">
-              <h3> <---- New Arrivals ----> </h3>
+              <h3> New Arrivals </h3>
           </header>
           
           </br>

@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/shop-item.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/reviewCreate.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/userCreate.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/chocolateServlet.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/db/databaseConnections.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/data/review.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/shop.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/userServlet.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/shopServlet.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/chocoCreate.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/data/chocolate.java</file>
+        </group>
     </open-files>
 </project-private>

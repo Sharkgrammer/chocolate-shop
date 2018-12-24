@@ -27,6 +27,22 @@ body{
     font-size: 110%;
 }
 
+.about-img{
+    margin:10px;
+}
+
+.contact-form{
+    width:100%;
+    padding:10px;
+    margin:10px;
+}
+
+.contact-but{
+    width:30%;
+    padding:10px;
+    margin:10px;
+}
+
 /* Carousel CSS */
 
 .carousel {
