@@ -29,13 +29,11 @@ public class userServlet extends HttpServlet {
         userDo(request, response);
     }
 
-    void userDo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    void userDo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int mode = Integer.valueOf(request.getParameter("mode"));
         switch (mode) {
             case 1:
-                // choco = database.retrieveMultiChocolate(4, filter);
-                // request.setAttribute("listNew", choco);
-
+                //Creating Users
                 String paramStr;
                 List<String> ParamsList = new ArrayList<>();
 
@@ -51,10 +49,27 @@ public class userServlet extends HttpServlet {
                 boolean result = false;
 
                 result = database.createUser(ParamsList.get(0), ParamsList.get(1), ParamsList.get(2), "USER", ParamsList.get(3));
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(database.returnErrorMessage());
-                    out.println(database.returnLastResult());
+                
+                if (result){
+                    request.setAttribute("boop", "Success");
                 }
+                
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                
+                break;
+            case 2:
+                //Logging in
+                
+                String email = request.getParameter("emai"), pass = request.getParameter("pass");
+                
+                int ID = database.login(email, pass);
+                
+                if (ID != 0){
+                    request.setAttribute("boop", ID);
+                }
+                
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                
                 break;
         }
     }

@@ -1,32 +1,16 @@
 <div>
     <form name="create" action="userServlet?mode=1" method="POST">
 
-        <table border="1">
-            <tbody>
+        <input type="text" required name="name" placeholder="Name" class="contact-form"/>
 
-                <tr>
-                    <td>Name</td>
-                    <td><input type="text" required name="name" placeholder="Name" /></td>
-                </tr>
+        <input type="text" required name="emai" placeholder="Email" class="contact-form"/>
 
-                <tr>
-                    <td>Email</td>
-                    <td><input type="text" required name="emai" placeholder="Email" /></td>
-                </tr>
+        <input type="password" required name="pass" placeholder="Password" class="contact-form"/>
 
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" required name="pass" placeholder="Password" /></td>
-                </tr>
-
-                <tr>
-                    <td>Address</td>
-                    <td><input type="text" required name="addr" placeholder="Address" /></td>
-                </tr>
-
-            </tbody>
-        </table>
-        <input type="submit" value="Submit" name="submit" /> <input type="reset">
+        <input type="text" required name="addr" placeholder="Address" class="contact-form"/>
+        
+        <input type="submit" value="Submit" name="submit" class="contact-but" /> <input type="reset" class="contact-but"/>
+        
     </form>
 
 </div>

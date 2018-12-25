@@ -67,6 +67,19 @@ public class databaseConnections {
         System.out.println(errorMessage);
     }
 
+    public int login(String email, String pass){
+        List<user> userList = retrieveAllUsers();
+        int result = 0;
+        
+        for (user x : userList){
+            if (x.getEmail().equals(email) && x.getPassword().equals(pass)){
+                result = x.getId();
+                break;
+            }
+        }
+        
+        return result;
+    }
     //Create operations
     public boolean createUser(String Name, String Email, String Password, String Type, String Address) {
         String funtName = "Create User";

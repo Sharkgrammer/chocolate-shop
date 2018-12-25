@@ -33,7 +33,7 @@
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" href="#"><h5><b>Log&nbsp;In/Sign&nbsp;Up</b></h5></a>
+                <a class="nav-link" href="login.jsp"><h5><b>Log&nbsp;In/Sign&nbsp;Up</b></h5></a>
             </li>
 
           </ul> 
