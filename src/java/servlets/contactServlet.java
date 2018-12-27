@@ -30,11 +30,11 @@ public class contactServlet extends HttpServlet {
         switch (mode) {
             case 1:
                 //handle contact form
-                
+        
                 break;
             case 2:
                 //handle newsletter form
-                
+
                 break;
         }
     }

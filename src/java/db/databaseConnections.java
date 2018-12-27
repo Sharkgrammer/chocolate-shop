@@ -538,7 +538,7 @@ public class databaseConnections {
             while (rs.next()) {
                 purch = new purchase();
                 purch.setId(rs.getInt("PURCHASE_ID"));
-                purch.setChoco_id(rs.getInt("CHOCO_ID"));
+                purch.setChoco(retrieveSingleChocolate(rs.getInt("CHOCO_ID")));
                 purch.setUser_id(rs.getInt("USER_ID"));
                 purch.setAmount(rs.getInt("PURCHASE_AMOUNT"));
                 purch.setDate(rs.getString("PURCHASE_DATE"));

@@ -4,6 +4,14 @@
         <%@page import="data.chocolate"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@include file="css.jsp" %>
+        
+        <script>
+             function updateScreen(){
+                 document.getElementById('amt').value = ${chocoShop.getPrice()} * document.getElementById('count').value;
+                 document.getElementById('total').innerHTML = "Total cost: &euro;" +  Math.round((${chocoShop.getPrice()} * document.getElementById('count').value) * 100) / 100;
+            }
+        </script>
+        
     </head>
 
     <body>
@@ -57,11 +65,11 @@
                                                 <button class="shop-but">Buy ${chocoShop.getName()}</button>
                                             </div>
                                             <div class="col-sm-2">
-                                                <input type="number" required name="price" value="1" class="shop-counter"/>
+                                                <input id="count" type="number" onKeyUp="updateScreen()" onclick="updateScreen()" required name="price" value="1" class="shop-counter"/>
                                             </div>
                                             <div class="col-sm-5">
                                                 <p>Cost Per Unit: &euro;${chocoShop.getPrice()}</p>
-                                                <p>Total Cost: <c:out value="${chocoShop.getPrice()}" /></p>
+                                                <span id="total">Total Cost: &euro;0</span>
                                             </div>
                                         </div>
                                     </div>
@@ -87,9 +95,9 @@
                             </div>
                         </c:forEach>
                     </div>
-                    
+
                 </div>
-                                            
+
                 <div class="col-sm-1"></div>
 
             </div>
@@ -97,6 +105,10 @@
 
         <%@include file="modal.jsp" %>
         <%@include file="footer.jsp" %>
+        <input type="text" name="amt" id="amt"/>
 
+        <script>
+            updateScreen();            
+        </script>
     </body>
 </html>

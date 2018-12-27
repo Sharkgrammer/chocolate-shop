@@ -91,11 +91,14 @@
 
                 <% if (result == true) {
                         if (admin == true) { %>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="admin.jsp">Admin</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admin.jsp">Admin</a>
+                        </li>
+                    <% } %>
+                 <li class="nav-item">
+                    <a class="nav-link" href="#">Cart</a>
                 </li>
-                <% } %>
+                    
                 <li class="nav-item">
                     <a class="nav-link" onclick="eraseCookie('key'); eraseCookie('id');window.location.reload(false);" href="#logout">Logout</a>
                 </li>

@@ -3,7 +3,7 @@ package data;
 public class purchase {
     
     private int id;
-    private int choco_id;
+    private chocolate choco;
     private int user_id;
     private int amount;
     private String date;
@@ -11,7 +11,7 @@ public class purchase {
     public purchase(){
         //Initialise variables here
         id = 0;
-        choco_id = 0;
+        choco = null;
         user_id = 0;
         amount = 0;
         date = "";
@@ -23,14 +23,6 @@ public class purchase {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getChoco_id() {
-        return choco_id;
-    }
-
-    public void setChoco_id(int choco_id) {
-        this.choco_id = choco_id;
     }
 
     public int getUser_id() {
@@ -55,6 +47,14 @@ public class purchase {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public chocolate getChoco() {
+        return choco;
+    }
+
+    public void setChoco(chocolate choco) {
+        this.choco = choco;
     }
     
 }
