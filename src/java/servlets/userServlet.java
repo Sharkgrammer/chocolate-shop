@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +52,9 @@ public class userServlet extends HttpServlet {
                 result = database.createUser(ParamsList.get(0), ParamsList.get(1), ParamsList.get(2), "USER", ParamsList.get(3));
                 
                 if (result){
-                    request.setAttribute("boop", "Success");
+                    request.setAttribute("result", "Success, Please Log In");
+                }else{
+                    request.setAttribute("result", "Failed, Please Try Again");
                 }
                 
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -65,12 +68,26 @@ public class userServlet extends HttpServlet {
                 int ID = database.login(email, pass);
                 
                 if (ID != 0){
-                    request.setAttribute("boop", ID);
+                    database.setAuthKey(generateKey(20), ID);
+                    request.setAttribute("id", ID);
+                    request.setAttribute("key", database.getAuthKey(ID));
                 }
+                
+                request.setAttribute("result", "Logged in");
                 
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
                 
                 break;
         }
+    }
+    
+    private String generateKey(int len){
+        char[] chars = "abcdefghijklmnopqrstuvwxyz123456789".toCharArray();
+        String output = "";
+        Random random = new Random();
+        for (int i = 0; i < len; i++) {
+            output += chars[random.nextInt(chars.length)];
+        }
+        return output;
     }
 }

@@ -3,6 +3,7 @@ package db;
 import java.sql.*;
 import data.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +81,54 @@ public class databaseConnections {
         
         return result;
     }
+    
+    public boolean isAdmin(int ID){
+        String type = "", funtName = "Check Admin";
+        sql = "select user_type from users where user_id = " + ID;
+        try {
+            Statement query = conn.createStatement();
+            ResultSet rs = query.executeQuery(sql);
+            
+            while (rs.next()) {
+                type = rs.getString("USER_TYPE");
+            }
+
+        } catch (SQLException ex) {
+            sqlSuccessHandler(funtName, ex);
+        }
+        
+        return type.equals("ADMIN");
+    }
+    
+    public String getAuthKey(int ID){
+        String key = "", funtName = "Retrieve Auth Key";
+        sql = "select user_key from users where user_id = " + ID;
+        try {
+            Statement query = conn.createStatement();
+            ResultSet rs = query.executeQuery(sql);
+            
+            while (rs.next()) {
+                key = rs.getString("USER_KEY");
+            }
+
+        } catch (SQLException ex) {
+            sqlSuccessHandler(funtName, ex);
+        }
+        
+        return key;
+    }
+    
+    public boolean setAuthKey(String key, int ID){
+        Map map = new HashMap(){{
+            put("USER_KEY", key);
+        }};
+        return updateUser(map, ID);
+    }
+    
+    public boolean checkAuthKey(String key, int ID){
+        return key.equals(getAuthKey(ID));
+    }
+    
     //Create operations
     public boolean createUser(String Name, String Email, String Password, String Type, String Address) {
         String funtName = "Create User";
@@ -611,20 +660,20 @@ public class databaseConnections {
                 sql += ",";
             }
         }
-        sql += "where user_id = ?";
+        sql += " where user_id = ?";
 
         try {
             PreparedStatement stmnt = conn.prepareStatement(sql);
 
             for (int x = 0; x < updateControl.size(); x++) {
-                if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")) {
-                    stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+                if (updateControl.get(x).split(":::")[0].toLowerCase().contains("id")) {
+                    stmnt.setInt(x + 1, Integer.parseInt(updateControl.get(x).split(":::")[1]));
                 } else {
-                    stmnt.setString(x, updateControl.get(x).split(":::")[1]);
+                    stmnt.setString(x + 1, updateControl.get(x).split(":::")[1]);
                 }
             }
-            stmnt.setInt(updateControl.size(), id);
-
+            stmnt.setInt(updateControl.size() + 1, id);
+            
             sqlSuccess = stmnt.executeUpdate() != 0;
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {

@@ -1,10 +1,10 @@
-<!DOCTYPE html>
 <html>
     <head>
         <%@page import="java.util.List"%>
         <%@page import="data.chocolate"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@include file="css.jsp" %>
+        
     </head>
 
     <body>
@@ -18,7 +18,17 @@
 
                 <div class="col-sm-10 content border border-dark rounded center text-center">
 
-                    <h1>${boop}</h1>
+                    <h1>${result}</h1>
+
+                    <script>
+                        setCookie("key", "${key}", 1);
+                        setCookie("id", ${id}, 1);
+                        setTimeout(function(){
+                            if ("${result}" == "Logged in"){
+                                window.location.href="/ChocolateShop";
+                            }
+                        },100);
+                    </script>
 
                     <header class="text-center">
                         <h3> Login </h3>
