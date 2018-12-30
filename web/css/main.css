@@ -131,6 +131,28 @@ body{
     width:300px;
 }
 
+.modal-shop{
+    background-color: #fefefe;
+    color:black;
+    padding: 10px 20px 10px 20px;
+}
+
+.modal-shop-padding{
+    background-color:#873B00;
+    padding:5px 25px 15px 25px;
+    color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-shop-btn{
+    width:200px;
+    padding: 5px;
+}
+
 .modal-edge {
     padding: 2px 16px;
     background-color: #873B00;
@@ -198,6 +220,20 @@ body{
     margin: 20% 0px 20% 0px;
     width: 50px;
     height:40%;
+}
+
+/* Purchase CSS */
+
+.purchContainerEx{
+    padding:5px;
+}
+
+.purchContainerIn{
+    padding:5px;
+}
+
+.purchMargin{
+    margin:5px;
 }
 
 /* Media querys here. Its set to 992 as this is where bootstrap switches to mobile mode with the navbar */

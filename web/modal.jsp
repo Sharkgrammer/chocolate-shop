@@ -23,7 +23,7 @@
 </div>
 
 <div id="newsmodal" class="modal">
-    <div class="modal-news-padding center text-center">
+    <div class="modal-news-padding center text-center rounded">
         <h2 id="newstitle">Hi there! Interested in some high quality deals and news?</h2>
         <div class="modal-news">
             <form name="create" action="contactServlet?mode=2" method="POST">
@@ -38,8 +38,28 @@
             </form>
         </div>
     </div>
-
 </div>
+
+<div id="shopmodal" class="modal">
+    <div class="modal-shop-padding center text-center rounded">
+        <h3>Add to cart?</h3>
+        <div class="modal-shop">
+            <button type="button" class="btn btn-success modal-shop-btn" id="shopaccept">Yes</button>
+            <button type="button" class="btn btn-danger modal-shop-btn" id="shopreject">No</button>
+        </div>
+    </div>
+</div>
+
+<div id="buymodal" class="modal">
+    <div class="modal-shop-padding center text-center rounded">
+        <h3>Buy from cart?</h3>
+        <div class="modal-shop">
+            <button type="button" class="btn btn-success modal-shop-btn" id="buyaccept">Yes</button>
+            <button type="button" class="btn btn-danger modal-shop-btn" id="buyreject">No</button>
+        </div>
+    </div>
+</div>
+
 
 <script>
     var modal = document.getElementById('gdprmodal');
@@ -80,6 +100,31 @@
         alert("Thank you for your email " + email.innerHTML);
         setCookie("email", "yes", 10);
     };
+
+    var modalshop = document.getElementById('shopmodal');
+    var spanshopyes = document.getElementById("shopaccept");
+    var spanshopno = document.getElementById("shopreject");
+    modalshop.style.display = "none";
+
+    spanshopno.onclick = function () {
+        modalshop.style.display = "none";
+    };
+    spanshopyes.onclick = function () {
+        sendToCart();
+    };
+
+    var modalbuy = document.getElementById('buymodal');
+    var spanbuyyes = document.getElementById("buyaccept");
+    var spanbuyno = document.getElementById("buyreject");
+    modalbuy.style.display = "none";
+
+    spanbuyno.onclick = function () {
+        modalbuy.style.display = "none";
+    };
+    spanbuyyes.onclick = function () {
+        buy();
+    };
+
 
 
     function newsletterCheck() {

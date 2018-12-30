@@ -26,6 +26,13 @@
     function eraseCookie(name) {
         document.cookie = name + '=; Max-Age=-99999999;';
     }
+    
+    function logout(){
+        eraseCookie('key');
+        eraseCookie('id');
+        eraseCookie("cart");
+        window.open("/ChocolateShop", "_self");
+    }
 
 </script>
 
@@ -96,11 +103,11 @@
                         </li>
                     <% } %>
                  <li class="nav-item">
-                    <a class="nav-link" href="#">Cart</a>
+                    <a class="nav-link" href="purchase.jsp">Cart</a>
                 </li>
                     
                 <li class="nav-item">
-                    <a class="nav-link" onclick="eraseCookie('key'); eraseCookie('id');window.location.reload(false);" href="#logout">Logout</a>
+                    <a class="nav-link" onclick="logout();" href="#logout">Logout</a>
                 </li>
                 <% } else { %>
                 <li class="nav-item">

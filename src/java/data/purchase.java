@@ -7,6 +7,7 @@ public class purchase {
     private int user_id;
     private int amount;
     private String date;
+    private int cart;
     
     public purchase(){
         //Initialise variables here
@@ -55,6 +56,14 @@ public class purchase {
 
     public void setChoco(chocolate choco) {
         this.choco = choco;
+    }
+
+    public int getCart() {
+        return cart;
+    }
+
+    public void setCart(int cart) {
+        this.cart = cart;
     }
     
 }

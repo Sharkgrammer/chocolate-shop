@@ -234,13 +234,23 @@ public class databaseConnections {
         return sqlSuccess;
     }
 
-    public boolean createPurchase(String ChocoID, String UserID, int Amt) {
+    public boolean createPurchase(int chocoID, int userID, String amt) {
         String funtName = "Create Purchase";
-        sql = "insert into purchase(CHOCO_ID,USER_ID,PURCHASE_AMOUNT,PURCHASE_DATE) values ("
-                + ChocoID + "," + UserID + "," + Amt + ",NOW());";
+        sql = "insert into purchases(CHOCO_ID,USER_ID,PURCHASE_AMOUNT,PURCHASE_DATE) values (?,?,?,?)";
+        
+        java.util.Date dateSys = new java.util.Date(System.currentTimeMillis());
+        java.sql.Date dateSql = new java.sql.Date(dateSys.getTime());
+        
         try {
-            Statement query = conn.createStatement();
-            sqlSuccess = query.execute(sql);
+            
+            PreparedStatement query = conn.prepareStatement(sql);
+
+            query.setInt(1, chocoID);
+            query.setInt(2, userID);
+            query.setString(3, amt);
+            query.setString(4, dateSql.toString());
+            
+            sqlSuccess = query.executeUpdate() == 1;
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
             sqlSuccessHandler(funtName, ex);

@@ -6,9 +6,12 @@
         <%@include file="css.jsp" %>
         
         <script>
-             function updateScreen(){
-                 document.getElementById('amt').value = ${chocoShop.getPrice()} * document.getElementById('count').value;
-                 document.getElementById('total').innerHTML = "Total cost: &euro;" +  Math.round((${chocoShop.getPrice()} * document.getElementById('count').value) * 100) / 100;
+            function updateScreen(){
+                document.getElementById('total').innerHTML = "Total cost: &euro;" +  Math.round((${chocoShop.getPrice()} * document.getElementById('count').value) * 100) / 100;
+            }
+            
+            function sendToCart(){
+                window.open("purchaseServlet?mode=1&id=${chocoShop.getId()}&amt=" + Math.round(document.getElementById('count').value,0), "_self");
             }
         </script>
         
@@ -33,11 +36,12 @@
 
                             <div class="col-sm-6" >
                                 <div class="text-center">
-                                    <h1>${chocoShop.getName()}  (${chocoShop.getId()})</h1>
+                                    <h1>${result}</h1>
+                                    <h1>${chocoShop.getName()}</h1>
                                 </div> 
 
                                 <div class="text-left">
-                                    <h3>${chocoShop.getDescription()}</h1>
+                                    <h3>${chocoShop.getDescription()}</h3>
                                 </div> 
 
                                 </br>
@@ -62,14 +66,14 @@
                                     <div class="container-fluid">
                                         <div class="row text-center">
                                             <div class="col-sm-5">
-                                                <button class="shop-but">Buy ${chocoShop.getName()}</button>
+                                                <button class="shop-but" onClick="modalshop.style.display = 'block';">Buy ${chocoShop.getName()}</button>
                                             </div>
                                             <div class="col-sm-2">
                                                 <input id="count" type="number" onKeyUp="updateScreen()" onclick="updateScreen()" required name="price" value="1" class="shop-counter"/>
                                             </div>
                                             <div class="col-sm-5">
                                                 <p>Cost Per Unit: &euro;${chocoShop.getPrice()}</p>
-                                                <span id="total">Total Cost: &euro;0</span>
+                                                <span id="total">Total Cost: &euro;</span>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +109,6 @@
 
         <%@include file="modal.jsp" %>
         <%@include file="footer.jsp" %>
-        <input type="text" name="amt" id="amt"/>
 
         <script>
             updateScreen();            
