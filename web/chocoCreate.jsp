@@ -30,51 +30,25 @@
 <div>
     <form name="create" action="chocolateServlet?mode=2&filt=0" method="POST">
 
-        <table border="1">
-            <tbody>
+        <input type="text" required name="name" placeholder="Name" class="contact-form"/>
 
-                <tr>
-                    <td>Name</td>
-                    <td><input type="text" required name="name" placeholder="Name" /></td>
-                </tr>
+        <textarea rows="2" required cols="25" name="desc" placeholder="Description" class="contact-form"></textarea>
 
-                <tr>
-                    <td>Description</td>
-                    <td><textarea rows="2" required cols="25" name="desc" placeholder="Description"></textarea></td>
-                </tr>
-
-                <tr>
-                    <td>Type</td>
-                    <td><input type="text" required name="type" placeholder="Type" /></td>
-                </tr>
-
-                <tr>
-                    <td>Weight</td>
-                    <td><input type="number" required name="weig" placeholder="Weight" /></td>
-                </tr>
-
-                <tr>
-                    <td>Producer</td>
-                    <td><input type="text" required name="prod" placeholder="Producer" /></td>
-                </tr>
-
-                <tr>
-                <input type="hidden" id="imgloc" name="img" value="null"/>
-                <td>Image</td>
-                <td><input type="file" id="imgfiles" multiple onchange="fileMultiStr()"></td>
-                </tr>
-
-                <tr>
-                    <td>Flavour</td>
-                    <td><input type="text" required name="flav" placeholder="Flavour" /></td>
-                </tr>
-                 <tr>
-                    <td>Price - Enter Float Value (0.00)</td>
-                    <td><input type="text" required name="pric" placeholder="Price" /></td>
-                </tr>
-            </tbody>
-        </table>
-        <input type="submit" value="Submit" name="submit" /> <input type="reset">
+        <input type="text" required name="type" placeholder="Type" class="contact-form"/>
+        
+        <input type="number" required name="weig" placeholder="Weight" class="contact-form"/>
+        
+        <input type="text" required name="prod" placeholder="Producer" class="contact-form"/>
+        
+        <input type="hidden" id="imgloc" name="img" value="null"/>
+        
+        <input type="file" id="imgfiles" multiple onchange="fileMultiStr()" class="contact-form">
+        
+        <input type="text" required name="flav" placeholder="Flavour" class="contact-form"/>
+        
+        <input type="text" required name="pric" placeholder="Price (0.00)" class="contact-form"/>
+        
+        <input type="submit" value="Submit" name="submit" class="contact-but"/> <input type="reset" class="contact-but">
     </form>
 
 </div>

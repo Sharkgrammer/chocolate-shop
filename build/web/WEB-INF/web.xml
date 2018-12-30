@@ -32,6 +32,18 @@
         <servlet-name>purchaseServlet</servlet-name>
         <servlet-class>servlets.purchaseServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>adminServlet</servlet-name>
+        <servlet-class>servlets.adminServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>stockServlet</servlet-name>
+        <servlet-class>servlets.stockServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>actServlet</servlet-name>
+        <servlet-class>servlets.actServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>chocolateServlet</servlet-name>
         <url-pattern>/chocolateServlet</url-pattern>
@@ -63,6 +75,18 @@
     <servlet-mapping>
         <servlet-name>purchaseServlet</servlet-name>
         <url-pattern>/purchaseServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>adminServlet</servlet-name>
+        <url-pattern>/adminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>stockServlet</servlet-name>
+        <url-pattern>/stockServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>actServlet</servlet-name>
+        <url-pattern>/actServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

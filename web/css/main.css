@@ -236,6 +236,18 @@ body{
     margin:5px;
 }
 
+/* Admin CSS */
+
+.adminPad{
+    margin:15px 5px 15px 5px;
+}
+
+.adminContainer{
+    width: auto;
+    display: block;
+    padding:5px;
+}
+
 /* Media querys here. Its set to 992 as this is where bootstrap switches to mobile mode with the navbar */
 
 @media screen and (max-width: 992px) {

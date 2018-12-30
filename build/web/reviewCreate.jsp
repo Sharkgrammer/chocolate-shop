@@ -1,39 +1,22 @@
 <div>
     <form name="create" action="reviewServlet?mode=1" method="POST">
 
-        <table border="1">
-            <tbody>
+        <input type="number" required name="choc" placeholder="Choco" class="contact-form"/></td>
 
-                <tr>
-                    <td>Choco ID</td>
-                    <td><input type="number" required name="choc" placeholder="Choco" /></td>
-                </tr>
+        <input type="number" required name="user" placeholder="User" class="contact-form"/></td>
 
-                <tr>
-                    <td>User ID</td>
-                    <td><input type="number" required name="user" placeholder="User" /></td>
-                </tr>
+        <textarea rows="2" required cols="25" name="data" placeholder="Review" class="contact-form"></textarea>
+        
+        <input type="text" required name="titl" placeholder="Title" class="contact-form" />
 
-                <tr>
-                    <td>Data</td>
-                    <td><textarea rows="2" required cols="25" name="data" placeholder="Data"></textarea></td>
-                </tr>
-                
-                <tr>
-                    <td>Title</td>
-                    <td><input type="text" required name="titl" placeholder="Title" /></td>
-                </tr>
-                
-                <tr>
-                    <input type="hidden" required id="but" name="but" value=""/>
-                    <td>Liked</td>
-                    <td><input type="button" value="Liked" onclick="document.getElementById('but').value = 'true';">
-                        <input type="button" value="Disliked" onclick="document.getElementById('but').value = 'false';"></td>
-                </tr>
+        <input type="hidden" required id="but" name="but" value=""/>
 
-            </tbody>
-        </table>
-        <input type="submit" value="Submit" name="submit" /> <input type="reset">
+        <input type="button" value="Liked" class="contact-but" onclick="document.getElementById('but').value = 'true';">
+
+        <input type="button" value="Disliked" class="contact-but" onclick="document.getElementById('but').value = 'false';">
+
+        <input type="submit" value="Submit" name="submit" class="contact-but" /> <input type="reset" class="contact-but">
+
     </form>
 
 </div>

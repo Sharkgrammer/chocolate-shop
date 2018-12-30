@@ -3,21 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/contact.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/shop-item.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/index.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/admin.jsp</file>
             <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/shopArrivals.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/header.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/db/databaseConnections.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/data/graph.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/stockCreate.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/css/main.css</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/actServlet.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/adminServlet.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Stock.sql</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/stockServlet.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/data/activity.java</file>
             <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/shop.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/about.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/carousel.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/reviews.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/login.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/userCreate.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/chocolateServlet.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/userServlet.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/shopServlet.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/actCreate.jsp</file>
         </group>
     </open-files>
 </project-private>
