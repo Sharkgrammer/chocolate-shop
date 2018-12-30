@@ -31,7 +31,37 @@
             }
 
             function buy() {
-                window.open("purchaseServlet?mode=3", "_self");
+                var str = "";
+                if (document.getElementById("card").value.length < 3) {
+                    str += "Card Holder";
+                }
+                if (document.getElementById("no").value.length < 6) {
+                    if (str != "") {
+                        str+=", ";
+                    }
+                    str += "Card Number";
+                }
+                if (document.getElementById("csv").value.length < 3) {
+                    if (str != "") {
+                        str+=", ";
+                    }
+                    str += "CSV Number";
+                }
+                if (document.getElementById("add").value.length < 6) {
+                    if (str != "") {
+                        str+=", ";
+                    }
+                    str += "Address";
+                }
+
+
+                if (str == "") {
+                    window.open("purchaseServlet?mode=3", "_self");
+                } else {
+                    modalbuy.style.display = 'none';
+                    alert("Error in: " + str);
+                }
+
             }
 
         </script>
@@ -59,19 +89,19 @@
                                     <tbody>
 
                                         <tr>
-                                            <td><input type="text" required name="name" placeholder="Card Holder" class="contact-form" /></td>
+                                            <td><input type="text" required id="card" placeholder="Card Holder" class="contact-form" /></td>
                                         </tr>
 
                                         <tr>
-                                            <td><input type="number" required name="name" placeholder="Card Number"  class="contact-form"/></td>
+                                            <td><input type="number" required id="no" placeholder="Card Number"  class="contact-form"/></td>
                                         </tr>
 
                                         <tr>
-                                            <td><input type="number" required name="name" placeholder="Csv Number" class="contact-form" /></td>
+                                            <td><input type="number" required id="csv" placeholder="Csv Number" class="contact-form" /></td>
                                         </tr>
 
                                         <tr>
-                                            <td><textarea rows="3" required cols="25" name="desc" placeholder="Address" class="contact-form"></textarea></td>
+                                            <td><textarea rows="3" required cols="25" id="add" placeholder="Address" class="contact-form"></textarea></td>
                                         </tr>
 
                                     </tbody>
@@ -82,7 +112,7 @@
                         <div class="col-sm-8">
 
                             <h1 class="text-center">${result}</h1>
-                            
+
                             <script>
                                 setTimeout(function () {
                                     if ("${result}" == "Items Bought!") {
@@ -116,7 +146,7 @@
                                             <script>
                                                 document.getElementById(${purch.getCart()}).innerHTML = (${purch.getAmount()} * ${purch.getChoco().getPrice()});
                                             </script>
-                                            <button class="shop-but" onclick="removeFromCart(})">Remove</button>
+                                            <button class="shop-but" onclick="removeFromCart(${purch.getCart()})">Remove</button>
                                         </div>
                                     </div>
                                 </c:forEach>

@@ -31,6 +31,7 @@ public class chocolate implements Serializable{
         producer = "";
         images = new ArrayList<>();
         date = "";
+        reviews = new ArrayList<>();
     }
     
     public int getId() {
@@ -184,5 +185,9 @@ public class chocolate implements Serializable{
 
     public void setReviews(List<review> reviews) {
         this.reviews = reviews;
+    }
+    
+    public int getReviewsCount() {
+        return reviews.size();
     }
 }

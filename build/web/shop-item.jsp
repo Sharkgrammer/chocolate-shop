@@ -4,17 +4,17 @@
         <%@page import="data.chocolate"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@include file="css.jsp" %>
-        
+
         <script>
-            function updateScreen(){
-                document.getElementById('total').innerHTML = "Total cost: &euro;" +  Math.round((${chocoShop.getPrice()} * document.getElementById('count').value) * 100) / 100;
+            function updateScreen() {
+                document.getElementById('total').innerHTML = "Total cost: &euro;" + Math.round((${chocoShop.getPrice()} * document.getElementById('count').value) * 100) / 100;
             }
-            
-            function sendToCart(){
-                window.open("purchaseServlet?mode=1&id=${chocoShop.getId()}&amt=" + Math.round(document.getElementById('count').value,0), "_self");
+
+            function sendToCart() {
+                window.open("purchaseServlet?mode=1&id=${chocoShop.getId()}&amt=" + Math.round(document.getElementById('count').value, 0), "_self");
             }
         </script>
-        
+
     </head>
 
     <body>
@@ -65,15 +65,18 @@
                                 <div class="border border-dark rounded shop-box">
                                     <div class="container-fluid">
                                         <div class="row text-center">
-                                            <div class="col-sm-5">
-                                                <button class="shop-but" onClick="modalshop.style.display = 'block';">Buy ${chocoShop.getName()}</button>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <input id="count" type="number" onKeyUp="updateScreen()" onclick="updateScreen()" required name="price" value="1" class="shop-counter"/>
-                                            </div>
+                                            <c:if test="${userid != 0}">
+                                                <div class="col-sm-5">
+
+                                                    <button class="shop-but" onClick="modalshop.style.display = 'block';">Buy ${chocoShop.getName()}</button>  
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input id="count" type="number" onKeyUp="updateScreen()" onclick="updateScreen()" required name="price" value="1" class="shop-counter"/>
+                                                </div>
+                                            </c:if>   
                                             <div class="col-sm-5">
                                                 <p>Cost Per Unit: &euro;${chocoShop.getPrice()}</p>
-                                                <span id="total">Total Cost: &euro;</span>
+                                                <span id="total">Total Cost: &euro;${chocoShop.getPrice()}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -85,20 +88,21 @@
 
                     </div></br>
 
-
-                    <header class="text-center">
-                        <h3> Chocolate Reviews </h3>
-                    </header>
-                    <div class="row text-center" style="overflow: hidden;">
-                        <c:forEach items="${chocoShop.getReviews()}" var="review">
-                            <div class="col-sm-3 border border-dark rounded shop-margin">
-                                <h2> ${review.getTitle()} (${review.isLiked()})</h2>
-                                <h3> ${review.getUser()} </h3>
-                                <h4> ${review.getDate()} </h4> 
-                                <p class="text-left">${review.getData()}</p>
-                            </div>
-                        </c:forEach>
-                    </div>
+                    <c:if test="${chocoShop.getReviewsCount() != 0}">
+                        <header class="text-center">
+                            <h3> Chocolate Reviews </h3>
+                        </header>
+                        <div class="row text-center" style="overflow: hidden;">
+                            <c:forEach items="${chocoShop.getReviews()}" var="review">
+                                <div class="col-sm-3 border border-dark rounded shop-margin">
+                                    <h2> ${review.getTitle()} (${review.isLiked()})</h2>
+                                    <h3> ${review.getUser()} </h3>
+                                    <h4> ${review.getDate()} </h4> 
+                                    <p class="text-left">${review.getData()}</p>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </c:if>
 
                 </div>
 
@@ -111,7 +115,7 @@
         <%@include file="footer.jsp" %>
 
         <script>
-            updateScreen();            
+            updateScreen();
         </script>
     </body>
 </html>
