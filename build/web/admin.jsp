@@ -9,7 +9,7 @@
         <script>
             window.onload = function () {
             <c:forEach items = "${output}" var = "graph" >
-                    var chart = new CanvasJS.Chart("${graph.getId()}", {
+                var chart${graph.getId()} = new CanvasJS.Chart("${graph.getId()}", {
                     animationEnabled: true,
                     exportEnabled: true,
                     title: {
@@ -28,7 +28,7 @@
                             dataPoints: ${graph.getData()}
                         }]
                 });
-                chart.render();
+                chart${graph.getId()}.render();
             </c:forEach>
             }
         </script>
@@ -74,16 +74,16 @@
                         </div>
                     </div>
 
-                    <h1 class="text-center">Data</h1>
+                    <h1 class="text-center">Data Charts</h1>
 
                     <div class="row border border-dark rounded adminPad">
-
+                        
                         <c:forEach items="${output}" var="graph">
-                            <div class="col-sm-12">
-                                <div id ="${graph.getId()}"></div>                 
+                            <div class="col-sm-6 border border-dark">
+                                <div id ="${graph.getId()}" class="adminGraph"></div>                 
                             </div>
                         </c:forEach>
-
+                        
                     </div>
                 </div>
 
@@ -94,7 +94,7 @@
 
         <%@include file="modal.jsp" %>
         <%@include file="footer.jsp" %>
-        
+
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
     </body>

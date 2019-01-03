@@ -33,9 +33,6 @@ public class reviewServlet extends HttpServlet {
         int mode = Integer.valueOf(request.getParameter("mode"));
         switch (mode) {
             case 1:
-                // choco = database.retrieveMultiChocolate(4, filter);
-                // request.setAttribute("listNew", choco);
-
                 String paramStr;
                 List<String> ParamsList = new ArrayList<>();
 

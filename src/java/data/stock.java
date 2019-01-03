@@ -3,17 +3,15 @@ package data;
 public class stock {
     
     private int id;
-    private int choco_id;
+    private chocolate choco;
     private int amount;
-    private String bestBefore;
     private String date;
     
     public stock(){
         //Initialise variables here
         id = 0;
-        choco_id = 0;
+        choco = null;
         amount = 0;
-        bestBefore = "";
         date = "";
     }
 
@@ -24,13 +22,13 @@ public class stock {
     public void setId(int id) {
         this.id = id;
     }
-
-    public int getChoco_id() {
-        return choco_id;
+    
+    public chocolate getChoco() {
+        return choco;
     }
 
-    public void setChoco_id(int choco_id) {
-        this.choco_id = choco_id;
+    public void setChoco(chocolate choco) {
+        this.choco = choco;
     }
 
     public int getAmount() {
@@ -39,14 +37,6 @@ public class stock {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public String getBestBefore() {
-        return bestBefore;
-    }
-
-    public void setBestBefore(String bestBefore) {
-        this.bestBefore = bestBefore;
     }
 
     public String getDate() {

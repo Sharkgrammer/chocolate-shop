@@ -4,7 +4,7 @@ public class purchase {
     
     private int id;
     private chocolate choco;
-    private int user_id;
+    private user user;
     private int amount;
     private String date;
     private int cart;
@@ -13,7 +13,7 @@ public class purchase {
         //Initialise variables here
         id = 0;
         choco = null;
-        user_id = 0;
+        user = null;
         amount = 0;
         date = "";
     }
@@ -25,15 +25,15 @@ public class purchase {
     public void setId(int id) {
         this.id = id;
     }
-
-    public int getUser_id() {
-        return user_id;
+    
+    public user getUser() {
+        return user;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser(user user) {
+        this.user = user;
     }
-
+    
     public int getAmount() {
         return amount;
     }

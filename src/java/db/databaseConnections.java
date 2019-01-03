@@ -261,11 +261,15 @@ public class databaseConnections {
 
     public boolean createActivity(String UserID, String Type, String Details) {
         String funtName = "Create Activity";
-        sql = "insert into activity(USER_ID,ACTIVITY_TYPE,ACTIVITY_DETAILS) values ("
-                + UserID + "," + Type + "," + Details + ");";
+        sql = "insert into activity(USER_ID,ACTIVITY_TYPE,ACTIVITY_DETAILS) values (?,?,?)";
         try {
-            Statement query = conn.createStatement();
-            sqlSuccess = query.execute(sql);
+            PreparedStatement query = conn.prepareStatement(sql);
+            
+            query.setString(1, UserID);
+            query.setString(2, Type);
+            query.setString(3, Details);
+            
+            sqlSuccess = query.executeUpdate() == 1;
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
             sqlSuccessHandler(funtName, ex);
@@ -274,13 +278,17 @@ public class databaseConnections {
         return sqlSuccess;
     }
 
-    public boolean createStock(String ChocoID, int Amt, String BestBefore) {
+    public boolean createStock(String ChocoID, int Amt, String Date) {
         String funtName = "Create Stock";
-        sql = "insert into stocks(CHOCO_ID,STOCK_AMOUNT,STOCK_BESTBEFORE,STOCK_DATE_ENTERED) values ("
-                + ChocoID + "," + Amt + "," + BestBefore + ",NOW());";
+        sql = "insert into stocks(CHOCO_ID,STOCK_AMOUNT,STOCK_DATE_ENTERED) values (?,?,?)";
         try {
-            Statement query = conn.createStatement();
-            sqlSuccess = query.execute(sql);
+            PreparedStatement query = conn.prepareStatement(sql);
+            
+            query.setString(1, ChocoID);
+            query.setInt(2, Amt);
+            query.setString(3, Date);
+            
+            sqlSuccess = query.executeUpdate() == 1;
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
             sqlSuccessHandler(funtName, ex);
@@ -535,9 +543,9 @@ public class databaseConnections {
         List<purchase> List = new ArrayList<>();
 
         if (id == 0) {
-            sql = "select * from purchase";
+            sql = "select * from purchases";
         } else {
-            sql = "select * from purchase where purchase_id = " + id;
+            sql = "select * from purchases where purchase_id = " + id;
         }
 
         try {
@@ -549,7 +557,7 @@ public class databaseConnections {
                 purch = new purchase();
                 purch.setId(rs.getInt("PURCHASE_ID"));
                 purch.setChoco(retrieveSingleChocolate(rs.getInt("CHOCO_ID")));
-                purch.setUser_id(rs.getInt("USER_ID"));
+                purch.setUser(retrieveSingleUser(rs.getInt("USER_ID")));
                 purch.setAmount(rs.getInt("PURCHASE_AMOUNT"));
                 purch.setDate(rs.getString("PURCHASE_DATE"));
                 List.add(purch);
@@ -633,9 +641,8 @@ public class databaseConnections {
             while (rs.next()) {
                 stock = new stock();
                 stock.setId(rs.getInt("STOCK_ID"));
-                stock.setChoco_id(rs.getInt("CHOCO_ID"));
+                stock.setChoco(retrieveSingleChocolate(rs.getInt("CHOCO_ID")));
                 stock.setAmount(rs.getInt("STOCK_AMOUNT"));
-                stock.setBestBefore(rs.getString("STOCK_BESTBEFORE"));
                 stock.setDate(rs.getString("STOCK_DATE_ENTERED"));
                 List.add(stock);
             }

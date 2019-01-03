@@ -73,7 +73,13 @@ public class userServlet extends HttpServlet {
                     request.setAttribute("key", database.getAuthKey(ID));
                 }
                 
-                request.setAttribute("result", "Logged in");
+                user user = database.retrieveSingleUser(ID);
+                
+                if (user.getType().equals("ADMIN")){
+                    request.setAttribute("result", "Logged in - Admin");
+                }else{
+                    request.setAttribute("result", "Logged in");
+                }
                 
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
                 

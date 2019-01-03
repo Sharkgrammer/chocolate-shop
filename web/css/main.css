@@ -248,6 +248,10 @@ body{
     padding:5px;
 }
 
+.adminGraph{
+    height:400px;
+}
+
 /* Media querys here. Its set to 992 as this is where bootstrap switches to mobile mode with the navbar */
 
 @media screen and (max-width: 992px) {

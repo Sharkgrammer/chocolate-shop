@@ -4,7 +4,7 @@
         <%@page import="data.chocolate"%>
         <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@include file="css.jsp" %>
-        
+
     </head>
 
     <body>
@@ -23,11 +23,13 @@
                     <script>
                         setCookie("key", "${key}", 1);
                         setCookie("id", ${id}, 1);
-                        setTimeout(function(){
-                            if ("${result}" == "Logged in"){
-                                window.location.href="/ChocolateShop";
+                        setTimeout(function () {
+                            if ("${result}" == "Logged in") {
+                                window.location.href = "/ChocolateShop";
+                            } else if ("${result}" == "Logged in - Admin") {
+                                window.location.href = "/ChocolateShop/admin.jsp";
                             }
-                        },100);
+                        }, 100);
                     </script>
 
                     <header class="text-center">
@@ -66,8 +68,8 @@
         </div>
 
         <div style="padding-bottom: 20px"></br></div>
-        <%@include file="modal.jsp" %>
-        <%@include file="footer.jsp" %>
+            <%@include file="modal.jsp" %>
+            <%@include file="footer.jsp" %>
 
     </body>
 </html>
