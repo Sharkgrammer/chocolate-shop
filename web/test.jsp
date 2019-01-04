@@ -1,69 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
-<%@ page import="com.google.gson.Gson"%>
-<%@ page import="com.google.gson.JsonObject"%>
-
-<%
-    Gson gsonObj = new Gson();
-    Map<Object, Object> map = null;
-    List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
-
-    map = new HashMap<Object, Object>();
-    map.put("label", "Shark");
-    map.put("y", 31);
-    list.add(map);
-    map = new HashMap<Object, Object>();
-    map.put("label", "Pizza");
-    map.put("y", 65);
-    list.add(map);
-    map = new HashMap<Object, Object>();
-    map.put("label", "Hi");
-    map.put("y", 40);
-    list.add(map);
-
-    String dataPoints = gsonObj.toJson(list);
-%>
-
-<!DOCTYPE HTML>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+         pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script type="text/javascript">
-            window.onload = function () {
+        <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+        <title>Insert title here</title>
+        <script
+        src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyCcrxqE9VgXuldbLPFlK8KzN_RPczOEiVI"></script>
+        <script>
+            var map;
+            function initialize() {
+                var mapOptions = {
+                    zoom: 8,
+                    center: new google.maps.LatLng(52.1490143, -8.398329200000001)
+                };
+                map = new google.maps.Map(document.getElementById('map-canvas'),
+                        mapOptions);
+            }
 
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    animationEnabled: true,
-                    exportEnabled: true,
-                    title: {
-                        text: "Simple Column Chart with Index Labels"
-                    },
-                    axisX: {
-                        title: "Primary X Axis"
-                    },
-                    axisX2: {
-                        title: "Secondary X Axis"
-                    },
-                    axisY: {
-                        title: "Primary Y Axis"
-                    },
-                    axisY2: {
-                        title: "Secondary Y Axis"
-                    },
-                    data: [{
-                            type: "column", //change type to bar, line, area, pie, etc
-                            //indexLabel: "{y}", //Shows y value on all Data Points
-                            indexLabelFontColor: "#5A5757",
-                            indexLabelPlacement: "outside",
-                            dataPoints: <%out.print(dataPoints);%>
-                        }]
-                });
-                chart.render();
-
-            };
+            google.maps.event.addDomListener(window, 'load', initialize);
         </script>
     </head>
     <body>
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <div id="map-canvas" style="height:300px; width:500px"></div>
     </body>
-</html>                              
+</html>

@@ -38,9 +38,17 @@ body{
 }
 
 .contact-but{
+    background-color: #873B00;
+    font-size: 120%;
+    border-radius: 25px;
+    color: white;
     width:30%;
     padding:10px;
     margin:10px;
+}
+
+.contact-but:hover {
+    background-color: #692E00;
 }
 
 /* Carousel CSS */
@@ -250,6 +258,14 @@ body{
 
 .adminGraph{
     height:400px;
+}
+
+/* User CSS */
+
+.userMap{
+    height:95%;
+    width:100%;
+    margin:auto;
 }
 
 /* Media querys here. Its set to 992 as this is where bootstrap switches to mobile mode with the navbar */

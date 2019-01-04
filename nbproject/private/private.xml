@@ -5,16 +5,12 @@
         <group>
             <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/admin.jsp</file>
             <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/shopArrivals.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/data/graph.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/stockCreate.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/css/main.css</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/actServlet.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/adminServlet.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/SQL/create%20Stock.sql</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/stockServlet.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/data/activity.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/shop.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/actCreate.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/userUpdate.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/user.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/data/updateMaps.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/userCreate.jsp</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/userServlet.java</file>
+            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/test.jsp</file>
         </group>
     </open-files>
 </project-private>

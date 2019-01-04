@@ -40,9 +40,9 @@ public class adminServlet extends HttpServlet {
         Map<Object, Object> map = null;
         List<Map<Object, Object>> list = new ArrayList<>();
         List<graph> output = new ArrayList<>();
-        List<review> reviews = database.retrieveAllReviews();
-        List<purchase> purchases = database.retrieveAllPurchases();
-        List<stock> stocks = database.retrieveAllStocks();
+        List<review> reviews = database.retrieveAllReviews(1);
+        List<purchase> purchases = database.retrieveAllPurchases(1);
+        List<stock> stocks = database.retrieveAllStocks(1);
         graph graph;
         List<String> dataList = new ArrayList<>();
         List<Integer> dataIntList = new ArrayList<>();
@@ -115,10 +115,10 @@ public class adminServlet extends HttpServlet {
             Name = purch.getChoco().getName() + " (ID: " + String.valueOf(purch.getChoco().getId()) + ")";
             if (!dataList.contains(Name)) {
                 dataList.add(Name);
-                dataList.add("1");
+                dataList.add(String.valueOf(purch.getAmount()));
             } else {
                 loc = dataList.indexOf(Name) + 1;
-                dataList.set(loc, String.valueOf(Integer.parseInt(dataList.get(loc)) + 1));
+                dataList.set(loc, String.valueOf(Integer.parseInt(dataList.get(loc)) + purch.getAmount()));
             }
         }
         
@@ -140,15 +140,16 @@ public class adminServlet extends HttpServlet {
         //Purchases per user
         dataList = new ArrayList<>();
         list = new ArrayList<>();
+        purchases = database.retrieveAllPurchases(2);
         
         for (purchase purch : purchases){
             Name = purch.getUser().getName() + " (ID: " + String.valueOf(purch.getUser().getId()) + ")";
             if (!dataList.contains(Name)) {
                 dataList.add(Name);
-                dataList.add("1");
+                dataList.add(String.valueOf(purch.getAmount()));
             } else {
                 loc = dataList.indexOf(Name) + 1;
-                dataList.set(loc, String.valueOf(Integer.parseInt(dataList.get(loc)) + 1));
+                dataList.set(loc, String.valueOf(Integer.parseInt(dataList.get(loc)) + purch.getAmount()));
             }
         }
         

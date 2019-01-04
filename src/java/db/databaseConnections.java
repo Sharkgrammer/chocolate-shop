@@ -455,24 +455,24 @@ public class databaseConnections {
         return List;
     }
     
-     public List<review> retrieveAllReviews() {
-        return retrieveReviewInternal(0, 0);
+     public List<review> retrieveAllReviews(int mode) {
+        return retrieveReviewInternal(0, 0, mode);
     }
 
     public List<review> retrieveChocoReviews(int id) {
-        return retrieveReviewInternal(id, 0);
+        return retrieveReviewInternal(id, 0, 0);
     }
     
     public List<review> retrieveChocoReviews(int id, int amt) {
-        return retrieveReviewInternal(id, amt);
+        return retrieveReviewInternal(id, amt, 0);
     }
 
     public List<review> retrieveMultiReviews(int amt) {
-        return retrieveReviewInternal(0, amt);
+        return retrieveReviewInternal(0, amt, 0);
     }
     
 
-    private List<review> retrieveReviewInternal(int id, int amt) {
+    private List<review> retrieveReviewInternal(int id, int amt, int mode) {
         String funtName = "Retrieve Review";
         List<review> List = new ArrayList<>();
 
@@ -482,7 +482,11 @@ public class databaseConnections {
             sql = "select * from review where choco_id = " + id;
         }
         
-        sql += " order by REV_ID desc";
+        if (mode == 0){
+            sql += " order by REV_ID desc";
+        }else{
+            sql += " order by REV_ID asc";
+        }
 
         if (amt != 0) {
             sql += " fetch first " + amt + " rows only";
@@ -530,15 +534,15 @@ public class databaseConnections {
         return blob;
     }
 
-    public List<purchase> retrieveAllPurchases() {
-        return retrievePurchaseInternal(0);
+    public List<purchase> retrieveAllPurchases(int mode) {
+        return retrievePurchaseInternal(0, mode);
     }
 
     public List<purchase> retrieveSinglePurchase(int id) {
-        return retrievePurchaseInternal(id);
+        return retrievePurchaseInternal(id, 0);
     }
 
-    private List<purchase> retrievePurchaseInternal(int id) {
+    private List<purchase> retrievePurchaseInternal(int id, int mode) {
         String funtName = "Retrieve Purchase";
         List<purchase> List = new ArrayList<>();
 
@@ -546,6 +550,12 @@ public class databaseConnections {
             sql = "select * from purchases";
         } else {
             sql = "select * from purchases where purchase_id = " + id;
+        }
+        
+        if (mode == 1){
+            sql += " order by CHOCO_ID desc";
+        }else if (mode == 2){
+            sql += " order by USER_ID desc";
         }
 
         try {
@@ -615,15 +625,15 @@ public class databaseConnections {
         return List;
     }
 
-    public List<stock> retrieveAllStocks() {
-        return retrieveStockInternal(0);
+    public List<stock> retrieveAllStocks(int mode) {
+        return retrieveStockInternal(0, mode);
     }
 
     public List<stock> retrieveSingleStock(int id) {
-        return retrieveStockInternal(id);
+        return retrieveStockInternal(id, 0);
     }
 
-    private List<stock> retrieveStockInternal(int id) {
+    private List<stock> retrieveStockInternal(int id, int mode) {
         String funtName = "Retrieve Stock";
         List<stock> List = new ArrayList<>();
 
@@ -631,6 +641,10 @@ public class databaseConnections {
             sql = "select * from stocks";
         } else {
             sql = "select * from stocks where stock_id = " + id;
+        }
+        
+        if (mode != 0){
+            sql += " order by CHOCO_ID asc";
         }
 
         try {

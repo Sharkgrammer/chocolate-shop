@@ -26,8 +26,8 @@
     function eraseCookie(name) {
         document.cookie = name + '=; Max-Age=-99999999;';
     }
-    
-    function logout(){
+
+    function logout() {
         eraseCookie('key');
         eraseCookie('id');
         eraseCookie("cart");
@@ -98,14 +98,19 @@
 
                 <% if (result == true) {
                         if (admin == true) { %>
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin.jsp">Admin</a>
-                        </li>
-                    <% } %>
-                 <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.jsp">Admin</a>
+                </li>
+                <% } %>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="user.jsp">Account</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="purchase.jsp">Cart</a>
                 </li>
-                    
+
                 <li class="nav-item">
                     <a class="nav-link" onclick="logout();" href="#logout">Logout</a>
                 </li>
