@@ -377,7 +377,7 @@ public class databaseConnections {
         }
 
         if (!name.equals("")) {
-            sql += " where CHOCO_NAME like %" + name + "%";
+            sql += " where UPPER(CHOCO_NAME) like UPPER('%" + name + "%')";
         }
 
         if (mode != 0) {

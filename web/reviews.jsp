@@ -15,7 +15,7 @@
                 <c:forEach items="${revList}" var="review">
 
                     <div class="col-sm-2" >
-                        <a href="shopServlet?id=${review.getChocoID()}" class="shop-link">
+                        <a href="shopServlet?id=${review.getChocoID()}&mode=1" class="shop-link">
 
                             <div class="center text-center">
                                 <h3>${review.getTitle()} (${review.isLiked()})</h3>
@@ -23,7 +23,6 @@
                             </div>
 
                             <p>${review.getData()}</p>
-
                         </a>
                     </div>
 

@@ -98,7 +98,7 @@ public class chocolateServlet extends HttpServlet {
             case 4:
                 choco = database.retrieveAllChocolate();
                 //choco = database.retrieveMultiChocolate(5, filter);
-                request.setAttribute("llstShop", choco);
+                request.setAttribute("listShop", choco);
                 break;
 
         }//*/

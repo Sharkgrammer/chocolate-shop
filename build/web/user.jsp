@@ -25,7 +25,7 @@
             }
 
             getXml("https://maps.googleapis.com/maps/api/geocode/xml?address=${address}&key=AIzaSyCcrxqE9VgXuldbLPFlK8KzN_RPczOEiVI");
-            
+
             var map;
             function initialize() {
                 var mapOptions = {
@@ -67,18 +67,19 @@
 
             </div>
         </div>
+    </div>
 
-        </br>
+    </br>
 
-        <%@include file="modal.jsp" %>
-        <%@include file="footer.jsp" %>
+    <%@include file="modal.jsp" %>
+    <%@include file="footer.jsp" %>
 
-        <script>
-            document.getElementById("name").value = "${user.getName()}";
-            document.getElementById("emai").value = "${user.getEmail()}";
-            document.getElementById("pass").value = "${user.getPassword()}";
-            document.getElementById("addr").value = "${user.getAddress()}";
-        </script>
+    <script>
+        document.getElementById("name").value = "${user.getName()}";
+        document.getElementById("emai").value = "${user.getEmail()}";
+        document.getElementById("pass").value = "${user.getPassword()}";
+        document.getElementById("addr").value = "${user.getAddress()}";
+    </script>
 
-    </body>
+</body>
 </html>

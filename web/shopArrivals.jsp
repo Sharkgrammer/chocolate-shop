@@ -7,8 +7,9 @@
       <div class="col-sm-10 content border border-dark rounded ">
           
           <div class="search-container">
-            <form action="/action_page.php">
+            <form action="shopServlet">
                 <div>
+                    <input type="hidden" value="2" name="mode" id="mode">
                     <input type="text" placeholder="Search.." name="search" class="bar">
                     <button type="submit"><img src="images/search.png" width="15" height="15"/></button>
                 </div>
@@ -24,7 +25,7 @@
           <div class="row text-center" style="overflow: hidden">
               <c:forEach items="${listNew}" var="choco">
                   <div class="col-sm-3">
-                      <a href="shopServlet?id=${choco.getId()}" class="shop-link">
+                      <a href="shopServlet?id=${choco.getId()}&mode=1" class="shop-link">
 
                           <h3> ${choco.getName()} </h3> 
                           <img src="${choco.getFirstImage()}" class="shop-arrival-img"/>

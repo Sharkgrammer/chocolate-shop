@@ -10,7 +10,7 @@
               <div class="carousel-inner">
 
                   <div class="carousel-item active">
-                      <a href="shopServlet?id=${firstChoco.getId()}" class="shop-link">
+                      <a href="shopServlet?id=${firstChoco.getId()}&mode=1" class="shop-link">
                           <img class="d-block cara" src="${firstChoco.getFirstImage()}" alt="${firstChoco.getName()}">
                           <div class="carousel-caption d-none d-md-block">
                               <h5>${firstChoco.getName()}</h5>
@@ -21,7 +21,7 @@
                   <c:forEach items="${listCara}" var="choco">
 
                       <div class="carousel-item">
-                          <a href="shopServlet?id=${choco.getId()}" class="shop-link">
+                          <a href="shopServlet?id=${choco.getId()}&mode=1" class="shop-link">
                               <img class="d-block cara" src="${choco.getFirstImage()}" alt="${choco.getName()}">
                               <div class="carousel-caption d-none d-md-block">
                                   <h5>${choco.getName()}</h5>
