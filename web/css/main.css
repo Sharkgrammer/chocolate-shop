@@ -56,7 +56,8 @@ body{
 
 .title{
     color: white;
-    width: 100%;   
+    width: 100%;
+    padding: 0px 5px 0px 5px;
 }
 
 .navsize{

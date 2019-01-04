@@ -81,7 +81,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-main fixed-top">
     <div class="container">
         <a href="/ChocolateShop"><img src="images/logo.png" class="logo"/></a>
+        <% if (frLang == true) { %>
+        <h2 class="text-center title">Requin&nbsp;au&nbsp;chocolat</h2>
+        <% } else { %>
         <h2 class="text-center title">Sharkolate</h2>
+        <% }%>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -126,11 +130,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="purchase.jsp">Chariot</a>
+                    <a class="nav-link" href="purchase.jsp">Panier</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" onclick="logout();" href="#logout">Connectez&nbsp;-&nbsp;Out</a>
+                    <a class="nav-link" onclick="logout();" href="#logout">Connectez&nbsp;Out</a>
                 </li>
                 <% } else { %>
                 <li class="nav-item">
