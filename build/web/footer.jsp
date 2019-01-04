@@ -20,8 +20,13 @@
             <a class="footer-link" href="purchase.jsp">Cart</a>
         </div>
 
-        <% }%>
-        
+        <% }else{ %>
+        <div class="col-sm-2">
+        </div>
+
+        <div class="col-sm-2">
+        </div>
+        <% } %>
         <div class="col-sm-2">
             <a class="footer-link" href="#" onclick="switchLan()">Switch Language</a>
         </div>

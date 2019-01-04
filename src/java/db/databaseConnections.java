@@ -644,7 +644,7 @@ public class databaseConnections {
         }
         
         if (mode != 0){
-            sql += " order by CHOCO_ID dessc";
+            sql += " order by CHOCO_ID desc";
         }
 
         try {
