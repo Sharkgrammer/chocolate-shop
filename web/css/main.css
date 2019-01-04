@@ -1,17 +1,53 @@
 /* Main CSS + header/footers*/
 
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
 footer {
-    height:10%;
-    width:100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+}
+
+.footer-link{
+    font-size: 90%;
+    color: white;
+    text-decoration: none;
+    margin:auto;
+    padding:4px;
+}
+
+.footer-link-copy{
+    font-size: 80%;
+    color: white;
+    text-decoration: none;
+}
+
+.footer-link:hover{
+    color: #888888;
+}
+
+.footer-pad{
+    padding:5px;
 }
 
 body{
     font-family: 'Mali', cursive;
     background-color: #e9ebee;
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
 }
 
 .bg-main{
-   background-color: #873B00; 
+    background-color: #873B00; 
 }
 
 .logo{
@@ -58,13 +94,13 @@ body{
 }
 
 .cara{
-   height: 500px;
-   margin: auto;
+    height: 500px;
+    margin: auto;
 }
 
 .caramain{
-   padding:2px;
-   background-color: #000000; 
+    padding:2px;
+    background-color: #000000; 
 }
 
 .content{
@@ -78,18 +114,31 @@ body{
 /* shopArrivals CSS */
 
 .search-container {
-  float: right;
-  margin:auto;
-  max-width:500px;
-  padding: 6px;
+    float: right;
+    margin:auto;
+    max-width:500px;
+    padding: 6px;
 }
 
-.search-container button {
-  background: #cccccc;
+.search-but{
+    width:100%;
+    height:100%;
 }
 
-.search-container button:hover {
-  background: #cccccc;
+.search-input{
+    width:100%;
+    height:100%;
+    padding: 5px;
+}
+
+.search-response{
+    font-size: 100%;
+    margin:auto;
+    z-index: 10;
+    padding:0px 10px 0px 10px;
+    position: absolute;
+    cursor: pointer; 
+    background-color: white;
 }
 
 /* Modal CSS */
@@ -178,8 +227,8 @@ body{
 }
 
 .shop-link:hover {
-  text-decoration: none;
-  color:#666666;
+    text-decoration: none;
+    color:#666666;
 }
 
 .shop-margin{
@@ -199,8 +248,8 @@ body{
 }
 
 .shop-cara{
-   height: 400px;
-   margin: auto;
+    height: 400px;
+    margin: auto;
 }
 
 .shop-box{
@@ -274,40 +323,40 @@ body{
     .title{
         width:50%
     }
-    
+
     .logo{
         width: 60px;
     }
-    
+
     .search-container {
         float: none;
     }
-    
+
     .modal-news h3{
         font-size:15px;
     }
-    
+
     .modal-news{
         padding: 5px 10px 5px 10px;
         line-height: 20%;
     }
-    
+
     .modal-news-padding h2{
         font-size:15px;
     }
-    
+
     .modal-news-padding{
         width: 60%;
         font-size:15px;
         padding:5px 10px 10px 10px;
     }
-    
+
     .modal-news-btn{
         width:120px;
         font-size:12px;
     }
-    
-     .modal-news-box{
+
+    .modal-news-box{
         width:120px;
         font-size:12px;
     }

@@ -1,7 +1,40 @@
 <footer class="py bg-main">
-    <div class="container" style="height:40px;">
-        <p class="text-center text-white">Copyright &copy; Choco 2018</p>
+
+    <div class="row text-center ">
+
+        <div class="col-sm-2">
+            <a class="footer-link" href="/ChocolateShop">Home</a>
+        </div>
+
+        <div class="col-sm-2">
+            <a class="footer-link" href="shop.jsp">Shop</a>
+        </div>
+
+        <% if (result == true) {
+                if (admin == true) { %>
+
+        <div class="col-sm-2">
+            <a class="footer-link" href="admin.jsp">Admin</a>
+        </div>
+
+        <% } %>
+        <div class="col-sm-2">
+            <a class="footer-link" href="user.jsp">Account</a>
+        </div>
+
+        <div class="col-sm-2">
+            <a class="footer-link" href="purchase.jsp">Cart</a>
+        </div>
+
+        <% }%>
+
+        <div class="col-sm-2">
+            <p class="footer-link-copy">Copyright &copy; Choco 2019</p>
+        </div>
+
     </div>
+
+
 </footer>
 
 <!-- Bootstrap core JavaScript -->

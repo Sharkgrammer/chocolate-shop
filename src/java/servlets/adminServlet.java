@@ -163,7 +163,7 @@ public class adminServlet extends HttpServlet {
         graph = new graph(4);
         graph.setData(gsonObj.toJson(list));
         graph.setName("Purchases - Users");
-        graph.setType("bar");
+        graph.setType("column");
         graph.setxLabel("Users");
         graph.setyLabel("Purchases");
         output.add(graph);
@@ -193,7 +193,7 @@ public class adminServlet extends HttpServlet {
         graph = new graph(5);
         graph.setData(gsonObj.toJson(list));
         graph.setName("Stock - Amounts");
-        graph.setType("column");
+        graph.setType("bar");
         graph.setxLabel("Chocolate");
         graph.setyLabel("Amount");
         output.add(graph);

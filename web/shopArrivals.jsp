@@ -6,15 +6,7 @@
       
       <div class="col-sm-10 content border border-dark rounded ">
           
-          <div class="search-container">
-            <form action="shopServlet">
-                <div>
-                    <input type="hidden" value="2" name="mode" id="mode">
-                    <input type="text" placeholder="Search.." name="search" class="bar">
-                    <button type="submit"><img src="images/search.png" width="15" height="15"/></button>
-                </div>
-            </form>
-          </div>
+          <%@include file="search.jsp" %> 
           
           <header class="text-center">
               <h3> New Arrivals </h3>
