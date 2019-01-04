@@ -10,14 +10,8 @@
             <a class="footer-link" href="shop.jsp">Shop</a>
         </div>
 
-        <% if (result == true) {
-                if (admin == true) { %>
-
-        <div class="col-sm-2">
-            <a class="footer-link" href="admin.jsp">Admin</a>
-        </div>
-
-        <% } %>
+        <% if (result == true) { %>
+        
         <div class="col-sm-2">
             <a class="footer-link" href="user.jsp">Account</a>
         </div>
@@ -27,6 +21,10 @@
         </div>
 
         <% }%>
+        
+        <div class="col-sm-2">
+            <a class="footer-link" href="#" onclick="switchLan()">Switch Language</a>
+        </div>
 
         <div class="col-sm-2">
             <p class="footer-link-copy">Copyright &copy; Choco 2019</p>

@@ -34,6 +34,18 @@
         window.open("/ChocolateShop", "_self");
     }
 
+    function switchLan() {
+        var result = getCookie("lan");
+        if (result == null) {
+            setCookie("lan", "fr", 1);
+        } else if (result == "fr") {
+            setCookie("lan", "en", 1);
+        } else {
+            setCookie("lan", "fr", 1);
+        }
+        window.location.reload();
+    }
+
 </script>
 
 <%@page import="db.databaseConnections"%>
@@ -41,6 +53,7 @@
     databaseConnections database = new databaseConnections();
     String key = "0000000000";
     int id = 0;
+    String lan = "";
 
     try {
         Cookie[] cookies = request.getCookies();
@@ -50,6 +63,8 @@
                     key = cookie.getValue();
                 } else if (cookie.getName().equals("id")) {
                     id = Integer.parseInt(cookie.getValue());
+                } else if (cookie.getName().equals("lan")) {
+                    lan = cookie.getValue();
                 }
             }
         }
@@ -59,6 +74,7 @@
 
     boolean result = database.checkAuthKey(key, id);
     boolean admin = database.isAdmin(id);
+    boolean frLang = lan.equals("fr");
 
 %>
 
@@ -73,6 +89,56 @@
 
         <div class="collapse navbar-collapse navsize" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+
+                <% if (frLang == true) { %>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/ChocolateShop">Accueil
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="shop.jsp">Boutique</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/ChocolateShop#reviews">Avis</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/ChocolateShop#about">Sur</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/ChocolateShop#contact">Contact</a>
+                </li>
+
+                <% if (result == true) {
+                        if (admin == true) { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.jsp">Admin</a>
+                </li>
+                <% } %>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="user.jsp">Compte</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="purchase.jsp">Chariot</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" onclick="logout();" href="#logout">Connectez&nbsp;-&nbsp;Out</a>
+                </li>
+                <% } else { %>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.jsp"><h5><b>Se&nbsp;connecter/S'inscrire</b></h5></a>
+                </li>
+                <% }%>
+
+                <% } else { %>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/ChocolateShop">Home
@@ -97,7 +163,7 @@
                 </li>
 
                 <% if (result == true) {
-                        if (admin == true) { %>
+                    if (admin == true) { %>
                 <li class="nav-item">
                     <a class="nav-link" href="admin.jsp">Admin</a>
                 </li>
@@ -118,6 +184,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="login.jsp"><h5><b>Log&nbsp;In/Sign&nbsp;Up</b></h5></a>
                 </li>
+
+                <% }%>
+
                 <% }%>
 
             </ul> 
