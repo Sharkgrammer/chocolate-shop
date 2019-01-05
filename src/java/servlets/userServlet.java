@@ -118,9 +118,9 @@ public class userServlet extends HttpServlet {
                         put("USER_ADDRESS", ParamsList.get(3));
                     }
                 };
+                
                 result = database.updateUser(mapUser, id);
                 userVar = database.retrieveSingleUser(id);
-                userVar.setAddress(userVar.getAddress().replace(" ", "+"));
                 
                 request.setAttribute("address", userVar.getAddress().replace(" ", "+"));
                 request.setAttribute("user", userVar);

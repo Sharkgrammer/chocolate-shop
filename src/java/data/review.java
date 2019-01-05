@@ -11,6 +11,7 @@ public class review implements Serializable {
     private String data;
     private String title;
     private boolean liked;
+    private int user_id;
 
     public review() {
         //Initialise variables here
@@ -21,6 +22,7 @@ public class review implements Serializable {
         date = "";
         title = "";
         liked = false;
+        user_id = 0;
     }
 
     public int getId() {
@@ -77,5 +79,13 @@ public class review implements Serializable {
 
     public void setLiked(boolean liked) {
         this.liked = liked;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }

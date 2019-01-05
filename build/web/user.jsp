@@ -72,14 +72,7 @@
     </br>
 
     <%@include file="modal.jsp" %>
-    <%@include file="footer.jsp" %>
-
-    <script>
-        document.getElementById("name").value = "${user.getName()}";
-        document.getElementById("emai").value = "${user.getEmail()}";
-        document.getElementById("pass").value = "${user.getPassword()}";
-        document.getElementById("addr").value = "${user.getAddress()}";
-    </script>
+    <%@include file="footer.jsp" %>    
 
 </body>
 </html>

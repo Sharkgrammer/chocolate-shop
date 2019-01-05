@@ -68,27 +68,27 @@ public class databaseConnections {
         System.out.println(errorMessage);
     }
 
-    public int login(String email, String pass){
+    public int login(String email, String pass) {
         List<user> userList = retrieveAllUsers();
         int result = 0;
-        
-        for (user x : userList){
-            if (x.getEmail().equals(email) && x.getPassword().equals(pass)){
+
+        for (user x : userList) {
+            if (x.getEmail().equals(email) && x.getPassword().equals(pass)) {
                 result = x.getId();
                 break;
             }
         }
-        
+
         return result;
     }
-    
-    public boolean isAdmin(int ID){
+
+    public boolean isAdmin(int ID) {
         String type = "", funtName = "Check Admin";
         sql = "select user_type from users where user_id = " + ID;
         try {
             Statement query = conn.createStatement();
             ResultSet rs = query.executeQuery(sql);
-            
+
             while (rs.next()) {
                 type = rs.getString("USER_TYPE");
             }
@@ -96,17 +96,17 @@ public class databaseConnections {
         } catch (SQLException ex) {
             sqlSuccessHandler(funtName, ex);
         }
-        
+
         return type.equals("ADMIN");
     }
-    
-    public String getAuthKey(int ID){
+
+    public String getAuthKey(int ID) {
         String key = "", funtName = "Retrieve Auth Key";
         sql = "select user_key from users where user_id = " + ID;
         try {
             Statement query = conn.createStatement();
             ResultSet rs = query.executeQuery(sql);
-            
+
             while (rs.next()) {
                 key = rs.getString("USER_KEY");
             }
@@ -114,21 +114,23 @@ public class databaseConnections {
         } catch (SQLException ex) {
             sqlSuccessHandler(funtName, ex);
         }
-        
+
         return key;
     }
-    
-    public boolean setAuthKey(String key, int ID){
-        Map map = new HashMap(){{
-            put("USER_KEY", key);
-        }};
+
+    public boolean setAuthKey(String key, int ID) {
+        Map map = new HashMap() {
+            {
+                put("USER_KEY", key);
+            }
+        };
         return updateUser(map, ID);
     }
-    
-    public boolean checkAuthKey(String key, int ID){
+
+    public boolean checkAuthKey(String key, int ID) {
         return key.equals(getAuthKey(ID));
     }
-    
+
     //Create operations
     public boolean createUser(String Name, String Email, String Password, String Type, String Address) {
         String funtName = "Create User";
@@ -141,7 +143,7 @@ public class databaseConnections {
             query.setString(3, Password);
             query.setString(4, Type);
             query.setString(5, Address);
-            
+
             sqlSuccess = query.executeUpdate() == 1;
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
@@ -224,7 +226,7 @@ public class databaseConnections {
             query.setString(4, data);
             query.setString(5, title);
             query.setBoolean(6, pos);
-            
+
             sqlSuccess = query.executeUpdate() == 1;
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
@@ -237,19 +239,19 @@ public class databaseConnections {
     public boolean createPurchase(int chocoID, int userID, String amt) {
         String funtName = "Create Purchase";
         sql = "insert into purchases(CHOCO_ID,USER_ID,PURCHASE_AMOUNT,PURCHASE_DATE) values (?,?,?,?)";
-        
+
         java.util.Date dateSys = new java.util.Date(System.currentTimeMillis());
         java.sql.Date dateSql = new java.sql.Date(dateSys.getTime());
-        
+
         try {
-            
+
             PreparedStatement query = conn.prepareStatement(sql);
 
             query.setInt(1, chocoID);
             query.setInt(2, userID);
             query.setString(3, amt);
             query.setString(4, dateSql.toString());
-            
+
             sqlSuccess = query.executeUpdate() == 1;
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
@@ -258,17 +260,17 @@ public class databaseConnections {
 
         return sqlSuccess;
     }
-    
+
     public boolean createStock(String ChocoID, int Amt, String Date) {
         String funtName = "Create Stock";
         sql = "insert into stocks(CHOCO_ID,STOCK_AMOUNT,STOCK_DATE_ENTERED) values (?,?,?)";
         try {
             PreparedStatement query = conn.prepareStatement(sql);
-            
+
             query.setString(1, ChocoID);
             query.setInt(2, Amt);
             query.setString(3, Date);
-            
+
             sqlSuccess = query.executeUpdate() == 1;
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
@@ -347,6 +349,10 @@ public class databaseConnections {
         return retrieveChocolateInternal(0, amt, name, mode);
     }
 
+    public int retrieveCountChocolate() {
+        return retrieveChocolateInternal(0, 0, "", 0).size();
+    }
+
     private List<chocolate> retrieveChocolateInternal(int id, int amt, String name, int mode) {
         String funtName = "Retrieve Chocolate";
         List<chocolate> List = new ArrayList<>();
@@ -422,7 +428,7 @@ public class databaseConnections {
                 }
                 choco.setImages(imageList); //*/
                 choco.setReviews(retrieveChocoReviews(choco.getId(), 6));
-                
+
                 List.add(choco);
             }
 
@@ -435,25 +441,36 @@ public class databaseConnections {
 
         return List;
     }
-    
-     public List<review> retrieveAllReviews(int mode) {
-        return retrieveReviewInternal(0, 0, mode);
+
+    public List<review> retrieveAllReviews(int mode) {
+        return retrieveReviewInternal(0, 0, mode, 0);
+    }
+
+    public int retrieveCountReviews() {
+        return retrieveReviewInternal(0, 0, 0, 0).size();
     }
 
     public List<review> retrieveChocoReviews(int id) {
-        return retrieveReviewInternal(id, 0, 0);
+        return retrieveReviewInternal(id, 0, 0, 0);
     }
-    
+
     public List<review> retrieveChocoReviews(int id, int amt) {
-        return retrieveReviewInternal(id, amt, 0);
+        return retrieveReviewInternal(id, amt, 0, 0);
+    }
+
+    public review retrieveSingleReview(int id) {
+        try {
+            return retrieveReviewInternal(0, 0, 0, id).get(0);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public List<review> retrieveMultiReviews(int amt) {
-        return retrieveReviewInternal(0, amt, 0);
+        return retrieveReviewInternal(0, amt, 0, 0);
     }
-    
 
-    private List<review> retrieveReviewInternal(int id, int amt, int mode) {
+    private List<review> retrieveReviewInternal(int id, int amt, int mode, int revid) {
         String funtName = "Retrieve Review";
         List<review> List = new ArrayList<>();
 
@@ -462,10 +479,14 @@ public class databaseConnections {
         } else {
             sql = "select * from review where choco_id = " + id;
         }
-        
-        if (mode == 0){
+
+        if (revid != 0) {
+            sql = "select * from review where rev_id = " + revid;
+        }
+
+        if (mode == 0) {
             sql += " order by REV_ID desc";
-        }else{
+        } else {
             sql += " order by REV_ID asc";
         }
 
@@ -482,6 +503,7 @@ public class databaseConnections {
                 review.setId(rs.getInt("REV_ID"));
                 review.setChocoID(rs.getInt("CHOCO_ID"));
                 review.setUser(retrieveSingleUser(rs.getInt("USER_ID")).getName());
+                review.setUser_id(rs.getInt("USER_ID"));
                 review.setDate(rs.getString("REV_DATE"));
                 review.setData(rs.getString("REV_DATA"));
                 review.setTitle(rs.getString("REV_TITLE"));
@@ -532,10 +554,10 @@ public class databaseConnections {
         } else {
             sql = "select * from purchases where purchase_id = " + id;
         }
-        
-        if (mode == 1){
+
+        if (mode == 1) {
             sql += " order by CHOCO_ID desc";
-        }else if (mode == 2){
+        } else if (mode == 2) {
             sql += " order by USER_ID desc";
         }
 
@@ -568,8 +590,12 @@ public class databaseConnections {
         return retrieveStockInternal(0, mode);
     }
 
-    public List<stock> retrieveSingleStock(int id) {
-        return retrieveStockInternal(id, 0);
+    public int retrieveCountStocks() {
+        return retrieveStockInternal(0, 0).size();
+    }
+
+    public stock retrieveSingleStock(int id) {
+        return retrieveStockInternal(id, 0).get(0);
     }
 
     private List<stock> retrieveStockInternal(int id, int mode) {
@@ -581,8 +607,8 @@ public class databaseConnections {
         } else {
             sql = "select * from stocks where stock_id = " + id;
         }
-        
-        if (mode != 0){
+
+        if (mode != 0) {
             sql += " order by CHOCO_ID desc";
         }
 
@@ -643,7 +669,49 @@ public class databaseConnections {
                 }
             }
             stmnt.setInt(updateControl.size() + 1, id);
-            
+
+            sqlSuccess = stmnt.executeUpdate() != 0;
+            sqlSuccessHandler(funtName);
+        } catch (SQLException ex) {
+            sqlSuccessHandler(funtName, ex);
+        }
+
+        return sqlSuccess;
+    }
+
+    public boolean updateReview(Map mapreview, int id) {
+        String funtName = "Update Reviews";
+        updateControl.clear();
+
+        if (mapreview.isEmpty()) {
+            sqlSuccess = false;
+            return sqlSuccess;
+        }
+
+        mapreview.forEach((k, v) -> updateControl.add(k.toString() + ":::" + v.toString()));
+        //Using updateControl, the update is created here
+
+        sql = "update review set ";
+        for (int x = 0; x < updateControl.size(); x++) {
+            sql += updateControl.get(x).split(":::")[0] + " = ?";
+            if (x != updateControl.size() - 1) {
+                sql += ",";
+            }
+        }
+        sql += " where rev_id = ?";
+
+        try {
+            PreparedStatement stmnt = conn.prepareStatement(sql);
+
+            for (int x = 0; x < updateControl.size(); x++) {
+                if (updateControl.get(x).split(":::")[0].toLowerCase().contains("id")) {
+                    stmnt.setInt(x + 1, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+                } else {
+                    stmnt.setString(x + 1, updateControl.get(x).split(":::")[1]);
+                }
+            }
+            stmnt.setInt(updateControl.size() + 1, id);
+
             sqlSuccess = stmnt.executeUpdate() != 0;
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
@@ -737,7 +805,7 @@ public class databaseConnections {
         return sqlSuccess;
     }
 
-    public boolean updatestocks(Map mapStock, int id) {
+    public boolean updateStocks(Map mapStock, int id) {
         String funtName = "Update Stocks";
         updateControl.clear();
 

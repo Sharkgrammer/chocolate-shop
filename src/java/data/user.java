@@ -8,6 +8,7 @@ public class user {
     private String password;
     private String type;
     private String address;
+    private int user_id;
     
     public user(){
         //Initialise variables here
@@ -17,6 +18,7 @@ public class user {
         password = "";
         type = "";
         address = "";
+        user_id = 0;
     }
 
     public int getId() {
@@ -66,6 +68,14 @@ public class user {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
     
 }

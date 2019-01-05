@@ -1,5 +1,6 @@
 package servlets;
 
+import data.stock;
 import db.databaseConnections;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,6 +58,19 @@ public class stockServlet extends HttpServlet {
                 try (PrintWriter out = response.getWriter()) {
                     out.println(database.returnErrorMessage());
                     out.println(database.returnLastResult());
+                }
+                
+                break;
+            case 2:
+                
+                int id = Integer.valueOf(request.getParameter("id"));
+                stock stock = database.retrieveSingleStock(id);
+                
+                try (PrintWriter out = response.getWriter()) {
+                    out.print(stock.getId() + ",");
+                    out.print(stock.getChoco().getId() + ",");
+                    out.print(stock.getAmount());
+                    
                 }
                 
                 break;

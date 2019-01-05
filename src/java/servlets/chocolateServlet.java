@@ -100,7 +100,22 @@ public class chocolateServlet extends HttpServlet {
                 //choco = database.retrieveMultiChocolate(5, filter);
                 request.setAttribute("listShop", choco);
                 break;
-
+            case 5:
+                int id = Integer.valueOf(request.getParameter("id"));
+                chocolate choc = database.retrieveSingleChocolate(id);
+                
+                try (PrintWriter out = response.getWriter()) {
+                    out.print(choc.getId() + ",");
+                    out.print(choc.getName() + ",");
+                    out.print(choc.getDescription() + ",");
+                    out.print(choc.getType() + ",");
+                    out.print(choc.getWeight() + ",");
+                    out.print(choc.getProducer() + ",");
+                    out.print(choc.getFlavour() + ",");
+                    out.print(choc.getPrice());
+                }
+                
+                break;
         }//*/
 
     }

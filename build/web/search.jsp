@@ -1,6 +1,4 @@
 <script type="text/javascript">
-    var $j = jQuery.noConflict();
-
     function searchItemClick(x) {
         document.getElementById("target").value = document.getElementById("search" + x).innerHTML;
     }

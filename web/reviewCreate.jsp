@@ -1,5 +1,5 @@
 <div>
-    <form name="create" action="reviewServlet?mode=1" method="POST">
+    <form action="reviewServlet?mode=1" method="POST">
 
         <input type="number" required name="choc" placeholder="Choco" class="contact-form"/></td>
 
