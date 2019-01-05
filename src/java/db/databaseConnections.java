@@ -850,7 +850,21 @@ public class databaseConnections {
     //Delete operations
     public boolean deleteUser(int id) {
         String funtName = "Delete User";
-        sql = "delete * from users where user_id = id";
+        sql = "delete * from users where user_id = " + id;
+        try {
+            Statement query = conn.createStatement();
+            sqlSuccess = query.execute(sql);
+            sqlSuccessHandler(funtName);
+        } catch (SQLException ex) {
+            sqlSuccessHandler(funtName, ex);
+        }
+
+        return sqlSuccess;
+    }
+    
+    public boolean deleteReview(int id) {
+        String funtName = "Delete Review";
+        sql = "delete * from review where rev_id = " + id;
         try {
             Statement query = conn.createStatement();
             sqlSuccess = query.execute(sql);
@@ -864,7 +878,7 @@ public class databaseConnections {
 
     public boolean deleteChocolate(int id) {
         String funtName = "Delete Chocolate";
-        sql = "delete * from chocolates where choco_id = id";
+        sql = "delete * from chocolates where choco_id = " + id;
         try {
             Statement query = conn.createStatement();
             sqlSuccess = query.execute(sql, Statement.RETURN_GENERATED_KEYS);

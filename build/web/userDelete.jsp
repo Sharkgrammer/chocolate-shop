@@ -1,7 +1,7 @@
 <div>
-    <form name="create" action="userServlet?mode=4" method="POST">
+    <form name="create" action="userServlet?mode=5" method="POST">
 
-        <input type="number" required name="ID" placeholder="ID" class="contact-form"/>
+        <input type="number" required name="id" placeholder="ID" class="contact-form"/>
         
         <input type="submit" value="Update" name="submit" class="contact-but" /> <input type="reset" class="contact-but"/>
         

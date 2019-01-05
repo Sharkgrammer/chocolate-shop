@@ -35,6 +35,7 @@ public class stockServlet extends HttpServlet {
 
     void stockDo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int mode = Integer.valueOf(request.getParameter("mode"));
+        int id;
         switch (mode) {
             case 1:
                 String paramStr;
@@ -63,7 +64,7 @@ public class stockServlet extends HttpServlet {
                 break;
             case 2:
                 
-                int id = Integer.valueOf(request.getParameter("id"));
+                id = Integer.valueOf(request.getParameter("id"));
                 stock stock = database.retrieveSingleStock(id);
                 
                 try (PrintWriter out = response.getWriter()) {
@@ -73,6 +74,10 @@ public class stockServlet extends HttpServlet {
                     
                 }
                 
+                break;
+            case 6:
+                id = Integer.valueOf(request.getParameter("id"));
+                database.deleteStock(id);
                 break;
         }
     }

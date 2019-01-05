@@ -37,6 +37,7 @@ public class chocolateServlet extends HttpServlet {
 
         ///*
         int mode = Integer.valueOf(request.getParameter("mode")), filter = Integer.valueOf(request.getParameter("filt"));
+        int id = 0;
         switch (mode) {
             case 1:
                 choco = database.retrieveMultiChocolate(4, filter);
@@ -101,7 +102,7 @@ public class chocolateServlet extends HttpServlet {
                 request.setAttribute("listShop", choco);
                 break;
             case 5:
-                int id = Integer.valueOf(request.getParameter("id"));
+                id = Integer.valueOf(request.getParameter("id"));
                 chocolate choc = database.retrieveSingleChocolate(id);
                 
                 try (PrintWriter out = response.getWriter()) {
@@ -115,6 +116,10 @@ public class chocolateServlet extends HttpServlet {
                     out.print(choc.getPrice());
                 }
                 
+                break;
+            case 6:
+                id = Integer.valueOf(request.getParameter("id"));
+                database.deleteChocolate(id);
                 break;
         }//*/
 

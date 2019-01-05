@@ -36,6 +36,7 @@ public class reviewServlet extends HttpServlet {
         List<review> reviews;
         Enumeration<String> Params;
         List<String> ParamsList = new ArrayList<>();
+        int id;
 
         switch (mode) {
             case 1:
@@ -69,9 +70,9 @@ public class reviewServlet extends HttpServlet {
                 break;
             case 3:
                 //return for admin
-                int id = Integer.valueOf(request.getParameter("id"));
+                id = Integer.valueOf(request.getParameter("id"));
                 review rev = database.retrieveSingleReview(id);
-                
+
                 try (PrintWriter out = response.getWriter()) {
                     out.print(rev.getId() + ",");
                     out.print(rev.getChocoID() + ",");
@@ -80,7 +81,7 @@ public class reviewServlet extends HttpServlet {
                     out.print(rev.getTitle() + ",");
                     out.print(rev.isLiked());
                 }
-                
+
                 break;
             case 4:
                 //update pls
@@ -103,9 +104,13 @@ public class reviewServlet extends HttpServlet {
                         put("REV_POSTIVE", ParamsList.get(5).equals("true"));
                     }
                 };
-                
+
                 database.updateReview(mapRev, Integer.parseInt(ParamsList.get(0).replace("ID: ", "")));
 
+                break;
+            case 5:
+                id = Integer.valueOf(request.getParameter("id"));
+                database.deleteReview(id);
                 break;
         }
     }
