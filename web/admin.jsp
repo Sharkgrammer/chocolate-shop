@@ -46,30 +46,26 @@
                 <div class="col-sm-1" ></div>
 
                 <div class="col-sm-10 content border border-dark rounded">
-                    <h1 class="text-center">Database Forms</h1>
+                    <h1 class="text-center">Chocolate Database</h1>
                     <div class="row border border-dark rounded adminPad">
                         <div class="col-sm-4">
                             <div class="adminContainer text-center">
-                                <h3 class="text-center">Chocolate</h3>
+                                <h3 class="text-center">Create</h3>
                                 <%@include file="chocoCreate.jsp" %>
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="adminContainer text-center">
-                                <h3 class="text-center">Stock</h3>
-                                <%@include file="stockCreate.jsp" %>
-                                <h3 class="text-center">Review</h3>
-                                <%@include file="reviewCreate.jsp" %>
+                                <h3 class="text-center">Update</h3>
+                                <%@include file="chocoUpdate.jsp" %>
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="adminContainer text-center">
-                                <h3 class="text-center">User</h3>
-                                <%@include file="userCreate.jsp" %>
-                                <h3 class="text-center">Activity</h3>
-                                <%@include file="actCreate.jsp" %>
+                                <h3 class="text-center">Delete</h3>
+                                <%@include file="chocoDelete.jsp" %>
                             </div>
                         </div>
                     </div>

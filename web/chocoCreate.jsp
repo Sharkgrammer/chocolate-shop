@@ -48,7 +48,7 @@
         
         <input type="text" required name="pric" placeholder="Price (0.00)" class="contact-form"/>
         
-        <input type="submit" value="Submit" name="submit" class="contact-but"/> <input type="reset" class="contact-but">
+        <input type="submit" value="Create" name="submit" class="contact-but"/> <input type="reset" class="contact-but">
     </form>
 
 </div>
