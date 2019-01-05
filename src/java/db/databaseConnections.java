@@ -258,26 +258,7 @@ public class databaseConnections {
 
         return sqlSuccess;
     }
-
-    public boolean createActivity(String UserID, String Type, String Details) {
-        String funtName = "Create Activity";
-        sql = "insert into activity(USER_ID,ACTIVITY_TYPE,ACTIVITY_DETAILS) values (?,?,?)";
-        try {
-            PreparedStatement query = conn.prepareStatement(sql);
-            
-            query.setString(1, UserID);
-            query.setString(2, Type);
-            query.setString(3, Details);
-            
-            sqlSuccess = query.executeUpdate() == 1;
-            sqlSuccessHandler(funtName);
-        } catch (SQLException ex) {
-            sqlSuccessHandler(funtName, ex);
-        }
-
-        return sqlSuccess;
-    }
-
+    
     public boolean createStock(String ChocoID, int Amt, String Date) {
         String funtName = "Create Stock";
         sql = "insert into stocks(CHOCO_ID,STOCK_AMOUNT,STOCK_DATE_ENTERED) values (?,?,?)";
@@ -583,48 +564,6 @@ public class databaseConnections {
         return List;
     }
 
-    public List<activity> retrieveAllActivitys() {
-        return retrieveActivityInternal(0);
-    }
-
-    public List<activity> retrieveSingleActivity(int id) {
-        return retrieveActivityInternal(id);
-    }
-
-    private List<activity> retrieveActivityInternal(int id) {
-        String funtName = "Retrieve Activity";
-        List<activity> List = new ArrayList<>();
-
-        if (id == 0) {
-            sql = "select * from activity";
-        } else {
-            sql = "select * from activity where activity_id = " + id;
-        }
-
-        try {
-            Statement query = conn.createStatement();
-            ResultSet rs = query.executeQuery(sql);
-
-            activity act;
-            while (rs.next()) {
-                act = new activity();
-                act.setId(rs.getInt("ACTIVITY_ID"));
-                act.setUser_id(rs.getInt("USER_ID"));
-                act.setType(rs.getString("ACTIVITY_TYPE"));
-                act.setDetails(rs.getString("ACTIVITY_DETAILS"));
-                List.add(act);
-            }
-
-        } catch (SQLException ex) {
-            sqlSuccessHandler(funtName, ex);
-        }
-
-        sqlSuccess = !List.isEmpty();
-        sqlSuccessHandler(funtName);
-
-        return List;
-    }
-
     public List<stock> retrieveAllStocks(int mode) {
         return retrieveStockInternal(0, mode);
     }
@@ -798,48 +737,6 @@ public class databaseConnections {
         return sqlSuccess;
     }
 
-    public boolean updateactivity(Map mapAct, int id) {
-        String funtName = "Update Activitys";
-        updateControl.clear();
-
-        if (mapAct.isEmpty()) {
-            sqlSuccess = false;
-            return sqlSuccess;
-        }
-
-        mapAct.forEach((k, v) -> updateControl.add(k.toString() + ":::" + v.toString()));
-        //Using updateControl, the update is created here
-
-        sql = "update activity set ";
-        for (int x = 0; x < updateControl.size(); x++) {
-            sql += updateControl.get(x).split(":::")[0] + " = ?";
-            if (x != updateControl.size() - 1) {
-                sql += ",";
-            }
-        }
-        sql += "where activity_id = ?";
-
-        try {
-            PreparedStatement stmnt = conn.prepareStatement(sql);
-
-            for (int x = 0; x < updateControl.size(); x++) {
-                if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")) {
-                    stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
-                } else {
-                    stmnt.setString(x, updateControl.get(x).split(":::")[1]);
-                }
-            }
-            stmnt.setInt(updateControl.size(), id);
-
-            sqlSuccess = stmnt.executeUpdate() != 0;
-            sqlSuccessHandler(funtName);
-        } catch (SQLException ex) {
-            sqlSuccessHandler(funtName, ex);
-        }
-
-        return sqlSuccess;
-    }
-
     public boolean updatestocks(Map mapStock, int id) {
         String funtName = "Update Stocks";
         updateControl.clear();
@@ -930,20 +827,6 @@ public class databaseConnections {
     public boolean deletePurchase(int id) {
         String funtName = "Delete Purchase";
         sql = "delete * from purchases where purchase_id = " + id;
-        try {
-            Statement query = conn.createStatement();
-            sqlSuccess = query.execute(sql);
-            sqlSuccessHandler(funtName);
-        } catch (SQLException ex) {
-            sqlSuccessHandler(funtName, ex);
-        }
-
-        return sqlSuccess;
-    }
-
-    public boolean deleteActivity(int id) {
-        String funtName = "Delete Activity";
-        sql = "delete * from activity where activity_id = " + id;
         try {
             Statement query = conn.createStatement();
             sqlSuccess = query.execute(sql);

@@ -17,6 +17,10 @@
                     result += document.getElementById(x).innerHTML * 1;
                 }
 
+                if (document.getElementById("fast").checked) {
+                    result += 5;
+                }
+
                 document.getElementById("total").innerHTML = "Total &euro;" + Math.round(result * 100) / 100;
             }
 
@@ -37,19 +41,19 @@
                 }
                 if (document.getElementById("no").value.length < 6) {
                     if (str != "") {
-                        str+=", ";
+                        str += ", ";
                     }
                     str += "Card Number";
                 }
                 if (document.getElementById("csv").value.length < 3) {
                     if (str != "") {
-                        str+=", ";
+                        str += ", ";
                     }
                     str += "CSV Number";
                 }
                 if (document.getElementById("add").value.length < 6) {
                     if (str != "") {
-                        str+=", ";
+                        str += ", ";
                     }
                     str += "Address";
                 }
@@ -101,7 +105,17 @@
                                         </tr>
 
                                         <tr>
+
                                             <td><textarea rows="3" required cols="25" id="add" placeholder="Address" class="contact-form"></textarea></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><h5>Delivery</h5></td>                                            
+                                        </tr>
+
+                                        <tr>
+                                            <td><input type="radio" onclick="updateTotal();" name="del" id="free" checked> Free    
+                                                <input type="radio" onclick="updateTotal();" name="del" id="fast"> Fast</td>
                                         </tr>
 
                                     </tbody>
@@ -140,7 +154,7 @@
                                                     </div>
                                                 </div>
 
-                                                <p class="text-center"><b>Total: &euro;<script>document.write(${purch.getAmount()} * ${purch.getChoco().getPrice()})</script></b></p>
+                                                <p class="text-center"><b>Total: &euro;<script>document.write(Math.round(${purch.getAmount()} * ${purch.getChoco().getPrice()} * 100) / 100);</script></b></p>
                                             </a>
                                             <p id="${purch.getCart()}" style="display:none"></p>
                                             <script>
