@@ -75,10 +75,6 @@
                 });
             }
 
-            stockData(stockCur);
-            reviewData(revCur);
-            chocolateData(chocCur);
-
             function chocNext() {
                 if (chocCur < chocCount) {
                     chocCur++;
@@ -198,6 +194,10 @@
                     loop = reviewData(revCur);
                 }
             }
+            
+            chocStart();
+            stockStart();
+            revStart();
 
         </script>
 

@@ -31,7 +31,7 @@ public class reviewServlet extends HttpServlet {
         reviewDo(request, response);
     }
 
-    void reviewDo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    void reviewDo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int mode = Integer.valueOf(request.getParameter("mode"));
         List<review> reviews;
         Enumeration<String> Params;
@@ -106,11 +106,12 @@ public class reviewServlet extends HttpServlet {
                 };
 
                 database.updateReview(mapRev, Integer.parseInt(ParamsList.get(0).replace("ID: ", "")));
-
+                request.getRequestDispatcher("/admin.jsp").forward(request, response);
                 break;
             case 5:
                 id = Integer.valueOf(request.getParameter("id"));
                 database.deleteReview(id);
+                request.getRequestDispatcher("/admin.jsp").forward(request, response);
                 break;
         }
     }
