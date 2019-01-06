@@ -11,7 +11,7 @@
         </div>
 
         <% if (result == true) { %>
-        
+
         <div class="col-sm-2">
             <a class="footer-link" href="user.jsp">Account</a>
         </div>
@@ -20,13 +20,13 @@
             <a class="footer-link" href="purchase.jsp">Cart</a>
         </div>
 
-        <% }else{ %>
+        <% } else { %>
         <div class="col-sm-2">
         </div>
 
         <div class="col-sm-2">
         </div>
-        <% } %>
+        <% }%>
         <div class="col-sm-2">
             <a class="footer-link" href="#" onclick="switchLan()">Switch Language</a>
         </div>
@@ -39,6 +39,8 @@
 
 
 </footer>
+
+<script>document.getElementById("loading").style = "display:none";</script>
 
 <!-- Bootstrap core JavaScript -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

@@ -326,34 +326,46 @@ public class databaseConnections {
     }
 
     public List<chocolate> retrieveAllChocolate() {
-        return retrieveChocolateInternal(0, 0, "", 0);
+        return retrieveChocolateInternal(0, 0, "", 0, "", "", "");
     }
 
     public chocolate retrieveSingleChocolate(int id) {
-        return retrieveChocolateInternal(id, 0, "", 0).get(0);
+        return retrieveChocolateInternal(id, 0, "", 0, "", "", "").get(0);
     }
 
     public List<chocolate> retrieveMultiChocolate(int amt, int mode) {
-        return retrieveChocolateInternal(0, amt, "", mode);
+        return retrieveChocolateInternal(0, amt, "", mode, "", "", "");
     }
 
     public List<chocolate> retrieveSearchChocolate(String name) {
-        return retrieveChocolateInternal(0, 0, name, 0);
+        return retrieveChocolateInternal(0, 0, name, 0, "", "", "");
     }
 
     public List<chocolate> retrieveSearchChocolate(String name, int amt) {
-        return retrieveChocolateInternal(0, amt, name, 0);
+        return retrieveChocolateInternal(0, amt, name, 0, "", "", "");
     }
 
     public List<chocolate> retrieveSearchChocolate(String name, int amt, int mode) {
-        return retrieveChocolateInternal(0, amt, name, mode);
+        return retrieveChocolateInternal(0, amt, name, mode, "", "", "");
+    }
+    
+    public List<chocolate> retrieveTypeChocolate(String Type) {
+        return retrieveChocolateInternal(0, 0, "", 0, Type, "", "");
+    }
+    
+    public List<chocolate> retrieveFlavourChocolate(String Flavour) {
+        return retrieveChocolateInternal(0, 0, "", 0, "", Flavour, "");
+    }
+    
+    public List<chocolate> retrieveProducerChocolate(String Producer) {
+        return retrieveChocolateInternal(0, 0, "", 0, "", "", Producer);
     }
 
     public int retrieveCountChocolate() {
-        return retrieveChocolateInternal(0, 0, "", 0).size();
+        return retrieveChocolateInternal(0, 0, "", 0, "", "", "").size();
     }
 
-    private List<chocolate> retrieveChocolateInternal(int id, int amt, String name, int mode) {
+    private List<chocolate> retrieveChocolateInternal(int id, int amt, String name, int mode, String type, String flavour, String producer) {
         String funtName = "Retrieve Chocolate";
         List<chocolate> List = new ArrayList<>();
 
@@ -365,6 +377,18 @@ public class databaseConnections {
 
         if (!name.equals("")) {
             sql += " where UPPER(CHOCO_NAME) like UPPER('%" + name + "%')";
+        }
+        
+        if (!type.equals("")) {
+            sql += " where UPPER(CHOCO_TYPE) like UPPER('%" + type + "%')";
+        }
+        
+        if (!flavour.equals("")) {
+            sql += " where UPPER(CHOCO_FLAVOUR) like UPPER('%" + flavour + "%')";
+        }
+        
+        if (!producer.equals("")) {
+            sql += " where UPPER(CHOCO_PRODUCER) like UPPER('%" + producer + "%')";
         }
 
         if (mode != 0) {
@@ -440,6 +464,48 @@ public class databaseConnections {
         sqlSuccessHandler(funtName);
 
         return List;
+    }
+    
+    public List<List<String>> retrieveChocolateFilters() {
+        String funtName = "Retrieve Chocolate Filters";
+
+        sql = "select DISTINCT CHOCO_TYPE, CHOCO_PRODUCER, CHOCO_FLAVOUR, CHOCO_WEIGHT from chocolate";
+        List<String> ListType = new ArrayList<>(), ListProducer = new ArrayList<>(), ListFlavour = new ArrayList<>(), ListWeight = new ArrayList<>();
+        List<List<String>> returnList = new ArrayList<>();
+        
+        try {
+            Statement query = conn.createStatement();
+            ResultSet rs = query.executeQuery(sql);
+            while (rs.next()) {
+                if (!rs.getString("CHOCO_TYPE").equals("")) {
+                    ListType.add(rs.getString("CHOCO_TYPE"));
+                }
+
+                if (!rs.getString("CHOCO_PRODUCER").equals("")) {
+                    ListProducer.add(rs.getString("CHOCO_PRODUCER"));
+                }
+
+                if (!rs.getString("CHOCO_FLAVOUR").equals("")) {
+                    ListFlavour.add(rs.getString("CHOCO_FLAVOUR"));
+                }
+                
+                if (!rs.getString("CHOCO_WEIGHT").equals("")) {
+                    ListWeight.add(rs.getString("CHOCO_WEIGHT"));
+                }
+            }
+
+            returnList.add(ListType);
+            returnList.add(ListProducer);
+            returnList.add(ListFlavour);
+            returnList.add(ListWeight);
+
+        } catch (SQLException ex) {
+            sqlSuccessHandler(funtName, ex);
+        }
+        
+        sqlSuccess = !returnList.get(0).isEmpty();
+        sqlSuccessHandler(funtName);
+        return returnList;
     }
 
     public List<review> retrieveAllReviews(int mode) {
@@ -861,7 +927,7 @@ public class databaseConnections {
 
         return sqlSuccess;
     }
-    
+
     public boolean deleteReview(int id) {
         String funtName = "Delete Review";
         sql = "delete * from review where rev_id = " + id;

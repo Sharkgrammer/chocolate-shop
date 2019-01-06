@@ -6,6 +6,8 @@
     </head>
 
     <body>
+        <%@include file="header.jsp" %> 
+        <div style="padding-bottom: 100px"></br></div>
 
         <div class="container-fluid">
             </br>
@@ -24,6 +26,9 @@
             </div>
             </br>
         </div>
+
+        <%@include file="modal.jsp" %>
+        <%@include file="footer.jsp" %>
 
     </body>
 </html>

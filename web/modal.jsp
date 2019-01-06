@@ -94,10 +94,10 @@
     };
     spannewsyes.onclick = function () {
         modalnews.style.display = "none";
+        contactLoading();
         //do something with the email here?
         //Such as uploading + checks and whatnot
         newsCounter = 5;
-        alert("Thank you for your email " + email.innerHTML);
         setCookie("email", "yes", 10);
     };
 

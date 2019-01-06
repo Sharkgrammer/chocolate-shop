@@ -42,7 +42,6 @@
                 <div class="col-sm-12">
                     <input type="text" placeholder="Search.." name="search" autocomplete="off" class="bar search-input" id="target"/>
                 </div>
-
             </div>
 
             <div class="text-center search-response border border-dark rounded">

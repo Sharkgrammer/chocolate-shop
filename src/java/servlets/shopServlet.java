@@ -52,9 +52,7 @@ public class shopServlet extends HttpServlet {
                 request.getRequestDispatcher("/shop-item.jsp").forward(request, response);
                 break;
             case 2:
-                //Assume search and filter options here
-                //Shop.jsp is self sufficent, normally. Pass filts and other options into chocolate servlet
-
+                //Search stuff
                 search = request.getParameter("search");
                 chocoList = database.retrieveSearchChocolate(search);
 
@@ -64,19 +62,71 @@ public class shopServlet extends HttpServlet {
                 break;
 
             case 3:
+                //search return for textbox
                 search = request.getParameter("search");
-                
-                if (search.equals("")){
+
+                if (search.equals("")) {
                     chocoList = null;
-                }else{
+                } else {
                     chocoList = database.retrieveSearchChocolate(search, 10);
                 }
-                
+
                 try (PrintWriter out = response.getWriter()) {
                     for (chocolate chocoLoop : chocoList) {
                         out.print(chocoLoop.getName() + ",");
                     }
                 }
+                break;
+            case 4:
+                //Populate the filters here pls
+                List<List<String>> List = database.retrieveChocolateFilters();
+
+                request.setAttribute("listType", List.get(0));
+                request.setAttribute("listProd", List.get(1));
+                request.setAttribute("listFlav", List.get(2));
+
+                if (request.getParameter("search") == null) {
+                    request.setAttribute("resultType", 0);
+                    request.setAttribute("resultProd", 0);
+                    request.setAttribute("resultFlav", 0);
+                }
+
+                break;
+            case 5:
+                //return based on types
+                search = request.getParameter("search");
+                chocoList = database.retrieveTypeChocolate(search);
+
+                request.setAttribute("listShop", chocoList);
+                request.setAttribute("options", 0);
+                request.setAttribute("resultType", search);
+                request.setAttribute("resultProd", 0);
+                request.setAttribute("resultFlav", 0);
+                request.getRequestDispatcher("/shop.jsp").forward(request, response);
+                break;
+            case 6:
+                //return based on prod
+                search = request.getParameter("search");
+                chocoList = database.retrieveProducerChocolate(search);
+
+                request.setAttribute("listShop", chocoList);
+                request.setAttribute("options", 0);
+                request.setAttribute("resultType", 0);
+                request.setAttribute("resultProd", search);
+                request.setAttribute("resultFlav", 0);
+                request.getRequestDispatcher("/shop.jsp").forward(request, response);
+                break;
+            case 7:
+                //return based on flavour
+                search = request.getParameter("search");
+                chocoList = database.retrieveFlavourChocolate(search);
+
+                request.setAttribute("listShop", chocoList);
+                request.setAttribute("options", 0);
+                request.setAttribute("resultType", 0);
+                request.setAttribute("resultProd", 0);
+                request.setAttribute("resultFlav", search);
+                request.getRequestDispatcher("/shop.jsp").forward(request, response);
                 break;
         }
     }

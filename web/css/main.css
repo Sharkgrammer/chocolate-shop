@@ -88,6 +88,15 @@ body{
     background-color: #692E00;
 }
 
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
 /* Carousel CSS */
 
 .carousel {
@@ -121,9 +130,10 @@ body{
     padding: 6px;
 }
 
-.search-but{
-    width:100%;
-    height:100%;
+.filter-container{
+    margin:auto;
+    max-width:500px;
+    padding: 6px;
 }
 
 .search-input{
@@ -232,8 +242,16 @@ body{
     color:#666666;
 }
 
+.shop-margin-top{
+    padding: 10px 15px 10px 15px;
+    overflow: hidden;
+}
+
 .shop-margin{
-    margin: 10px 52px 10px 52px;
+    padding: 10px 40px 10px 40px;
+    overflow-y: scroll;
+    height:300px;
+    
 }
 
 .shop-arrival-img{
@@ -278,6 +296,11 @@ body{
     margin: 20% 0px 20% 0px;
     width: 50px;
     height:40%;
+}
+
+.shop-filt{
+    padding: 5px;
+    width:100%;
 }
 
 /* Purchase CSS */

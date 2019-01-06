@@ -47,6 +47,13 @@
         window.location.reload();
     }
 
+    function contactLoading() {
+        document.getElementById("newsmodal").style = "display:none;";
+        document.getElementById("mainIndex").style = "display:none;";
+        document.getElementById("loading").style = "display:initial";
+        document.getElementById("mainLoad").style = "display:initial";
+    }
+
 </script>
 
 <%@page import="db.databaseConnections"%>
