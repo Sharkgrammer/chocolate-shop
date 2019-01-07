@@ -57,15 +57,11 @@ public class reviewServlet extends HttpServlet {
 
                 result = database.createReview(Integer.parseInt(ParamsList.get(0)), Integer.parseInt(ParamsList.get(1)), dateSql.toString(), ParamsList.get(2),
                         ParamsList.get(3), ParamsList.get(4).equals("true"));
-
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(database.returnErrorMessage());
-                    out.println(database.returnLastResult());
-                }
+                request.getRequestDispatcher("/shopServlet?id=" + ParamsList.get(0) + "&mode=1").forward(request, response);
 
                 break;
             case 2:
-                reviews = database.retrieveMultiReviews(6);
+                reviews = database.retrieveMultiReviews(8);
                 request.setAttribute("revList", reviews);
                 break;
             case 3:
@@ -111,6 +107,13 @@ public class reviewServlet extends HttpServlet {
             case 5:
                 id = Integer.valueOf(request.getParameter("id"));
                 database.deleteReview(id);
+                
+                
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(database.returnErrorMessage());
+                    out.println(database.returnLastResult());
+                }
+                
                 request.getRequestDispatcher("/admin.jsp").forward(request, response);
                 break;
         }

@@ -96,8 +96,8 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    
     <!-- Error Pages -->
-    <!-- redo later pls 
     <error-page>
         <error-code>401</error-code>
         <location>/errorServlet?code=401</location>
@@ -117,5 +117,5 @@
     <error-page>
         <error-code>503</error-code>
         <location>/errorServlet?code=503</location>
-    </error-page>-->
+    </error-page>
 </web-app>

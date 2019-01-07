@@ -7,7 +7,7 @@ public class review implements Serializable {
     private int id;
     private int chocoID;
     private String user;
-    private String date; 
+    private String date;
     private String data;
     private String title;
     private boolean liked;
@@ -54,7 +54,7 @@ public class review implements Serializable {
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date = toVisualDate(date);
     }
 
     public String getData() {
@@ -87,5 +87,17 @@ public class review implements Serializable {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    private String toVisualDate(String date) {
+        String returnDate = "";
+        String[] dateArr = date.split("-");
+        for (int x = dateArr.length - 1; x >= 0; x--) {
+            returnDate += dateArr[x];
+            if (x != 0) {
+                returnDate += "/";
+            }
+        }
+        return returnDate;
     }
 }

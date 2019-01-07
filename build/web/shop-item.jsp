@@ -13,12 +13,28 @@
             function sendToCart() {
                 window.open("purchaseServlet?mode=1&id=${chocoShop.getId()}&amt=" + Math.round(document.getElementById('count').value, 0), "_self");
             }
+
+            function showReview() {
+                var isHidden = document.getElementById("reviewButton").style.display == "none";
+                if (isHidden) {
+                    document.getElementById("reviewButton").style = "display:inital";
+                } else {
+                    document.getElementById("reviewButton").style = "display:none";
+                }
+                //set user id + choco id + hide em
+                document.getElementById("revCreateChoc").style = "display:none";
+                document.getElementById("revCreateUser").style = "display:none";
+                document.getElementById('revCreateChoc').readOnly = true;
+                document.getElementById('revCreateUser').readOnly = true;
+                document.getElementById("revCreateChoc").value = ${chocoShop.getId()};
+                document.getElementById("revCreateUser").value = getCookie("id");
+            }
         </script>
 
     </head>
 
     <body>
-        <%@include file="header.jsp" %> 
+        <%@include file="header.jsp" %>
         <div style="padding-bottom: 100px"></br></div>
 
         <div class="container-fluid">
@@ -81,6 +97,27 @@
                                         </div>
                                     </div>
                                 </div>
+                                <c:if test="${userid != 0}">
+                                    <div class="border border-dark rounded shop-box">
+                                        <div class="container-fluid">
+                                            <div class="row text-center">
+                                                <div class="col-sm-2"></br></div>
+                                                <div class="col-sm-8">
+                                                    <div style="height:50px;">
+                                                        <button class="shop-but" onClick="showReview();">Review Chocolate</button>  
+                                                    </div>
+                                                    <div id="reviewButton" style="display:none">
+                                                        <%@include file="reviewCreate.jsp" %>
+                                                    </div>
+
+                                                </div> 
+                                                <div class="col-sm-2"></br></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>  
+
+
 
                             </div>
 
@@ -92,13 +129,31 @@
                         <header class="text-center">
                             <h3> Chocolate Reviews </h3>
                         </header>
-                        <div class="row text-center" style="overflow: hidden;">
+                        <div class="row" style="overflow: hidden;">
                             <c:forEach items="${chocoShop.getReviews()}" var="review">
-                                <div class="col-sm-3 border border-dark rounded shop-margin">
-                                    <h2> ${review.getTitle()} (${review.isLiked()})</h2>
-                                    <h3> ${review.getUser()} </h3>
-                                    <h4> ${review.getDate()} </h4> 
-                                    <p class="text-left">${review.getData()}</p>
+                                <div class='col-sm-3 shop-margin-top'>
+                                    <div class="border border-dark rounded shop-margin-review">
+                                        <h2 class='text-center'> ${review.getTitle()}</h2>
+                                        <div class="row">
+                                            <div class='col-sm-6'>
+                                                <h3> ${review.getUser()} </h3>
+                                                <h4> ${review.getDate()} </h4> 
+                                            </div>
+
+                                            <div class='col-sm-6'>
+                                                <c:choose>
+                                                    <c:when test="${review.isLiked()}">
+                                                        <img class='img-review' src='images/thumbsUp.png'/>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <img class='img-review' src='images/thumbsDown.png'/>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                            
+                                        </div>
+                                        <p class="text-left">${review.getData()}</p>
+                                    </div>
                                 </div>
                             </c:forEach>
                         </div>

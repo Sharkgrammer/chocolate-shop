@@ -40,7 +40,7 @@
 
 </footer>
 
-<script>document.getElementById("loading").style = "display:none";</script>
+<script>try{document.getElementById("loading").style = "display:none";}catch(e){console.log(e);}</script>
 
 <!-- Bootstrap core JavaScript -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

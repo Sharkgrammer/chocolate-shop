@@ -251,7 +251,12 @@ body{
     padding: 10px 40px 10px 40px;
     overflow-y: scroll;
     height:300px;
-    
+}
+
+.shop-margin-review{
+    padding: 5px 20px 5px 20px;
+    overflow-y: scroll;
+    height:200px;
 }
 
 .shop-arrival-img{
@@ -301,6 +306,11 @@ body{
 .shop-filt{
     padding: 5px;
     width:100%;
+}
+
+.img-review{
+    height:80px;
+    padding:10px;
 }
 
 /* Purchase CSS */

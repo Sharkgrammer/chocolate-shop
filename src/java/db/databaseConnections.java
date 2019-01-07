@@ -362,7 +362,23 @@ public class databaseConnections {
     }
 
     public int retrieveCountChocolate() {
-        return retrieveChocolateInternal(0, 0, "", 0, "", "", "").size();
+        String funtName = "Retrieve Chocolate Count";
+        sql = "select CHOCO_ID from chocolate ORDER BY CHOCO_ID DESC FETCH FIRST 1 ROWS ONLY";
+        int result = 0;
+        try {
+            Statement query = conn.createStatement();
+            ResultSet rs = query.executeQuery(sql);
+            
+            while (rs.next()) {
+                result = rs.getInt("CHOCO_ID");
+            }
+            sqlSuccess = result != 0;
+
+            sqlSuccessHandler(funtName);
+        } catch (SQLException ex) {
+            sqlSuccessHandler(funtName, ex);
+        }
+        return result;
     }
 
     private List<chocolate> retrieveChocolateInternal(int id, int amt, String name, int mode, String type, String flavour, String producer) {
@@ -513,7 +529,23 @@ public class databaseConnections {
     }
 
     public int retrieveCountReviews() {
-        return retrieveReviewInternal(0, 0, 0, 0).size();
+        String funtName = "Retrieve Reviews Count";
+        sql = "select REV_ID from review ORDER BY REV_ID DESC FETCH FIRST 1 ROWS ONLY";
+        int result = 0;
+        try {
+            Statement query = conn.createStatement();
+            ResultSet rs = query.executeQuery(sql);
+            
+            while (rs.next()) {
+                result = rs.getInt("REV_ID");
+            }
+            sqlSuccess = result != 0;
+
+            sqlSuccessHandler(funtName);
+        } catch (SQLException ex) {
+            sqlSuccessHandler(funtName, ex);
+        }
+        return result;
     }
 
     public List<review> retrieveChocoReviews(int id) {
@@ -657,7 +689,23 @@ public class databaseConnections {
     }
 
     public int retrieveCountStocks() {
-        return retrieveStockInternal(0, 0).size();
+        String funtName = "Retrieve Stocks Count";
+        sql = "select STOCK_ID from stocks ORDER BY STOCK_ID DESC FETCH FIRST 1 ROWS ONLY";
+        int result = 0;
+        try {
+            Statement query = conn.createStatement();
+            ResultSet rs = query.executeQuery(sql);
+            
+            while (rs.next()) {
+                result = rs.getInt("STOCK_ID");
+            }
+            sqlSuccess = result != 0;
+
+            sqlSuccessHandler(funtName);
+        } catch (SQLException ex) {
+            sqlSuccessHandler(funtName, ex);
+        }
+        return result;
     }
 
     public stock retrieveSingleStock(int id) {
@@ -930,7 +978,7 @@ public class databaseConnections {
 
     public boolean deleteReview(int id) {
         String funtName = "Delete Review";
-        sql = "delete * from review where rev_id = " + id;
+        sql = "delete from review where rev_id = " + id;
         try {
             Statement query = conn.createStatement();
             sqlSuccess = query.execute(sql);
@@ -949,7 +997,7 @@ public class databaseConnections {
             Statement query = conn.createStatement();
             sqlSuccess = query.execute(sql, Statement.RETURN_GENERATED_KEYS);
             ResultSet key = query.getGeneratedKeys();
-            query.execute("delete * from image where choco_id = " + key.first());
+            query.execute("delete from image where choco_id = " + key.first());
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
             sqlSuccessHandler(funtName, ex);
@@ -960,7 +1008,7 @@ public class databaseConnections {
 
     public boolean deleteImage(int id) {
         String funtName = "Delete Image";
-        sql = "delete * from image where image_id = " + id;
+        sql = "delete from image where image_id = " + id;
         try {
             Statement query = conn.createStatement();
             sqlSuccess = query.execute(sql);
@@ -974,7 +1022,7 @@ public class databaseConnections {
 
     public boolean deletePurchase(int id) {
         String funtName = "Delete Purchase";
-        sql = "delete * from purchases where purchase_id = " + id;
+        sql = "delete from purchases where purchase_id = " + id;
         try {
             Statement query = conn.createStatement();
             sqlSuccess = query.execute(sql);

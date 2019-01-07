@@ -1,9 +1,9 @@
 <div>
     <form action="reviewServlet?mode=1" method="POST">
 
-        <input type="number" required name="choc" placeholder="Choco" class="contact-form"/></td>
+        <input type="number" required name="choc" placeholder="Choco" id="revCreateChoc" class="contact-form"/></td>
 
-        <input type="number" required name="user" placeholder="User" class="contact-form"/></td>
+        <input type="number" required name="user" placeholder="User" id="revCreateUser" class="contact-form"/></td>
 
         <textarea rows="2" required cols="25" name="data" placeholder="Review" class="contact-form"></textarea>
         
