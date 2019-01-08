@@ -325,8 +325,8 @@ public class databaseConnections {
         return List;
     }
 
-    public List<chocolate> retrieveAllChocolate() {
-        return retrieveChocolateInternal(0, 0, "", 0, "", "", "");
+    public List<chocolate> retrieveAllChocolate(int mode) {
+        return retrieveChocolateInternal(0, 0, "", mode, "", "", "");
     }
 
     public chocolate retrieveSingleChocolate(int id) {

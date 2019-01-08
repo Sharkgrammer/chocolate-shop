@@ -1,6 +1,7 @@
 <script type="text/javascript">
     function searchItemClick(x) {
         document.getElementById("target").value = document.getElementById("search" + x).innerHTML;
+        $("#searchForm").submit();
     }
 
     $j(document).ready(function () {
@@ -24,7 +25,7 @@
 
             });
         }
-        
+
         $j('#target').keyup(function (e) {
             clearTimeout(timeoutID);
             timeoutID = setTimeout(findMember.bind(undefined, e.target.value), 500);
@@ -35,7 +36,7 @@
 </script>
 
 <div class="search-container">
-    <form action="shopServlet">
+    <form action="shopServlet" id="searchForm">
         <div>
             <input type="hidden" value="2" name="mode" id="mode"/>
             <div class="row">

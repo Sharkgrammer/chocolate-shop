@@ -24,7 +24,7 @@
 
         <div class="container-fluid" id='shop'>
             <c:if test="${options != 0}">
-                <jsp:include page="/chocolateServlet?mode=4&filt=0" />
+                <jsp:include page="/chocolateServlet?mode=4&filt=7" />
             </c:if>
 
             <div class="row">

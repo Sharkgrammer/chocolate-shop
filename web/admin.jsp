@@ -60,9 +60,7 @@
                         </c:forEach>
 
                     </div>
-
-                    <input id ='trueFalse'/>
-
+                    
                     <h1 class="text-center">Chocolate Database</h1>
                     <div class="row border border-dark rounded adminPad">
                         <div class="col-sm-4">

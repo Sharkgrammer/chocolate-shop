@@ -58,6 +58,9 @@ public class shopServlet extends HttpServlet {
 
                 request.setAttribute("listShop", chocoList);
                 request.setAttribute("options", 0);
+                request.setAttribute("resultType", 0);
+                request.setAttribute("resultProd", 0);
+                request.setAttribute("resultFlav", 0);
                 request.getRequestDispatcher("/shop.jsp").forward(request, response);
                 break;
 

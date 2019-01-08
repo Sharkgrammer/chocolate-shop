@@ -3,7 +3,6 @@ package servlets;
 import data.purchase;
 import db.databaseConnections;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -13,10 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class purchaseServlet extends HttpServlet {
-
-    public purchaseServlet() {
-
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
