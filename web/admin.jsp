@@ -195,7 +195,6 @@
                         document.getElementById("stockID").value = "ID: " + data.split(",")[0];
                         document.getElementById("stockChocoID").value = data.split(",")[1];
                         document.getElementById("stockAmt").value = data.split(",")[2];
-                        document.getElementById("trueFalse").value = (data.split(",").length <= 1);
                     }
                 });
             }
@@ -348,7 +347,7 @@
         <%@include file="modal.jsp" %>
         <%@include file="footer.jsp" %>
 
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script src="js/canvasjs.min.js"></script>
 
     </body>
 </html>
