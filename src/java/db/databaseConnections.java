@@ -67,7 +67,7 @@ public class databaseConnections {
         errorMessage = ex.toString();
         System.out.println(errorMessage);
     }
-
+    
     public int login(String email, String pass) {
         List<user> userList = retrieveAllUsers();
         int result = 0;
@@ -770,7 +770,7 @@ public class databaseConnections {
                 sql += ",";
             }
         }
-        sql += " where user_id = ?";
+        sql += " where user_id = ? ";
 
         try {
             PreparedStatement stmnt = conn.prepareStatement(sql);
@@ -812,7 +812,7 @@ public class databaseConnections {
                 sql += ",";
             }
         }
-        sql += " where rev_id = ?";
+        sql += " where rev_id = ? ";
 
         try {
             PreparedStatement stmnt = conn.prepareStatement(sql);
@@ -838,6 +838,8 @@ public class databaseConnections {
     public boolean updateChocolate(Map mapChoco, int id) {
         String funtName = "Update Chocolate";
         updateControl.clear();
+        
+        System.out.println(id);
 
         if (mapChoco.isEmpty()) {
             sqlSuccess = false;
@@ -853,25 +855,32 @@ public class databaseConnections {
             if (x != updateControl.size() - 1) {
                 sql += ",";
             }
+            System.out.println(updateControl.get(x));
         }
-        sql += "where chocolate_id = ?";
-
+        sql += " where CHOCO_ID = ?";
         try {
             PreparedStatement stmnt = conn.prepareStatement(sql);
 
             for (int x = 0; x < updateControl.size(); x++) {
-                if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")) {
-                    stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+                if (updateControl.get(x).split(":::")[0].contains("ID") || updateControl.get(x).split(":::")[0].contains("WEIGHT")) {
+                    if (updateControl.get(x).split(":::")[0].contains("PRICE")){
+                        stmnt.setFloat(x + 1, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+                    }else{
+                        stmnt.setInt(x + 1, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+                    }
                 } else {
-                    stmnt.setString(x, updateControl.get(x).split(":::")[1]);
+                    stmnt.setString(x + 1, updateControl.get(x).split(":::")[1]);
                 }
             }
-            stmnt.setInt(updateControl.size(), id);
-
-            sqlSuccess = stmnt.executeUpdate() != 0;
+            stmnt.setInt(updateControl.size() + 1, id);
+            
+            
+            sqlSuccess = stmnt.execute();
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
             sqlSuccessHandler(funtName, ex);
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
         }
 
         return sqlSuccess;
@@ -896,19 +905,19 @@ public class databaseConnections {
                 sql += ",";
             }
         }
-        sql += "where purchase_id = ?";
+        sql += " where purchase_id = ? ";
 
         try {
             PreparedStatement stmnt = conn.prepareStatement(sql);
 
             for (int x = 0; x < updateControl.size(); x++) {
                 if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")) {
-                    stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+                    stmnt.setInt(x + 1, Integer.parseInt(updateControl.get(x).split(":::")[1]));
                 } else {
-                    stmnt.setString(x, updateControl.get(x).split(":::")[1]);
+                    stmnt.setString(x + 1, updateControl.get(x).split(":::")[1]);
                 }
             }
-            stmnt.setInt(updateControl.size(), id);
+            stmnt.setInt(updateControl.size() + 1, id);
 
             sqlSuccess = stmnt.executeUpdate() != 0;
             sqlSuccessHandler(funtName);
@@ -938,19 +947,19 @@ public class databaseConnections {
                 sql += ",";
             }
         }
-        sql += "where stock_id = ?";
+        sql += " where stock_id = ? ";
 
         try {
             PreparedStatement stmnt = conn.prepareStatement(sql);
 
             for (int x = 0; x < updateControl.size(); x++) {
                 if (updateControl.get(x).split(":::")[0].contains("id") || updateControl.get(x).split(":::")[0].contains("amount")) {
-                    stmnt.setInt(x, Integer.parseInt(updateControl.get(x).split(":::")[1]));
+                    stmnt.setInt(x + 1, Integer.parseInt(updateControl.get(x).split(":::")[1]));
                 } else {
-                    stmnt.setString(x, updateControl.get(x).split(":::")[1]);
+                    stmnt.setString(x + 1, updateControl.get(x).split(":::")[1]);
                 }
             }
-            stmnt.setInt(updateControl.size(), id);
+            stmnt.setInt(updateControl.size() + 1, id);
 
             sqlSuccess = stmnt.executeUpdate() != 0;
             sqlSuccessHandler(funtName);
@@ -964,7 +973,7 @@ public class databaseConnections {
     //Delete operations
     public boolean deleteUser(int id) {
         String funtName = "Delete User";
-        sql = "delete * from users where user_id = " + id;
+        sql = "delete from users where user_id = " + id;
         try {
             Statement query = conn.createStatement();
             sqlSuccess = query.execute(sql);
@@ -992,12 +1001,13 @@ public class databaseConnections {
 
     public boolean deleteChocolate(int id) {
         String funtName = "Delete Chocolate";
-        sql = "delete * from chocolates where choco_id = " + id;
+        sql = "delete from chocolate where choco_id = " + id;
         try {
             Statement query = conn.createStatement();
-            sqlSuccess = query.execute(sql, Statement.RETURN_GENERATED_KEYS);
-            ResultSet key = query.getGeneratedKeys();
-            query.execute("delete from image where choco_id = " + key.first());
+            query.execute("delete from image where choco_id = " + id);
+            query.execute("delete from review where choco_id = " + id);
+            query.execute("delete from stocks where choco_id = " + id);
+            sqlSuccess = query.execute(sql);
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {
             sqlSuccessHandler(funtName, ex);
@@ -1036,7 +1046,7 @@ public class databaseConnections {
 
     public boolean deleteStock(int id) {
         String funtName = "Delete Stock";
-        sql = "delete * from stock where stock_id = " + id;
+        sql = "delete from stocks where stock_id = " + id;
         try {
             Statement query = conn.createStatement();
             sqlSuccess = query.execute(sql);

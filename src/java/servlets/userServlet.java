@@ -134,7 +134,7 @@ public class userServlet extends HttpServlet {
             case 5:
                 id = Integer.valueOf(request.getParameter("id"));
                 database.deleteUser(id);
-                request.getRequestDispatcher("/admin.jsp").forward(request, response);
+                response.sendRedirect("admin.jsp");
                 break;
         }
     }

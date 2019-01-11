@@ -1,6 +1,6 @@
 <div>
-    <form name="create" action="chocolateServlet?mode=2&filt=0" method="POST">
-        <input type="text" id="chocoID" value="0" readonly="true" class="contact-form"/>
+    <form name="create" action="chocolateServlet?mode=7&filt=0" method="POST">
+        <input type="text" id="chocoID" name="choc" readonly="true" class="contact-form"/>
 
         <input type="text" id="chocoName" required name="name" placeholder="Name" class="contact-form"/>
 

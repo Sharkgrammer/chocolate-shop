@@ -60,7 +60,7 @@
                         </c:forEach>
 
                     </div>
-                    
+
                     <h1 class="text-center">Chocolate Database</h1>
                     <div class="row border border-dark rounded adminPad">
                         <div class="col-sm-4">
@@ -185,7 +185,6 @@
                                 stockCur--;
                             }
                         } else if (mode == 2) {
-                            stockCur = stockCount;
                             stockCur--;
                         } else if (mode == 3) {
                             stockCur++;
@@ -197,93 +196,6 @@
                         document.getElementById("stockAmt").value = data.split(",")[2];
                     }
                 });
-            }
-
-            function reviewData(id, mode) {
-                $j.get("reviewServlet?mode=3&id=" + id, function (data, status) {
-
-                    if (data.split(",").length <= 1) {
-                        if (mode == 0) {
-                            if (revCur < revCount) {
-                                revCur++;
-                            }
-                        } else if (mode == 1) {
-                            if (revCur > 1) {
-                                revCur--;
-                            }
-                        } else if (mode == 2) {
-                            revCur = revCount;
-                            revCur--;
-                        } else if (mode == 3) {
-                            revCur++;
-                        }
-                        reviewData(revCur, mode);
-                    } else {
-                        document.getElementById("revID").value = "ID: " + data.split(",")[0];
-                        document.getElementById("revChocoID").value = data.split(",")[1];
-                        document.getElementById("revUserID").value = data.split(",")[2];
-                        document.getElementById("revData").value = data.split(",")[3];
-                        document.getElementById("revTitle").value = data.split(",")[4];
-                        document.getElementById("revbut").value = data.split(",")[5];
-                    }
-                });
-            }
-
-            function chocolateData(id) {
-                $j.get("chocolateServlet?mode=5&filt=0&id=" + id, function (data, status) {
-                    if (data.split(",").length <= 1) {
-                        if (mode == 0) {
-                            if (chocCur < chocCount) {
-                                chocCur++;
-                            }
-                        } else if (mode == 1) {
-                            if (chocCur > 1) {
-                                chocCur--;
-                            }
-                        } else if (mode == 2) {
-                            chocCur = chocCount;
-                            chocCur--;
-                        } else if (mode == 3) {
-                            chocCur++;
-                        }
-                        chocolateData(chocCur, mode);
-                    } else {
-                        document.getElementById("chocoID").value = "ID: " + data.split(",")[0];
-                        document.getElementById("chocoName").value = data.split(",")[1];
-                        document.getElementById("chocoDesc").value = data.split(",")[2];
-                        document.getElementById("chocoType").value = data.split(",")[3];
-                        document.getElementById("chocoWeig").value = data.split(",")[4];
-                        document.getElementById("chocoProd").value = data.split(",")[5];
-                        document.getElementById("chocoFlav").value = data.split(",")[6];
-                        document.getElementById("chocoPric").value = data.split(",")[7];
-                    }
-
-                });
-            }
-
-            function chocNext() {
-                if (chocCur < chocCount) {
-                    chocCur++;
-                    chocolateData(chocCur, 0);
-                }
-
-            }
-
-            function chocBack() {
-                if (chocCur > 1) {
-                    chocCur--;
-                    chocolateData(chocCur, 1);
-                }
-            }
-
-            function chocStart() {
-                chocCur = 1;
-                chocolateData(chocCur, 3);
-            }
-
-            function chocEnd() {
-                chocCur = chocCount;
-                chocolateData(chocCur, 2);
             }
 
             function stockNext() {
@@ -311,12 +223,39 @@
                 stockData(stockCur, 2);
             }
 
+            function reviewData(id, mode) {
+                $j.get("reviewServlet?mode=3&id=" + id, function (data, status) {
+                    if (data.split(",").length <= 1) {
+                        if (mode == 0) {
+                            if (revCur < revCount) {
+                                revCur++;
+                            }
+                        } else if (mode == 1) {
+                            if (revCur > 1) {
+                                revCur--;
+                            }
+                        } else if (mode == 2) {
+                            revCur--;
+                        } else if (mode == 3) {
+                            revCur++;
+                        }
+                        reviewData(revCur, mode);
+                    } else {
+                        document.getElementById("revID").value = "ID: " + data.split(",")[0];
+                        document.getElementById("revChocoID").value = data.split(",")[1];
+                        document.getElementById("revUserID").value = data.split(",")[2];
+                        document.getElementById("revData").value = data.split(",")[3];
+                        document.getElementById("revTitle").value = data.split(",")[4];
+                        document.getElementById("revbut").value = data.split(",")[5];
+                    }
+                });
+            }
+
             function revNext() {
                 if (revCur < revCount) {
                     revCur++;
                     reviewData(revCur, 0);
                 }
-
             }
 
             function revBack() {
@@ -336,11 +275,67 @@
                 reviewData(revCur, 2);
             }
 
+            function chocolateData(id) {
+                console.log("hi2");
+                $j.get("chocolateServlet?mode=5&filt=0&id=" + id, function (data, status) {
+                    if (data.split(",").length <= 1) {
+                        if (mode == 0) {
+                            if (chocCur < chocCount) {
+                                chocCur++;
+                            }
+                        } else if (mode == 1) {
+                            if (chocCur > 1) {
+                                chocCur--;
+                            }
+                        } else if (mode == 2) {
+                            chocCur--;
+                        } else if (mode == 3) {
+                            chocCur++;
+                        }
+                        chocolateData(chocCur, mode);
+                    } else {
+                        document.getElementById("chocoID").value = "ID: " + data.split(",")[0];
+                        document.getElementById("chocoName").value = data.split(",")[1];
+                        document.getElementById("chocoDesc").value = data.split(",")[2];
+                        document.getElementById("chocoType").value = data.split(",")[3];
+                        document.getElementById("chocoWeig").value = data.split(",")[4];
+                        document.getElementById("chocoProd").value = data.split(",")[5];
+                        document.getElementById("chocoFlav").value = data.split(",")[6];
+                        document.getElementById("chocoPric").value = data.split(",")[7];
+                    }
+
+                });
+            }
+
+            function chocNext() {
+                if (chocCur < chocCount) {
+                    chocCur++;
+                    console.log("hi");
+                    chocolateData(chocCur, 0);
+                }
+                console.log(chocCur + " " + chocCount);
+            }
+
+            function chocBack() {
+                if (chocCur > 1) {
+                    chocCur--;
+                    chocolateData(chocCur, 1);
+                }
+            }
+
+            function chocStart() {
+                chocCur = 1;
+                chocolateData(chocCur, 3);
+            }
+
+            function chocEnd() {
+                chocCur = chocCount;
+                chocolateData(chocCur, 2);
+            }
+
             chocStart();
             stockStart();
             revStart();
-
-
         </script>
 
 

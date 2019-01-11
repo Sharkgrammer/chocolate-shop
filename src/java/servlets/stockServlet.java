@@ -59,10 +59,7 @@ public class stockServlet extends HttpServlet {
 
                 result = database.createStock(ParamsList.get(0), Integer.parseInt(ParamsList.get(1)), dateSql.toString());
 
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(database.returnErrorMessage());
-                    out.println(database.returnLastResult());
-                }
+                response.sendRedirect("admin.jsp");
 
                 break;
             case 2:
@@ -81,7 +78,7 @@ public class stockServlet extends HttpServlet {
             case 3:
                 id = Integer.valueOf(request.getParameter("id"));
                 database.deleteStock(id);
-                request.getRequestDispatcher("/admin.jsp").forward(request, response);
+                response.sendRedirect("admin.jsp");
                 break;
             case 4:
                 //update
@@ -101,8 +98,13 @@ public class stockServlet extends HttpServlet {
                     }
                 };
                 
-                database.updateChocolate(mapStock, Integer.parseInt(ParamsList.get(0).replace("ID: ", "")));
-                request.getRequestDispatcher("/admin.jsp").forward(request, response);
+                database.updateStocks(mapStock, Integer.parseInt(ParamsList.get(0).replace("ID: ", "")));
+                /*try (PrintWriter out = response.getWriter()) {
+                    out.println(database.returnLastResult());
+                    out.println(database.returnErrorMessage());
+                } */
+                
+                response.sendRedirect("admin.jsp");
                 break;
         }
     }

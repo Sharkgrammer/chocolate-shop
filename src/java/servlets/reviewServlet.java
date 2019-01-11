@@ -100,21 +100,15 @@ public class reviewServlet extends HttpServlet {
                         put("REV_POSTIVE", ParamsList.get(5).equals("true"));
                     }
                 };
-
+                
                 database.updateReview(mapRev, Integer.parseInt(ParamsList.get(0).replace("ID: ", "")));
-                request.getRequestDispatcher("/admin.jsp").forward(request, response);
+                response.sendRedirect("admin.jsp");
                 break;
             case 5:
                 id = Integer.valueOf(request.getParameter("id"));
                 database.deleteReview(id);
                 
-                
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(database.returnErrorMessage());
-                    out.println(database.returnLastResult());
-                }
-                
-                request.getRequestDispatcher("/admin.jsp").forward(request, response);
+                response.sendRedirect("admin.jsp");
                 break;
         }
     }

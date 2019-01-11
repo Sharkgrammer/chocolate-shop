@@ -64,7 +64,7 @@ public class adminServlet extends HttpServlet {
 
         for (int x = 0; x < dataList.size(); x += 2) {
             map = new HashMap<>();
-            map.put("label", toVisualDate(dataList.get(x)));
+            map.put("label", toVisualDate(dataList.get(x), " "));
             map.put("y", Integer.parseInt(dataList.get(x + 1)));
             list.add(map);
         }
@@ -215,7 +215,7 @@ public class adminServlet extends HttpServlet {
 
         for (int x = 0; x < dataList.size(); x += 2) {
             map = new HashMap<>();
-            map.put("label", toVisualDate(dataList.get(x)));
+            map.put("label", toVisualDate(dataList.get(x), "-"));
             map.put("y", Integer.parseInt(dataList.get(x + 1)));
             list.add(map);
         }
@@ -241,9 +241,9 @@ public class adminServlet extends HttpServlet {
         }//*/
     }
 
-    private String toVisualDate(String date) {
+    private String toVisualDate(String date, String s) {
         String returnDate = "";
-        String[] dateArr = date.split(" ");
+        String[] dateArr = date.split(s);
         for (int x = dateArr.length - 1; x >= 0; x--) {
             returnDate += dateArr[x];
             if (x != 0) {

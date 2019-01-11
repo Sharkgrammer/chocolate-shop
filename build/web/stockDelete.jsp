@@ -1,5 +1,5 @@
 <div>
-    <form action="stockServlet?mode=6" method="POST">
+    <form action="stockServlet?mode=3" method="POST">
 
         <input type="number" required name="id" placeholder="ID" class="contact-form"/>
 

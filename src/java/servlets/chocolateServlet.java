@@ -83,11 +83,7 @@ public class chocolateServlet extends HttpServlet {
                 result = database.createChocolate(ParamsList.get(0), ParamsList.get(1), ParamsList.get(2),
                         ParamsList.get(5), ParamsList.get(3), ParamsList.get(4), dateSql.toString(), ParamsList.get(6), imageList);
 
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(imageList.size());
-                    out.println(database.returnErrorMessage());
-                    out.println(database.returnLastResult());
-                }
+                response.sendRedirect("admin.jsp");
                 
                 break;
             case 3:
@@ -122,35 +118,28 @@ public class chocolateServlet extends HttpServlet {
                 
                 break;
             case 6:
+                //delete 
                 id = Integer.valueOf(request.getParameter("id"));
                 database.deleteChocolate(id);
-                request.getRequestDispatcher("/admin.jsp").forward(request, response);
+                response.sendRedirect("admin.jsp");
                 break;
             case 7:
                 //update chocolate                
-                Params = request.getParameterNames();
-                while (Params.hasMoreElements()) {
-                    paramStr = Params.nextElement();
-
-                    if (!paramStr.equals("submit") && !paramStr.equals("mode")) {
-                        ParamsList.add(request.getParameter(paramStr));
-                    }
-                }
                 
                 Map mapChoco = new HashMap() {
                     {
-                        put("CHOCO_NAME", ParamsList.get(1));
-                        put("CHOCO_DESC", ParamsList.get(2));
-                        put("CHOCO_TYPE", ParamsList.get(3));
-                        put("CHOCO_WEIGHT", ParamsList.get(4));
-                        put("CHOCO_PRODUCER", ParamsList.get(5));
-                        put("CHOCO_FLAVOUR", ParamsList.get(6));
-                        put("CHOCO_PRICE", ParamsList.get(7));
+                        put("CHOCO_NAME", request.getParameterValues("name")[0]);
+                        put("CHOCO_DESC", request.getParameterValues("desc")[0]);
+                        put("CHOCO_TYPE", request.getParameterValues("type")[0]);
+                        put("CHOCO_WEIGHT", request.getParameterValues("weig")[0]);
+                        put("CHOCO_PRODUCER", request.getParameterValues("prod")[0]);
+                        put("CHOCO_FLAVOUR", request.getParameterValues("flav")[0]);
+                        put("CHOCO_PRICE", request.getParameterValues("pric")[0]);
                     }
                 };
                 
-                database.updateChocolate(mapChoco, Integer.parseInt(ParamsList.get(0).replace("ID: ", "")));
-                request.getRequestDispatcher("/admin.jsp").forward(request, response);
+                database.updateChocolate(mapChoco, Integer.parseInt(request.getParameterValues("choc")[0].replace("ID: ", "")));
+                response.sendRedirect("admin.jsp");
                 break;
         }//*/
 

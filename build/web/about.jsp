@@ -10,14 +10,12 @@
                     <div class="col-sm-8">
                         <div class="text-center">
                             <h3>Our Founder - Daniel Keane Kelly</h3>
-                            <i><b><h5>"Some inspirational quote here please"</h5></b></i>
+                            <i><b><h5>"Make sure to eat chocolate like a shark"</h5></b></i>
                         </div>
                         
                         <p>
-                            Lorem ipsum dolor amet banjo sint migas, meggings nisi officia gentrify mollit. 
-                            Readymade mlkshk letterpress venmo incididunt art party. Brooklyn mumblecore sriracha jianbing 
-                            kale chips messenger bag typewriter disrupt minim pug. Keffiyeh disrupt letterpress direct trade seitan bushwick. 
-                            Glossier pickled tattooed DIY. Occaecat messenger bag pabst aliquip, chartreuse post-ironic migas pug hella.
+                            Sharkolate is dedicated to getting chocolate to anyone and everyone from many different producers.
+                            Why Sharkolate? Our founder has liked sharks from a young age and decided that they made the best branding. 
                         </p>
                          <p>
                             Lorem ipsum dolor amet banjo sint migas, meggings nisi officia gentrify mollit. 
