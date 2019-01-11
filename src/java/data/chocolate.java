@@ -6,8 +6,8 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
-public class chocolate implements Serializable{
-    
+public class chocolate implements Serializable {
+
     private int id;
     private String name;
     private String desc;
@@ -19,8 +19,8 @@ public class chocolate implements Serializable{
     private String date;
     private float price;
     private List<review> reviews;
-    
-    public chocolate(){
+
+    public chocolate() {
         //Initialise variables here
         id = 0;
         name = "";
@@ -33,7 +33,7 @@ public class chocolate implements Serializable{
         date = "";
         reviews = new ArrayList<>();
     }
-    
+
     public int getId() {
         return id;
     }
@@ -101,74 +101,76 @@ public class chocolate implements Serializable{
     public List<Integer> getImages() {
         return images;
     }
-    
-    public List<String> getImageStrings(){
+
+    public List<String> getImageStrings() {
         List<String> listStr = new ArrayList<>();
-        
-        for (int x : images){
+
+        for (int x : images) {
             listStr.add(blobToString(x));
         }
-        
+
         return listStr;
     }
-    
-    public List<String> getImageStringsCara(){
+
+    public List<String> getImageStringsCara() {
         List<String> listStr = new ArrayList<>();
-        
-        for (int x = 1; x < images.size(); x++){
-            listStr.add(blobToString(x));
+
+        for (int x = 1; x < images.size(); x++) {
+            listStr.add(blobToString(images.get(x)));
         }
-        
+
         return listStr;
     }
 
     public void setImages(List<Integer> images) {
         this.images = images;
     }
-    
+
     public String getFirstImage() {
-        if (images.isEmpty()){
+        if (images.isEmpty()) {
             return null;
-        }else{
-            
+        } else {
+
             return blobToString(images.get(0));
         }
     }
-    
-    private String blobToString(int blobInt){
-         byte [] blobBytes;
-            String contentType = "", baseImage = ""; char c; int content = 0;
-            try {
-                databaseConnections database = new databaseConnections();
-                database.setAutoCommit();
-                
-                Blob blob = database.retrieveImage(blobInt);
-                blobBytes = blob.getBytes(1, (int) blob.length());
-                for (byte b : blobBytes){
-                    c = (char) b;
 
-                    if (c == ';'){
-                        content = 1;
-                        continue;
-                    }else if (c == ','){
-                        content = 2;
-                        continue;
-                    }
+    private String blobToString(int blobInt) {
+        byte[] blobBytes;
+        String contentType = "", baseImage = "";
+        char c;
+        int content = 0;
+        try {
+            databaseConnections database = new databaseConnections();
+            database.setAutoCommit();
 
-                    if (content == 0){
-                        contentType += c;
-                    }else if (content == 2){
-                        baseImage += c;
-                    }
+            Blob blob = database.retrieveImage(blobInt);
+            blobBytes = blob.getBytes(1, (int) blob.length());
+            for (byte b : blobBytes) {
+                c = (char) b;
 
+                if (c == ';') {
+                    content = 1;
+                    continue;
+                } else if (c == ',') {
+                    content = 2;
+                    continue;
                 }
 
-                baseImage = "data:" + contentType + ";base64," + baseImage;
-            } catch (Exception ex) {
-                baseImage = ex.toString();
+                if (content == 0) {
+                    contentType += c;
+                } else if (content == 2) {
+                    baseImage += c;
+                }
+
             }
-            
-            return baseImage;
+
+            baseImage = "data:" + contentType + ";base64," + baseImage;
+        } catch (Exception ex) {
+            baseImage = ex.toString();
+        }
+
+        return baseImage;
     }
 
     public float getPrice() {
@@ -186,7 +188,7 @@ public class chocolate implements Serializable{
     public void setReviews(List<review> reviews) {
         this.reviews = reviews;
     }
-    
+
     public int getReviewsCount() {
         return reviews.size();
     }

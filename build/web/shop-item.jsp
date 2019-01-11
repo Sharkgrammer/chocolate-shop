@@ -48,7 +48,7 @@
 
                         <div class="row">
 
-                            <div class="col-sm-6" ><%@include file="carouselShopItem.jsp" %></div>
+                            <div class="col-sm-6" style="padding:20px;"><%@include file="carouselShopItem.jsp" %></div>
 
                             <div class="col-sm-6" >
                                 <div class="text-center">
