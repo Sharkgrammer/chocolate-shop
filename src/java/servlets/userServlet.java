@@ -70,7 +70,8 @@ public class userServlet extends HttpServlet {
             case 2:
                 //Logging in
 
-                String email = request.getParameter("emai"), pass = request.getParameter("pass");
+                String email = request.getParameter("emai"),
+                 pass = request.getParameter("pass");
 
                 int ID = database.login(email, pass);
 
@@ -84,8 +85,10 @@ public class userServlet extends HttpServlet {
 
                 if (userVar.getType().equals("ADMIN")) {
                     request.setAttribute("result", "Logged in - Admin");
-                } else {
+                } else if (userVar.getType().equals("USER")) {
                     request.setAttribute("result", "Logged in");
+                } else {
+                    request.setAttribute("result", "Error Details Incorrect");
                 }
 
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -99,9 +102,9 @@ public class userServlet extends HttpServlet {
             case 4:
                 ParamsList = new ArrayList<>();
                 Params = request.getParameterNames();
-                
+
                 id = Integer.parseInt(getCookie("id", request).getValue());
-                
+
                 while (Params.hasMoreElements()) {
                     paramStr = Params.nextElement();
 
@@ -118,17 +121,17 @@ public class userServlet extends HttpServlet {
                         put("USER_ADDRESS", ParamsList.get(3));
                     }
                 };
-                
+
                 result = database.updateUser(mapUser, id);
                 userVar = database.retrieveSingleUser(id);
-                
+
                 request.setAttribute("address", userVar.getAddress().replace(" ", "+"));
                 request.setAttribute("user", userVar);
-                
-                if (result){
+
+                if (result) {
                     request.setAttribute("result", "Details Updated");
                 }
-                
+
                 request.getRequestDispatcher("/user.jsp").forward(request, response);
                 break;
             case 5:

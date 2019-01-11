@@ -497,19 +497,19 @@ public class databaseConnections {
             Statement query = conn.createStatement();
             ResultSet rs = query.executeQuery(sql);
             while (rs.next()) {
-                if (!rs.getString("CHOCO_TYPE").equals("")) {
+                if (!rs.getString("CHOCO_TYPE").equals("") && !ListType.contains(rs.getString("CHOCO_TYPE"))) {
                     ListType.add(rs.getString("CHOCO_TYPE"));
                 }
 
-                if (!rs.getString("CHOCO_PRODUCER").equals("")) {
+                if (!rs.getString("CHOCO_PRODUCER").equals("") && !ListProducer.contains(rs.getString("CHOCO_PRODUCER"))) {
                     ListProducer.add(rs.getString("CHOCO_PRODUCER"));
                 }
 
-                if (!rs.getString("CHOCO_FLAVOUR").equals("")) {
+                if (!rs.getString("CHOCO_FLAVOUR").equals("") && !ListFlavour.contains(rs.getString("CHOCO_FLAVOUR"))) {
                     ListFlavour.add(rs.getString("CHOCO_FLAVOUR"));
                 }
 
-                if (!rs.getString("CHOCO_WEIGHT").equals("")) {
+                if (!rs.getString("CHOCO_WEIGHT").equals("") && !ListWeight.contains(rs.getString("CHOCO_WEIGHT"))) {
                     ListWeight.add(rs.getString("CHOCO_WEIGHT"));
                 }
             }
