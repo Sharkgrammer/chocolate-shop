@@ -102,6 +102,7 @@ public class chocolateServlet extends HttpServlet {
                 request.setAttribute("listShop", choco);
                 break;
             case 5:
+                //return for admin
                 id = Integer.valueOf(request.getParameter("id"));
                 chocolate choc = database.retrieveSingleChocolate(id);
                 

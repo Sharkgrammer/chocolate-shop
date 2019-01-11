@@ -67,7 +67,7 @@ public class databaseConnections {
         errorMessage = ex.toString();
         System.out.println(errorMessage);
     }
-    
+
     public int login(String email, String pass) {
         List<user> userList = retrieveAllUsers();
         int result = 0;
@@ -330,7 +330,11 @@ public class databaseConnections {
     }
 
     public chocolate retrieveSingleChocolate(int id) {
-        return retrieveChocolateInternal(id, 0, "", 0, "", "", "").get(0);
+        try {
+            return retrieveChocolateInternal(id, 0, "", 0, "", "", "").get(0);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public List<chocolate> retrieveMultiChocolate(int amt, int mode) {
@@ -348,15 +352,15 @@ public class databaseConnections {
     public List<chocolate> retrieveSearchChocolate(String name, int amt, int mode) {
         return retrieveChocolateInternal(0, amt, name, mode, "", "", "");
     }
-    
+
     public List<chocolate> retrieveTypeChocolate(String Type) {
         return retrieveChocolateInternal(0, 0, "", 0, Type, "", "");
     }
-    
+
     public List<chocolate> retrieveFlavourChocolate(String Flavour) {
         return retrieveChocolateInternal(0, 0, "", 0, "", Flavour, "");
     }
-    
+
     public List<chocolate> retrieveProducerChocolate(String Producer) {
         return retrieveChocolateInternal(0, 0, "", 0, "", "", Producer);
     }
@@ -368,7 +372,7 @@ public class databaseConnections {
         try {
             Statement query = conn.createStatement();
             ResultSet rs = query.executeQuery(sql);
-            
+
             while (rs.next()) {
                 result = rs.getInt("CHOCO_ID");
             }
@@ -394,15 +398,15 @@ public class databaseConnections {
         if (!name.equals("")) {
             sql += " where UPPER(CHOCO_NAME) like UPPER('%" + name + "%')";
         }
-        
+
         if (!type.equals("")) {
             sql += " where UPPER(CHOCO_TYPE) like UPPER('%" + type + "%')";
         }
-        
+
         if (!flavour.equals("")) {
             sql += " where UPPER(CHOCO_FLAVOUR) like UPPER('%" + flavour + "%')";
         }
-        
+
         if (!producer.equals("")) {
             sql += " where UPPER(CHOCO_PRODUCER) like UPPER('%" + producer + "%')";
         }
@@ -481,14 +485,14 @@ public class databaseConnections {
 
         return List;
     }
-    
+
     public List<List<String>> retrieveChocolateFilters() {
         String funtName = "Retrieve Chocolate Filters";
 
         sql = "select DISTINCT CHOCO_TYPE, CHOCO_PRODUCER, CHOCO_FLAVOUR, CHOCO_WEIGHT from chocolate";
         List<String> ListType = new ArrayList<>(), ListProducer = new ArrayList<>(), ListFlavour = new ArrayList<>(), ListWeight = new ArrayList<>();
         List<List<String>> returnList = new ArrayList<>();
-        
+
         try {
             Statement query = conn.createStatement();
             ResultSet rs = query.executeQuery(sql);
@@ -504,7 +508,7 @@ public class databaseConnections {
                 if (!rs.getString("CHOCO_FLAVOUR").equals("")) {
                     ListFlavour.add(rs.getString("CHOCO_FLAVOUR"));
                 }
-                
+
                 if (!rs.getString("CHOCO_WEIGHT").equals("")) {
                     ListWeight.add(rs.getString("CHOCO_WEIGHT"));
                 }
@@ -518,7 +522,7 @@ public class databaseConnections {
         } catch (SQLException ex) {
             sqlSuccessHandler(funtName, ex);
         }
-        
+
         sqlSuccess = !returnList.get(0).isEmpty();
         sqlSuccessHandler(funtName);
         return returnList;
@@ -535,7 +539,7 @@ public class databaseConnections {
         try {
             Statement query = conn.createStatement();
             ResultSet rs = query.executeQuery(sql);
-            
+
             while (rs.next()) {
                 result = rs.getInt("REV_ID");
             }
@@ -695,7 +699,7 @@ public class databaseConnections {
         try {
             Statement query = conn.createStatement();
             ResultSet rs = query.executeQuery(sql);
-            
+
             while (rs.next()) {
                 result = rs.getInt("STOCK_ID");
             }
@@ -709,7 +713,11 @@ public class databaseConnections {
     }
 
     public stock retrieveSingleStock(int id) {
-        return retrieveStockInternal(id, 0).get(0);
+        try {
+            return retrieveStockInternal(id, 0).get(0);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private List<stock> retrieveStockInternal(int id, int mode) {
@@ -838,7 +846,7 @@ public class databaseConnections {
     public boolean updateChocolate(Map mapChoco, int id) {
         String funtName = "Update Chocolate";
         updateControl.clear();
-        
+
         System.out.println(id);
 
         if (mapChoco.isEmpty()) {
@@ -863,9 +871,9 @@ public class databaseConnections {
 
             for (int x = 0; x < updateControl.size(); x++) {
                 if (updateControl.get(x).split(":::")[0].contains("ID") || updateControl.get(x).split(":::")[0].contains("WEIGHT")) {
-                    if (updateControl.get(x).split(":::")[0].contains("PRICE")){
+                    if (updateControl.get(x).split(":::")[0].contains("PRICE")) {
                         stmnt.setFloat(x + 1, Integer.parseInt(updateControl.get(x).split(":::")[1]));
-                    }else{
+                    } else {
                         stmnt.setInt(x + 1, Integer.parseInt(updateControl.get(x).split(":::")[1]));
                     }
                 } else {
@@ -873,8 +881,7 @@ public class databaseConnections {
                 }
             }
             stmnt.setInt(updateControl.size() + 1, id);
-            
-            
+
             sqlSuccess = stmnt.execute();
             sqlSuccessHandler(funtName);
         } catch (SQLException ex) {

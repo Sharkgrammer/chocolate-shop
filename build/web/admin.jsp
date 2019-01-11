@@ -171,9 +171,8 @@
             var revCount = ${revCount};
             var chocCount = ${chocCount};
             var stockCur = 1, revCur = 1, chocCur = 1;
-            var loop = false;
 
-            function stockData(id) {
+            function stockData(id, mode) {
                 $j.get("stockServlet?mode=2&id=" + id, function (data, status) {
                     if (data.split(",").length <= 1) {
                         if (mode == 0) {
@@ -275,9 +274,10 @@
                 reviewData(revCur, 2);
             }
 
-            function chocolateData(id) {
-                console.log("hi2");
+            function chocolateData(id, mode) {
+                console.log(id + "  " + mode);
                 $j.get("chocolateServlet?mode=5&filt=0&id=" + id, function (data, status) {
+                    console.log(data.split(",").length);
                     if (data.split(",").length <= 1) {
                         if (mode == 0) {
                             if (chocCur < chocCount) {
@@ -310,10 +310,8 @@
             function chocNext() {
                 if (chocCur < chocCount) {
                     chocCur++;
-                    console.log("hi");
                     chocolateData(chocCur, 0);
                 }
-                console.log(chocCur + " " + chocCount);
             }
 
             function chocBack() {
