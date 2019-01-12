@@ -83,9 +83,9 @@ public class userServlet extends HttpServlet {
 
                 userVar = database.retrieveSingleUser(ID);
 
-                if (userVar.getType().equals("ADMIN")) {
+                if (userVar.getType().equals("ADMIN") && ID != 0) {
                     request.setAttribute("result", "Logged in - Admin");
-                } else if (userVar.getType().equals("USER")) {
+                } else if (userVar.getType().equals("USER") && ID != 0) {
                     request.setAttribute("result", "Logged in");
                 } else {
                     request.setAttribute("result", "Error Details Incorrect");

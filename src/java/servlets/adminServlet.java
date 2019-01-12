@@ -40,8 +40,8 @@ public class adminServlet extends HttpServlet {
         Map<Object, Object> map = null;
         List<Map<Object, Object>> list = new ArrayList<>();
         List<graph> output = new ArrayList<>();
-        List<review> reviews = database.retrieveAllReviews(1);
-        List<purchase> purchases = database.retrieveAllPurchases(1);
+        List<review> reviews = database.retrieveAllReviews(0);
+        List<purchase> purchases;
         List<stock> stocks = database.retrieveAllStocks(1);
         graph graph;
         List<String> dataList = new ArrayList<>();
@@ -50,6 +50,7 @@ public class adminServlet extends HttpServlet {
         //Review Date Graph code
         String date;
         int loc;
+        int graphID = 0;
 
         for (review rev : reviews) {
             date = rev.getDate().replace("-", " ");
@@ -69,7 +70,7 @@ public class adminServlet extends HttpServlet {
             list.add(map);
         }
 
-        graph = new graph(1);
+        graph = new graph(++graphID);
         graph.setData(gsonObj.toJson(list));
         graph.setName("Review - Dates");
         graph.setType("column");
@@ -100,25 +101,27 @@ public class adminServlet extends HttpServlet {
         map.put("y", dataIntList.get(1));
         list.add(map);
 
-        graph = new graph(2);
+        graph = new graph(++graphID);
         graph.setData(gsonObj.toJson(list));
         graph.setName("Review - Scores");
         graph.setType("pie");
         output.add(graph);
 
-        //Purchases per chocolate
+        //Review per users
+        reviews = database.retrieveAllReviews(1);
+
+        String Name;
         dataList = new ArrayList<>();
         list = new ArrayList<>();
-        String Name;
 
-        for (purchase purch : purchases) {
-            Name = purch.getChoco().getName() + " (ID: " + String.valueOf(purch.getChoco().getId()) + ")";
+        for (review rev : reviews) {
+            Name = rev.getUser() + " (ID: " + String.valueOf(rev.getUser_id()) + ")";
             if (!dataList.contains(Name)) {
                 dataList.add(Name);
-                dataList.add(String.valueOf(purch.getAmount()));
+                dataList.add("1");
             } else {
                 loc = dataList.indexOf(Name) + 1;
-                dataList.set(loc, String.valueOf(Integer.parseInt(dataList.get(loc)) + purch.getAmount()));
+                dataList.set(loc, String.valueOf(Integer.parseInt(dataList.get(loc)) + 1));
             }
         }
 
@@ -129,12 +132,10 @@ public class adminServlet extends HttpServlet {
             list.add(map);
         }
 
-        graph = new graph(3);
+        graph = new graph(++graphID);
         graph.setData(gsonObj.toJson(list));
-        graph.setName("Purchases - Chocolate");
-        graph.setType("bar");
-        graph.setxLabel("Chocolate");
-        graph.setyLabel("Purchases");
+        graph.setName("Reviews - Users");
+        graph.setType("pie");
         output.add(graph);
 
         //Purchases per user
@@ -160,11 +161,40 @@ public class adminServlet extends HttpServlet {
             list.add(map);
         }
 
-        graph = new graph(4);
+        graph = new graph(++graphID);
         graph.setData(gsonObj.toJson(list));
         graph.setName("Purchases - Users");
-        graph.setType("column");
-        graph.setxLabel("Users");
+        graph.setType("pie");
+        output.add(graph);
+
+        //Purchases per chocolate
+        dataList = new ArrayList<>();
+        list = new ArrayList<>();
+        purchases = database.retrieveAllPurchases(1);
+
+        for (purchase purch : purchases) {
+            Name = purch.getChoco().getName() + " (ID: " + String.valueOf(purch.getChoco().getId()) + ")";
+            if (!dataList.contains(Name)) {
+                dataList.add(Name);
+                dataList.add(String.valueOf(purch.getAmount()));
+            } else {
+                loc = dataList.indexOf(Name) + 1;
+                dataList.set(loc, String.valueOf(Integer.parseInt(dataList.get(loc)) + purch.getAmount()));
+            }
+        }
+
+        for (int x = 0; x < dataList.size(); x += 2) {
+            map = new HashMap<>();
+            map.put("label", dataList.get(x));
+            map.put("y", Integer.parseInt(dataList.get(x + 1)));
+            list.add(map);
+        }
+
+        graph = new graph(++graphID);
+        graph.setData(gsonObj.toJson(list));
+        graph.setName("Purchases - Amounts");
+        graph.setType("bar");
+        graph.setxLabel("Chocolate");
         graph.setyLabel("Purchases");
         output.add(graph);
 
@@ -190,7 +220,7 @@ public class adminServlet extends HttpServlet {
             list.add(map);
         }
 
-        graph = new graph(5);
+        graph = new graph(++graphID);
         graph.setData(gsonObj.toJson(list));
         graph.setName("Stock - Amounts");
         graph.setType("bar");
@@ -198,7 +228,37 @@ public class adminServlet extends HttpServlet {
         graph.setyLabel("Amount");
         output.add(graph);
 
-        //Stock level amounts
+        //Purchases per Date
+        dataList = new ArrayList<>();
+        list = new ArrayList<>();
+
+        for (purchase purch : purchases) {
+            date = purch.getDate();
+            if (!dataList.contains(date)) {
+                dataList.add(date);
+                dataList.add(String.valueOf(purch.getAmount()));
+            } else {
+                loc = dataList.indexOf(date) + 1;
+                dataList.set(loc, String.valueOf(Integer.parseInt(dataList.get(loc)) + purch.getAmount()));
+            }
+        }
+
+        for (int x = 0; x < dataList.size(); x += 2) {
+            map = new HashMap<>();
+            map.put("label", toVisualDate(dataList.get(x), "-"));
+            map.put("y", Integer.parseInt(dataList.get(x + 1)));
+            list.add(map);
+        }
+
+        graph = new graph(++graphID);
+        graph.setData(gsonObj.toJson(list));
+        graph.setName("Purchases - Date");
+        graph.setType("column");
+        graph.setxLabel("Date");
+        graph.setyLabel("Purchases");
+        output.add(graph);
+
+        //Stock level amounts with date
         dataList = new ArrayList<>();
         list = new ArrayList<>();
 
@@ -220,7 +280,7 @@ public class adminServlet extends HttpServlet {
             list.add(map);
         }
 
-        graph = new graph(6);
+        graph = new graph(++graphID);
         graph.setData(gsonObj.toJson(list));
         graph.setName("Stock - Date");
         graph.setType("column");

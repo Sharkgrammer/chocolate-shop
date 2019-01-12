@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/admin.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/stockDelete.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/css/main.css</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/header.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/chocolateServlet.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/db/databaseConnections.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/adminServlet.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/stockServlet.java</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/chocoDelete.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/web/chocoUpdate.jsp</file>
-            <file>file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/src/java/servlets/reviewServlet.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

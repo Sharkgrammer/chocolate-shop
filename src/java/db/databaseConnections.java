@@ -588,6 +588,8 @@ public class databaseConnections {
 
         if (mode == 0) {
             sql += " order by REV_ID desc";
+        } else if (mode == 1) {
+            sql += " order by USER_ID desc";
         } else {
             sql += " order by REV_ID asc";
         }

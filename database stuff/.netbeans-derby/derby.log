@@ -1,7 +1,7 @@
-Thu Jan 10 15:44:48 GMT 2019 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
+Sat Jan 12 13:06:58 GMT 2019 : Apache Derby Network Server - 10.10.2.0 - (1582446) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Thu Jan 10 15:45:00 GMT 2019:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0168-386f-f7e9-00001add53e0 
+Sat Jan 12 13:19:02 GMT 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0168-422c-0117-00001add53e0 
 on database directory C:\Users\gills\Documents\NetBeansProjects\ChocolateShop\database stuff\.netbeans-derby\chocolateshop with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
 Loaded from file:/C:/Users/gills/Documents/NetBeansProjects/ChocolateShop/database%20stuff/javadb/lib/derby.jar
 java.vendor=Oracle Corporation
@@ -12,3 +12,5 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Users\gills\Documents\NetBeansProjects\ChocolateShop\database stuff\.netbeans-derby
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Sat Jan 12 20:26:33 GMT 2019: Shutting down Derby engine
