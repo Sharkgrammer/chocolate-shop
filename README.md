@@ -18,7 +18,7 @@ GDPR notice:
 ![GDPR notice](https://i.imgur.com/e9Ina3Z.png)
 
 Newsletter:
-!Newsletter](https://i.imgur.com/lZhRBcu.png)
+![Newsletter](https://i.imgur.com/lZhRBcu.png)
 
 New Arrivals:
 ![New Arrivals](https://i.imgur.com/lBIwaaL.png)
