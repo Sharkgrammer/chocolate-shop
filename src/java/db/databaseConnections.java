@@ -663,6 +663,8 @@ public class databaseConnections {
             sql += " order by CHOCO_ID desc";
         } else if (mode == 2) {
             sql += " order by USER_ID desc";
+        }else{
+             sql += " order by purchase_id desc";
         }
 
         try {
@@ -734,6 +736,8 @@ public class databaseConnections {
 
         if (mode != 0) {
             sql += " order by CHOCO_ID desc";
+        }else{
+            sql += " order by STOCK_ID desc";
         }
 
         try {

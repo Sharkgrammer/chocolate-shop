@@ -231,6 +231,7 @@ public class adminServlet extends HttpServlet {
         //Purchases per Date
         dataList = new ArrayList<>();
         list = new ArrayList<>();
+        purchases = database.retrieveAllPurchases(3);
 
         for (purchase purch : purchases) {
             date = purch.getDate();
@@ -262,6 +263,7 @@ public class adminServlet extends HttpServlet {
         dataList = new ArrayList<>();
         list = new ArrayList<>();
 
+        stocks = database.retrieveAllStocks(0);
         for (stock stock : stocks) {
             date = stock.getDate();
             if (!dataList.contains(date)) {

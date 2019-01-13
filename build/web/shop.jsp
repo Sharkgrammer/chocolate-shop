@@ -15,8 +15,12 @@
             $j(document).ready(function () {
                 document.getElementById("main").style = "visibility:visible;";
                 document.getElementById("loading").style = "display:none";
-
             });
+
+            function linkLoad(link) {
+                console.log(link);
+                window.open(link, "_self");
+            }
 
         </script>
 
@@ -36,19 +40,19 @@
                     <div class="row">
                         <div class="col-sm-2">
                             <div class="filter-container">
-                                <select id="shopType" class="shop-filt"></select>
+                                <select id="shopType" class="shop-filt" onchange="linkLoad('shopServlet?mode=5&search=' + this.value);"></select>
                             </div>
                         </div>
 
                         <div class="col-sm-2">
                             <div class="filter-container">
-                                <select id="shopProd" class="shop-filt"></select>
+                                <select id="shopProd" class="shop-filt" onchange="linkLoad('shopServlet?mode=6&search=' + this.value);"></select>
                             </div>
                         </div>
 
                         <div class="col-sm-2">
                             <div class="filter-container">
-                                <select id="shopFlav" class="shop-filt"></select>
+                                <select id="shopFlav" class="shop-filt" onchange="linkLoad('shopServlet?mode=7&search=' + this.value);"></select>
                             </div>
                         </div>
 
@@ -59,9 +63,6 @@
                     </div>
 
                     <script>
-                        function linkLoad(link) {
-                            window.open(link, "_self");
-                        }
 
                         <c:choose>
                             <c:when test="${resultType == 0}">
@@ -90,15 +91,15 @@
                         </c:choose>
 
                         <c:forEach items="${listType}" var="type">
-                        document.getElementById("shopType").innerHTML += "<option onclick='linkLoad(&quot;shopServlet?mode=5&search=${type}&quot;);'>${type}</option>";
+                        document.getElementById("shopType").innerHTML += "<option>${type}</option>";
                         </c:forEach>
 
                         <c:forEach items="${listProd}" var="prod">
-                        document.getElementById("shopProd").innerHTML += "<option onclick='linkLoad(&quot;shopServlet?mode=6&search=${prod}&quot;);'>${prod}</option>";
+                        document.getElementById("shopProd").innerHTML += "<option>${prod}</option>";
                         </c:forEach>
 
                         <c:forEach items="${listFlav}" var="flav">
-                        document.getElementById("shopFlav").innerHTML += "<option onclick='linkLoad(&quot;shopServlet?mode=7&search=${flav}&quot;);'>${flav}</option>";
+                        document.getElementById("shopFlav").innerHTML += "<option>${flav}</option>";
                         </c:forEach>
 
                     </script>

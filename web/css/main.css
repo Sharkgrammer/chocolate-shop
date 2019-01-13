@@ -291,6 +291,7 @@ body{
     border-radius: 25px;
     text-align: center;
     text-decoration: none;
+    max-height: 120px;
     margin: auto;
 }
 
@@ -302,6 +303,7 @@ body{
     margin: 20% 0px 20% 0px;
     width: 50px;
     height:40%;
+    max-height: 50px;
 }
 
 .shop-filt{

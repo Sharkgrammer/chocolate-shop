@@ -82,12 +82,12 @@
                                     <div class="container-fluid">
                                         <div class="row text-center">
                                             <c:if test="${userid != 0}">
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-5" >
 
                                                     <button class="shop-but" onClick="modalshop.style.display = 'block';">Buy ${chocoShop.getName()}</button>  
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <input id="count" type="number" onKeyUp="updateScreen()" onclick="updateScreen()" required name="price" value="1" class="shop-counter"/>
+                                                    <input id="count" type="number" onKeyUp="updateScreen()" onclick="updateScreen()" min="0" required name="price" value="1" class="shop-counter"/>
                                                 </div>
                                             </c:if>   
                                             <div class="col-sm-5">
@@ -97,6 +97,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                            
                                 <c:if test="${userid != 0}">
                                     <div class="border border-dark rounded shop-box">
                                         <div class="container-fluid">
@@ -150,7 +151,7 @@
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>
-                                            
+
                                         </div>
                                         <p class="text-left">${review.getData()}</p>
                                     </div>
