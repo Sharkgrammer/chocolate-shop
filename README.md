@@ -27,7 +27,7 @@ New Reviews:
 ![New Reviews](https://i.imgur.com/BFPiXYU.png)
 
 About:
-![About](https://i.imgur.com/BFPiXYU.png)
+![About](https://i.imgur.com/Ve1Hwu2.png)
 
 Contact Form:
 ![Contact Form](https://i.imgur.com/n3FmzsL.png)
