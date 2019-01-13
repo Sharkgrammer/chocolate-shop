@@ -11,7 +11,7 @@ Ecommerce site for chocolate. List of features:
 * User accounts protected from unauthorized logins through a key generated at login. Logging in elsewhere or changing the ID cookie will cause the current browser to log off
                             
 
-#Home Page
+# Home Page
 ![Home Page](https://i.imgur.com/aiYdoJC.png)
 
 GDPR notice:
@@ -32,7 +32,7 @@ About:
 Contact Form:
 ![Contact Form](https://i.imgur.com/n3FmzsL.png)
 
-#Shop pages
+# Shop pages
 Filtering:
 ![Filters](https://i.imgur.com/ytYMwmQ.png)
 
@@ -43,7 +43,7 @@ Choclate Page:
 Cart:
 ![Cart](https://i.imgur.com/w4OKzEE.png)
 
-#Admin and User
+# Admin and User
 Admin Charts:
 ![Chart1](https://i.imgur.com/yxut6NS.png)
 ![Chart1](https://i.imgur.com/jlN4hSj.png)
@@ -54,8 +54,9 @@ Database form:
 User Account:
 ![Account](https://i.imgur.com/9EmWuLe.png)
 
-#Other
+# Other
 Loading Screens:
 ![Loading1](https://i.imgur.com/84TRZa1.png)
 ![Loading2](https://i.imgur.com/G7cEc8F.png)
+
 ![Loading3](https://i.imgur.com/YGbGzXn.gif)
