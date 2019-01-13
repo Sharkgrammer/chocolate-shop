@@ -8,8 +8,7 @@
             </br> 
 
             <h5>In order to use this site you must accept our cookies and other tracking technologies</h5>
-            <h5>If you do not accept these, you cannot use this site. Filthy EU casual </h5>
-            <a href="terms.html"><h5>Learn more here</h5></a>
+            <h5>If you do not accept these, you cannot use this site.</h5>
             <div class="center text-center">
                 <button type="button" class="btn btn-success" id="close">Accept</button>
                 <a type="button" class="btn btn-danger" href="reject.html">Reject</a>
