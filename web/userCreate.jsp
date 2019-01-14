@@ -3,7 +3,7 @@
 
         <input type="text" required name="name" placeholder="Name" class="contact-form"/>
 
-        <input type="text" required name="emai" placeholder="Email" class="contact-form"/>
+        <input type="email" required name="emai" placeholder="Email" class="contact-form"/>
 
         <input type="password" required name="pass" placeholder="Password" class="contact-form"/>
 

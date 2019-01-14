@@ -36,7 +36,7 @@
 
         <input type="text" required name="type" placeholder="Type" class="contact-form"/>
         
-        <input type="number" required name="weig" placeholder="Weight" class="contact-form"/>
+        <input type="number" required name="weig" min="0" placeholder="Weight" class="contact-form"/>
         
         <input type="text" required name="prod" placeholder="Producer" class="contact-form"/>
         

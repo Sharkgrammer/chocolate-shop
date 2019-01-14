@@ -8,7 +8,7 @@
 
         <input type="text" id="chocoType" required name="type" placeholder="Type" class="contact-form"/>
 
-        <input type="number" id="chocoWeig" required name="weig" placeholder="Weight" class="contact-form"/>
+        <input type="number" id="chocoWeig" min="0" required name="weig" placeholder="Weight" class="contact-form"/>
 
         <input type="text" id="chocoProd" required name="prod" placeholder="Producer" class="contact-form"/>
 

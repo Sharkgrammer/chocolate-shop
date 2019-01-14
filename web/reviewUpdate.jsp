@@ -3,9 +3,9 @@
 
         <input type="text" id="revID" readonly="true" required name="revID" value="0" class="contact-form"/>
 
-        <input type="number" id="revChocoID" required name="revChocoID" placeholder="Choco" class="contact-form"/>
+        <input type="number" id="revChocoID" min="0" required name="revChocoID" placeholder="Choco" class="contact-form"/>
 
-        <input type="number" id="revUserID" required name="revUserID" placeholder="User" class="contact-form"/>
+        <input type="number" id="revUserID" min="0" required name="revUserID" placeholder="User" class="contact-form"/>
 
         <textarea rows="2" id="revData" required cols="25" name="revData" placeholder="Review" class="contact-form"></textarea>
 

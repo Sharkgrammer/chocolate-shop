@@ -4,7 +4,7 @@
 
         <input type="text" required id="name" name="name" placeholder="Name" class="contact-form"/>
 
-        <input type="text" required id="emai" name="emai" placeholder="Email" class="contact-form"/>
+        <input type="email" required id="emai" name="emai" placeholder="Email" class="contact-form"/>
 
         <input type="password" required id="pass" name="pass" placeholder="Password" class="contact-form"/>
 

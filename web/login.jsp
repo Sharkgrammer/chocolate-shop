@@ -42,7 +42,7 @@
 
                             <div class="col-sm-6">
                                 <form name="create" action="userServlet?mode=2" method="POST">
-                                    <input type="text" required name="emai" placeholder="Email" class="contact-form"/>
+                                    <input type="email" required name="emai" placeholder="Email" class="contact-form"/>
                                     <input type="password" required name="pass" placeholder="Password" class="contact-form" />
 
                                     <input type="submit" value="Login" name="submit" class="contact-but"/> <input type="reset" class="contact-but"/>
