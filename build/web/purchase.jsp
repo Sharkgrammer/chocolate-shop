@@ -97,11 +97,11 @@
                                         </tr>
 
                                         <tr>
-                                            <td><input type="number" required id="no" placeholder="Card Number"  class="contact-form"/></td>
+                                            <td><input type="number" min="0" required id="no" placeholder="Card Number"  class="contact-form"/></td>
                                         </tr>
 
                                         <tr>
-                                            <td><input type="number" required id="csv" placeholder="Csv Number" class="contact-form" /></td>
+                                            <td><input type="number" min="0" required id="csv" placeholder="Csv Number" class="contact-form" /></td>
                                         </tr>
 
                                         <tr>
@@ -141,7 +141,7 @@
                                 <c:forEach items="${purchList}" var="purch">
                                     <div class="col-sm-4 purchContainerEx">
                                         <div class="purchContainerIn border border-dark rounded">
-                                            <a href="shopServlet?id=${purch.getChoco().getId()}" class="shop-link">
+                                            <a href="shopServlet?id=${purch.getChoco().getId()}&mode=1" class="shop-link">
                                                 <h3 class="text-center center">${purch.getChoco().getName()}</h3>
 
                                                 <div class="row">
