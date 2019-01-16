@@ -6,7 +6,7 @@
         <%@include file="css.jsp" %>
         <jsp:include page="/userServlet?mode=3" />
 
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyCcrxqE9VgXuldbLPFlK8KzN_RPczOEiVI"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key="></script>
 
         <script>
             var lat;
@@ -24,7 +24,7 @@
                 lng = loc[0].getElementsByTagName("lng")[0].innerHTML;
             }
 
-            getXml("https://maps.googleapis.com/maps/api/geocode/xml?address=${address}&key=AIzaSyCcrxqE9VgXuldbLPFlK8KzN_RPczOEiVI");
+            getXml("https://maps.googleapis.com/maps/api/geocode/xml?address=${address}&key=");
 
             var map;
             function initialize() {
